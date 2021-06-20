@@ -17,13 +17,13 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-//app.use("/api/auth/", Auth);
+app.use("/api/user/", User);
+app.use("/api/role/", Role);
+app.use("/api/auth/", Auth);
 //app.use("/api/board/", Board);
 //app.use("/api/project", Project);
-//app.use("/api/role/", Role);
 //app.use("/api/task/", Task);
 //app.use("/api/team/", Team);
-//app.use("/api/user/", User);
 
 app.listen(process.env.PORT, () =>
   console.log("Backend server running on port: " + process.env.PORT)
