@@ -41,8 +41,7 @@ router.put("/update", Auth, UserAuth, ScrumMaster, async (req, res) => {
     if (
         !req.body._id ||
         !req.body.userId ||
-        !req.body.teamId ||
-        !req.body.status
+        !req.body.teamId
       )
         return res.status(400).send("Process failed: Incomplete data");
     
