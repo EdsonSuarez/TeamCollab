@@ -22,7 +22,7 @@ app.use(cors());
 app.use("/api/user/", User);
 app.use("/api/role/", Role);
 app.use("/api/auth/", Auth);
-//app.use("/api/board/", Board);
+app.use("/api/board/", Board);
 app.use("/api/project", Project);
 app.use("/api/task/", Task);
 app.use("/api/team/", Team);

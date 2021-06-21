@@ -31,7 +31,7 @@ router.post("/addTeam", Auth, UserAuth, ScrumM, async (req, res) => {
 
 router.get("/getTeamScrum", Auth, UserAuth, ScrumM, async (req, res) => {
   const team = await DetailTeam.find({ userId: req.user._id })
-    .populate()
+    .populate({path: "teamId", populate: "projectId"})
     .exec();
   if (!team) return res.status(401).send("Process dailed: Error getting team");
   res.status(200).send({ team });
@@ -43,9 +43,9 @@ router.put("/updateTeam", Auth, UserAuth, ScrumM, async (req, res) => {
   const validId = mongoose.Types.ObjectId.isValid(req.body.projectId);
   if (!validId)
     return res.status(401).send("Process failed: Invalid projectId");
-  const team = Team.findByIdAndUpdate(req.body._id, {
+  const team = await Team.findByIdAndUpdate(req.body._id, {
     name: req.body.name,
-    description: req.body.description,
+    projectId: req.body.projectId,
     active: true,
   });
   if (!team) return res.status(401).send("Process failed: Error updating team");
@@ -58,9 +58,9 @@ router.put("/deleteTeam", Auth, UserAuth, ScrumM, async (req, res) => {
   const validId = mongoose.Types.ObjectId.isValid(req.body.projectId);
   if (!validId)
     return res.status(401).send("Process failed: Invalid projectId");
-  const team = Team.findByIdAndUpdate(req.body._id, {
+  const team = await Team.findByIdAndUpdate(req.body._id, {
     name: req.body.name,
-    description: req.body.description,
+    projectId: req.body.projectId,
     active: false,
   });
   if (!team) return res.status(401).send("Process failed: Error deleting team");

@@ -50,21 +50,28 @@ router.post("/addTask", Auth, UserAuth, ScrumM, async (req, res) => {
 });
 
 router.get("/getTaskUser", Auth, UserAuth, async (req, res) => {
-  const userTask = await DetailTask.findById({ userId: req.user._id })
+  const userTask = await DetailTask.find({ userId: req.user._id })
     .populate("taskId")
-    .exc();
-  if (!user) return res.status(401).send("Process failed: Task not found");
+    .exec();
   res.status(200).send({ userTask });
 });
 
-router.get("getTaskScrum", Auth, UserAuth, ScrumM, async (req, res) => {
-  const userTasks = await DetailTask.find().populate("taskId").exec();
-  if (!userTasks)
-    return res.status(401).send("Process failed: Tasks not found");
-  res.status(200).send({ userTasks });
-});
+router.get(
+  "/getTaskScrum/:userId",
+  Auth,
+  UserAuth,
+  ScrumM,
+  async (req, res) => {
+    const userTasks = await DetailTask.find({ userId: req.params.userId })
+      .populate("taskId")
+      .exec();
+    if (!userTasks)
+      return res.status(401).send("Process failed: Tasks not found");
+    res.status(200).send({ userTasks });
+  }
+);
 
-router.put("updateTask", Auth, UserAuth, ScrumM, async (req, res) => {
+router.put("/updateTask", Auth, UserAuth, ScrumM, async (req, res) => {
   if (
     !req.body._id ||
     !req.body.name ||
@@ -83,7 +90,7 @@ router.put("updateTask", Auth, UserAuth, ScrumM, async (req, res) => {
     if (!isValid)
       return res.status(401).send("Process failed: Invalid denpendencyId");
   }
-  const task = Task.findById(req.body._id, {
+  const task = await Task.findByIdAndUpdate(req.body._id, {
     name: req.body.name,
     description: req.body.description,
     boardId: req.body.boardId,
@@ -96,7 +103,7 @@ router.put("updateTask", Auth, UserAuth, ScrumM, async (req, res) => {
   res.status(200).send({ task });
 });
 
-router.delete("deleteTask/:_id", Auth, UserAuth, ScrumM, async (req, res) => {
+router.delete("/deleteTask/:_id", Auth, UserAuth, ScrumM, async (req, res) => {
   const task = await Task.findByIdAndDelete(req.params._id);
   if (!task) return res.status(401).send("Process failed: Error deleting task");
   res.status(200).send("Process successfull: Task deleted");
