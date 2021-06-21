@@ -60,7 +60,7 @@ router.put("/deleteTeam", Auth, UserAuth, ScrumM, async (req, res) => {
     return res.status(401).send("Process failed: Invalid projectId");
   const team = await Team.findByIdAndUpdate(req.body._id, {
     name: req.body.name,
-    description: req.body.description,
+    projectId: req.body.projectId,
     active: false,
   });
   if (!team) return res.status(401).send("Process failed: Error deleting team");

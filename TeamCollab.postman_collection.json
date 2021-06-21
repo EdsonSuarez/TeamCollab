@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2e4ebbb1-e7a2-4fac-b64b-122cd9838aa5",
+		"_postman_id": "9b8d6be2-78ab-480d-9731-cf2a04cff739",
 		"name": "TeamCollab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -605,52 +605,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "UpdateImg",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZGVlYjkxYmRmYzE4MjRiZjA3YTEiLCJmdWxsTmFtZSI6IkZlbGlwZSBwZXJlYSIsImVtYWlsIjoiZmVAZ21haWwuY29tIiwicm9sZUlkIjoiNjBjZmEyZDYzNzg2MzExMmY0OGEzNTU1IiwiaWF0IjoxNjI0MzAyNDU3fQ.oedk4V-0kwMKnvSDJYd7g5LUTJl-vGRbR_kxiy4FlG8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "_id",
-									"value": "60d0deeb91bdfc1824bf07a1",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": "/C:/Users/crisfordy/Pictures/luna.jpg"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:3001/api/user/updateImg",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
-								"api",
-								"user",
-								"updateImg"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -1180,6 +1134,685 @@
 									"key": "_id",
 									"value": null
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Team",
+			"item": [
+				{
+					"name": "AddTeam",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZTM5ZTJjMDNjMTI5NmM1NzdkYTUiLCJmdWxsTmFtZSI6IlN0aXZlbiBRdWlyb2dhIiwiZW1haWwiOiJzdGl2ZW5AZ21haWwuY29tIiwicm9sZUlkIjoiNjBkMGUyMWYyYzAzYzEyOTZjNTc3ZDhiIiwiaWF0IjoxNjI0MzAyNDk0fQ.Acedjes1hU-tIRAQ9uKSmzlWg7vjgGt--SaCQETdMQM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Backend\",\r\n    \"projectId\": \"60d0e93b27e51c5f2023b42f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/team/addTeam",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"team",
+								"addTeam"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTeamScrum",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZTM5ZTJjMDNjMTI5NmM1NzdkYTUiLCJmdWxsTmFtZSI6IlN0aXZlbiBRdWlyb2dhIiwiZW1haWwiOiJzdGl2ZW5AZ21haWwuY29tIiwicm9sZUlkIjoiNjBkMGUyMWYyYzAzYzEyOTZjNTc3ZDhiIiwiaWF0IjoxNjI0MzAyNDk0fQ.Acedjes1hU-tIRAQ9uKSmzlWg7vjgGt--SaCQETdMQM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/team/getTeamScrum",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"team",
+								"getTeamScrum"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTeam",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZTM5ZTJjMDNjMTI5NmM1NzdkYTUiLCJmdWxsTmFtZSI6IlN0aXZlbiBRdWlyb2dhIiwiZW1haWwiOiJzdGl2ZW5AZ21haWwuY29tIiwicm9sZUlkIjoiNjBkMGUyMWYyYzAzYzEyOTZjNTc3ZDhiIiwiaWF0IjoxNjI0MzAyNDk0fQ.Acedjes1hU-tIRAQ9uKSmzlWg7vjgGt--SaCQETdMQM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d0e95427e51c5f2023b433\",\r\n    \"name\": \"TeamCollab Project\",\r\n    \"projectId\": \"60d0e95427e51c5f2023b433\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/team/updateTeam",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"team",
+								"updateTeam"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTeam",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZTM5ZTJjMDNjMTI5NmM1NzdkYTUiLCJmdWxsTmFtZSI6IlN0aXZlbiBRdWlyb2dhIiwiZW1haWwiOiJzdGl2ZW5AZ21haWwuY29tIiwicm9sZUlkIjoiNjBkMGUyMWYyYzAzYzEyOTZjNTc3ZDhiIiwiaWF0IjoxNjI0MzAyNDk0fQ.Acedjes1hU-tIRAQ9uKSmzlWg7vjgGt--SaCQETdMQM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d0e95427e51c5f2023b433\",\r\n    \"name\": \"TeamCollab Project\",\r\n    \"projectId\": \"60d0e95427e51c5f2023b433\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/team/deleteTeam",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"team",
+								"deleteTeam"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Board",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwYmE5Zjg4OTIwNjBkZDAxZWFmNzMiLCJmdWxsTmFtZSI6Ik1pZ3VlbCBDZXJxdWVyYSIsImVtYWlsIjoiY2VycXVlcmExOTk2MjdAaG90bWFpbC5jb20iLCJyb2xlSWQiOiI2MGQwYmE1Zjg4OTIwNjBkZDAxZWFmNmYiLCJpYXQiOjE2MjQyOTI0NzZ9.N8aNLSd-ToAslXa255RmUzFPRh5vdMJ1-ULzUn7yQ04",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"sprint 1\",\r\n    \"description\": \"Creacion del backend parte 1\",\r\n    \"teamId\": \"60d0be82326db23f72a2be53\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/board/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"board",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwYmE5Zjg4OTIwNjBkZDAxZWFmNzMiLCJmdWxsTmFtZSI6Ik1pZ3VlbCBDZXJxdWVyYSIsImVtYWlsIjoiY2VycXVlcmExOTk2MjdAaG90bWFpbC5jb20iLCJyb2xlSWQiOiI2MGQwYmE1Zjg4OTIwNjBkZDAxZWFmNmYiLCJpYXQiOjE2MjQyOTI0NzZ9.N8aNLSd-ToAslXa255RmUzFPRh5vdMJ1-ULzUn7yQ04",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/board/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"board",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwYmE5Zjg4OTIwNjBkZDAxZWFmNzMiLCJmdWxsTmFtZSI6Ik1pZ3VlbCBDZXJxdWVyYSIsImVtYWlsIjoiY2VycXVlcmExOTk2MjdAaG90bWFpbC5jb20iLCJyb2xlSWQiOiI2MGQwYmE1Zjg4OTIwNjBkZDAxZWFmNmYiLCJpYXQiOjE2MjQyOTI0NzZ9.N8aNLSd-ToAslXa255RmUzFPRh5vdMJ1-ULzUn7yQ04",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d0bf8133ebc835f86ff8f5\",\r\n    \"name\": \"sprint 2\",\r\n    \"description\": \"Creacion del backend parte 2\",\r\n    \"teamId\": \"60d0be82326db23f72a2be53\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/board/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"board",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwYmE5Zjg4OTIwNjBkZDAxZWFmNzMiLCJmdWxsTmFtZSI6Ik1pZ3VlbCBDZXJxdWVyYSIsImVtYWlsIjoiY2VycXVlcmExOTk2MjdAaG90bWFpbC5jb20iLCJyb2xlSWQiOiI2MGQwYmE1Zjg4OTIwNjBkZDAxZWFmNmYiLCJpYXQiOjE2MjQyOTI0NzZ9.N8aNLSd-ToAslXa255RmUzFPRh5vdMJ1-ULzUn7yQ04",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d0bf8133ebc835f86ff8f5\",\r\n    \"name\": \"sprint 2\",\r\n    \"description\": \"Creacion del backend parte 2\",\r\n    \"teamId\": \"60d0be82326db23f72a2be53\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/board/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"board",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"OnlineShop\",\r\n    \"description\": \"Front y back para una tienda online\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/project/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/project/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/project/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d0eabde576f601201d10ba\",\r\n    \"name\": \"OnlineShop\",\r\n    \"description\": \"Front y back para una tienda online\",\r\n    \"status\": \"doing\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/project/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d0eabde576f601201d10ba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/project/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "AddTask",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZTM5ZTJjMDNjMTI5NmM1NzdkYTUiLCJmdWxsTmFtZSI6IlN0aXZlbiBRdWlyb2dhIiwiZW1haWwiOiJzdGl2ZW5AZ21haWwuY29tIiwicm9sZUlkIjoiNjBkMGUyMWYyYzAzYzEyOTZjNTc3ZDhiIiwiaWF0IjoxNjI0MzAyNDk0fQ.Acedjes1hU-tIRAQ9uKSmzlWg7vjgGt--SaCQETdMQM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"front\",\r\n    \"description\": \"Front para hacer\",\r\n    \"boardId\": \"60d0f2c423033933a065de79\",\r\n    \"priority\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/task/addTask",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"task",
+								"addTask"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTaskUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZTM5ZTJjMDNjMTI5NmM1NzdkYTUiLCJmdWxsTmFtZSI6IlN0aXZlbiBRdWlyb2dhIiwiZW1haWwiOiJzdGl2ZW5AZ21haWwuY29tIiwicm9sZUlkIjoiNjBkMGUyMWYyYzAzYzEyOTZjNTc3ZDhiIiwiaWF0IjoxNjI0MzA2MzQ1fQ.VVdJimdNUNfUoreTIyvXbTqJmCY5Nub8omV-zTx5xfI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/task/getTaskUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"task",
+								"getTaskUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTaskScrum",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZTM5ZTJjMDNjMTI5NmM1NzdkYTUiLCJmdWxsTmFtZSI6IlN0aXZlbiBRdWlyb2dhIiwiZW1haWwiOiJzdGl2ZW5AZ21haWwuY29tIiwicm9sZUlkIjoiNjBkMGUyMWYyYzAzYzEyOTZjNTc3ZDhiIiwiaWF0IjoxNjI0MzA2MzQ1fQ.VVdJimdNUNfUoreTIyvXbTqJmCY5Nub8omV-zTx5xfI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/task/getTaskScrum/60d0e22d2c03c1296c577d92",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"task",
+								"getTaskScrum",
+								"60d0e22d2c03c1296c577d92"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTask",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZTM5ZTJjMDNjMTI5NmM1NzdkYTUiLCJmdWxsTmFtZSI6IlN0aXZlbiBRdWlyb2dhIiwiZW1haWwiOiJzdGl2ZW5AZ21haWwuY29tIiwicm9sZUlkIjoiNjBkMGUyMWYyYzAzYzEyOTZjNTc3ZDhiIiwiaWF0IjoxNjI0MzA2MzQ1fQ.VVdJimdNUNfUoreTIyvXbTqJmCY5Nub8omV-zTx5xfI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d0f2e023033933a065de7d\",\r\n    \"name\":\"front\",\r\n    \"description\": \"Front para hacer\",\r\n    \"boardId\": \"60d0f2c423033933a065de79\",\r\n    \"status\": \"finished\",\r\n    \"priority\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/task/updateTask",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"task",
+								"updateTask"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTask",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZTM5ZTJjMDNjMTI5NmM1NzdkYTUiLCJmdWxsTmFtZSI6IlN0aXZlbiBRdWlyb2dhIiwiZW1haWwiOiJzdGl2ZW5AZ21haWwuY29tIiwicm9sZUlkIjoiNjBkMGUyMWYyYzAzYzEyOTZjNTc3ZDhiIiwiaWF0IjoxNjI0MzA2MzQ1fQ.VVdJimdNUNfUoreTIyvXbTqJmCY5Nub8omV-zTx5xfI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/task/deleteTask/60d0f2e023033933a065de7d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"task",
+								"deleteTask",
+								"60d0f2e023033933a065de7d"
 							]
 						}
 					},
