@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"user\",\r\n    \"description\": \"user\"\r\n}",
+							"raw": "{\r\n    \"name\": \"technicalLeader\",\r\n    \"description\": \"technicalLeader\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -46,7 +46,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDIyNjA5NH0.Sl9C3pJU-F80us-ImnKVmkudI3qFktDnXWQUpD8YlJg",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4OTc4N30.9UcVX49B1RSi6GOigR_n5wnnDtr--u6AsnMtAM1JHxA",
 									"type": "string"
 								}
 							]
@@ -68,6 +68,86 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4OTAwMH0.4iScJbut70ZMKCA5VbvKsvY4OMISm3owT7SAWib5Kgc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d0a0fec26e8e0d245ba298\",\r\n    \"name\": \"scrumMaster\",\r\n    \"description\": \"scrumMaster\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/role/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"role",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4OTAwMH0.4iScJbut70ZMKCA5VbvKsvY4OMISm3owT7SAWib5Kgc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d0a0fec26e8e0d245ba298\",\r\n    \"name\": \"scrumMaster\",\r\n    \"description\": \"scrumMaster\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/role/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"role",
+								"delete"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -75,7 +155,7 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "add",
+					"name": "Add",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -99,6 +179,37 @@
 								"api",
 								"user",
 								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ2YmQ5M2JhMDE1Njg5ZTY0YmIiLCJmdWxsTmFtZSI6IkRhbmkgdiIsImVtYWlsIjoiZEBnbWFpbC5jb20iLCJyb2xlSWQiOiI2MGNmYTJkNjM3ODYzMTEyZjQ4YTM1NTUiLCJpYXQiOjE2MjQyODg5ODB9.pgOnfLyOqeHZufbwD5Tud1FXtGOqqt3xTXcySm8n2n8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/user/getUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"user",
+								"getUser"
 							]
 						}
 					},
@@ -130,6 +241,126 @@
 								"api",
 								"user",
 								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddUserAdmin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4NTQ3M30.1YEbrofEDSpYxM-pGCZ5Ex0njqux7i3c3nTdZgNjM5Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"fullName\": \"Felipe perea\",\r\n    \"email\": \"f@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"roleId\": \"60d0a0fec26e8e0d245ba298\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/user/addUserAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"user",
+								"addUserAdmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4NTQ3M30.1YEbrofEDSpYxM-pGCZ5Ex0njqux7i3c3nTdZgNjM5Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"_id\": \"60d0a17cc26e8e0d245ba2a5\",\r\n    \"fullName\": \"Felipe perez\",\r\n    \"email\": \"fe@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"roleId\": \"60d0a0fec26e8e0d245ba298\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/user/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4NTQ3M30.1YEbrofEDSpYxM-pGCZ5Ex0njqux7i3c3nTdZgNjM5Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"_id\": \"60d0a17cc26e8e0d245ba2a5\",\r\n    \"fullName\": \"Felipe perez\",\r\n    \"email\": \"fe@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"roleId\": \"60d0a0fec26e8e0d245ba298\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/user/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"user",
+								"delete"
 							]
 						}
 					},
