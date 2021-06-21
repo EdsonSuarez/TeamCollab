@@ -45,12 +45,9 @@ router.get("/get", Auth, UserAuth, async(req, res) => {
     if (!validId) 
         return res.status(401).send("Process failed: Invalid id");
 
-    const user = await DetailTeam.find({userId: req.user._id})
+    const user = await DetailTeam.find({userId: req.user._id}, { name: 1 }).populate("teamId")
     if(!user) 
         return res.status(401).send("Process failed: User not found in DB");
-
-    const team = await Team.find({projectId: req.body._id})
-        .populate("projectId").exec();
 
     const projects = await Project.find();
     if (!projects) 
