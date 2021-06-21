@@ -2,14 +2,19 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Project = require("../models/project");
+const DetailTeam = require("../models/detailTeam")
+const Team = require("../models/team")
 const Auth = require("../middleware/auth");
 const UserAuth = require("../middleware/user");
+const AdminAuth = require("../middleware/admin");
+const ScrumAuth = require("../middleware/scrumMaster");
 
-router.post("/add", Auth, UserAuth, async(req, res) => {
+router.post("/add", Auth, UserAuth, ScrumAuth, async(req, res) => {
     if (!req.body.name || !req.body.description)
         return res.status(401).send("Process failed: Incomplete data");
 
     const project = new Project({
+        userId: req.user._id,
         name: req.body.name,
         description: req.body.description,
     })
@@ -21,7 +26,7 @@ router.post("/add", Auth, UserAuth, async(req, res) => {
     return res.status(200).send({ result });
 });
 
-router.get("/get", Auth, UserAuth, async(req, res) => {
+router.get("/getAll", Auth, UserAuth, AdminAuth, async(req, res) => {
     const validId = mongoose.Types.ObjectId.isValid(req.user._id);
     if (!validId) 
         return res.status(401).send("Process failed: Invalid id");
@@ -31,6 +36,22 @@ router.get("/get", Auth, UserAuth, async(req, res) => {
         return res.status(401).send("Process failed: No projects found");
 
     return res.status(200).send({ projects });
+});
+
+router.get("/getMyProjects", Auth, UserAuth, async(req, res) => {
+    // console.log(req.user._id)
+    const validId = mongoose.Types.ObjectId.isValid(req.user._id);
+    if (!validId) 
+        return res.status(401).send("Process failed: Invalid id");
+
+    const team = await DetailTeam.find({userId: req.user._id})
+        .populate({path: "teamId", populate: "projectId"})
+        .exec();
+    console.log(team.teamId);
+    if(!team) 
+        return res.status(401).send("Process failed: Team not found in DB");
+
+    return res.status(200).send({ team });
 });
 
 router.put("/update", Auth, UserAuth, async(req, res) => {
