@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "84dcc540-7809-4357-9bfe-af8f3f5c78d2",
+		"_postman_id": "c88f32bf-1261-43f6-b673-96212608ccf2",
 		"name": "TeamCollab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -165,6 +165,162 @@
 								"api",
 								"auth",
 								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwOWQ4YTMxY2NhNzMxYWM0ZTI1ZTQiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDA5ZDgwMzFjY2E3MzFhYzRlMjVlMCIsImlhdCI6MTYyNDI4NDU2Mn0.lKpvrrM1g4QgS4QIsiql0VbKeCImcPn79JDIq7ccDdc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Online Shop\",\r\n    \"description\": \"Make the front and back for an online shop\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/project/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwOWQ4YTMxY2NhNzMxYWM0ZTI1ZTQiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDA5ZDgwMzFjY2E3MzFhYzRlMjVlMCIsImlhdCI6MTYyNDI4NDU2Mn0.lKpvrrM1g4QgS4QIsiql0VbKeCImcPn79JDIq7ccDdc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/project/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwOWQ4YTMxY2NhNzMxYWM0ZTI1ZTQiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDA5ZDgwMzFjY2E3MzFhYzRlMjVlMCIsImlhdCI6MTYyNDI4NDU2Mn0.lKpvrrM1g4QgS4QIsiql0VbKeCImcPn79JDIq7ccDdc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d09cfe12d86c03ccb3a763\",\r\n    \"name\": \"Online Shop\",\r\n    \"description\": \"Make the front and back for an online shop\",\r\n    \"status\": \"doing\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/project/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwOWQ4YTMxY2NhNzMxYWM0ZTI1ZTQiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDA5ZDgwMzFjY2E3MzFhYzRlMjVlMCIsImlhdCI6MTYyNDI4NDU2Mn0.lKpvrrM1g4QgS4QIsiql0VbKeCImcPn79JDIq7ccDdc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d09cfe12d86c03ccb3a763\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/project/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"delete"
 							]
 						}
 					},
