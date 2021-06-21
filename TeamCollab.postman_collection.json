@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "84dcc540-7809-4357-9bfe-af8f3f5c78d2",
+		"_postman_id": "668fef42-9b15-4421-917c-6c44649660be",
 		"name": "TeamCollab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,7 +9,97 @@
 			"name": "Role",
 			"item": [
 				{
-					"name": "add",
+					"name": "add User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"user\",\r\n    \"description\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/role/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"role",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"admin\",\r\n    \"description\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/role/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"role",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add ScrumMaster",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"scrumMaster\",\r\n    \"description\": \"scrumMaster\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/role/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"role",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add TechnicalLeader",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -155,13 +245,13 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "Add",
+					"name": "Add User 1",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fullName\": \"Cristian Gomez\",\r\n    \"email\": \"c@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+							"raw": "{\r\n    \"fullName\": \"Cristian Gomez\",\r\n    \"email\": \"cristian@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -185,22 +275,21 @@
 					"response": []
 				},
 				{
-					"name": "GetUser",
+					"name": "Add User 2",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ2YmQ5M2JhMDE1Njg5ZTY0YmIiLCJmdWxsTmFtZSI6IkRhbmkgdiIsImVtYWlsIjoiZEBnbWFpbC5jb20iLCJyb2xlSWQiOiI2MGNmYTJkNjM3ODYzMTEyZjQ4YTM1NTUiLCJpYXQiOjE2MjQyODg5ODB9.pgOnfLyOqeHZufbwD5Tud1FXtGOqqt3xTXcySm8n2n8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"Miguel Cerquera\",\r\n    \"email\": \"mguel@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3001/api/user/getUser",
+							"raw": "http://localhost:3001/api/user/add",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -209,7 +298,167 @@
 							"path": [
 								"api",
 								"user",
-								"getUser"
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddUserAdmin Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4NTQ3M30.1YEbrofEDSpYxM-pGCZ5Ex0njqux7i3c3nTdZgNjM5Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"fullName\": \"Pepito Perez\",\r\n    \"email\": \"pepito@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"roleId\": \"60d0b320bfc837071081ee1e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/user/addUserAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"user",
+								"addUserAdmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddUserAdmin User 3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4NTQ3M30.1YEbrofEDSpYxM-pGCZ5Ex0njqux7i3c3nTdZgNjM5Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"fullName\": \"Natalia Ortiz\",\r\n    \"email\": \"natalia@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"roleId\": \"60d0b2febfc837071081ee1b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/user/addUserAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"user",
+								"addUserAdmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddUserAdmin ScrumMaster",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4NTQ3M30.1YEbrofEDSpYxM-pGCZ5Ex0njqux7i3c3nTdZgNjM5Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"fullName\": \"Stiven Quiroga\",\r\n    \"email\": \"stiven@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"roleId\": \"60d0b323bfc837071081ee21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/user/addUserAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"user",
+								"addUserAdmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddUserAdmin TechnicalLeader",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4NTQ3M30.1YEbrofEDSpYxM-pGCZ5Ex0njqux7i3c3nTdZgNjM5Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"fullName\": \"Edson Suarez\",\r\n    \"email\": \"edson@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"roleId\": \"60d0b327bfc837071081ee24\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/user/addUserAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"user",
+								"addUserAdmin"
 							]
 						}
 					},
@@ -247,31 +496,22 @@
 					"response": []
 				},
 				{
-					"name": "AddUserAdmin",
+					"name": "GetUser",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4NTQ3M30.1YEbrofEDSpYxM-pGCZ5Ex0njqux7i3c3nTdZgNjM5Q",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ2YmQ5M2JhMDE1Njg5ZTY0YmIiLCJmdWxsTmFtZSI6IkRhbmkgdiIsImVtYWlsIjoiZEBnbWFpbC5jb20iLCJyb2xlSWQiOiI2MGNmYTJkNjM3ODYzMTEyZjQ4YTM1NTUiLCJpYXQiOjE2MjQyODg5ODB9.pgOnfLyOqeHZufbwD5Tud1FXtGOqqt3xTXcySm8n2n8",
 									"type": "string"
 								}
 							]
 						},
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{    \r\n    \"fullName\": \"Felipe perea\",\r\n    \"email\": \"f@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"roleId\": \"60d0a0fec26e8e0d245ba298\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:3001/api/user/addUserAdmin",
+							"raw": "http://localhost:3001/api/user/getUser",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -280,7 +520,7 @@
 							"path": [
 								"api",
 								"user",
-								"addUserAdmin"
+								"getUser"
 							]
 						}
 					},
@@ -303,7 +543,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{    \r\n    \"_id\": \"60d0a17cc26e8e0d245ba2a5\",\r\n    \"fullName\": \"Felipe perez\",\r\n    \"email\": \"fe@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"roleId\": \"60d0a0fec26e8e0d245ba298\"\r\n}",
+							"raw": "{    \r\n    \"_id\": \"60d0a17cc26e8e0d245ba2a5\",\r\n    \"fullName\": \"cristian Gomez\",\r\n    \"email\": \"cristian@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"roleId\": \"60d0a0fec26e8e0d245ba298\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -343,7 +583,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{    \r\n    \"_id\": \"60d0a17cc26e8e0d245ba2a5\",\r\n    \"fullName\": \"Felipe perez\",\r\n    \"email\": \"fe@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"roleId\": \"60d0a0fec26e8e0d245ba298\"\r\n}",
+							"raw": "{    \r\n    \"_id\": \"60d0a17cc26e8e0d245ba2a5\",\r\n    \"fullName\": \"cristian Gomez\",\r\n    \"email\": \"cristian@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"roleId\": \"60d0a0fec26e8e0d245ba298\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -372,13 +612,13 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "login",
+					"name": "login User 1",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"c@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+							"raw": "{\r\n    \"email\":\"cristian@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -396,6 +636,504 @@
 								"api",
 								"auth",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login User 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"miguel@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login User 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"natalia@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"pepito@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login ScrumMaster",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"stiven@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login TechnicalLeader",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"edson@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DetailTask",
+			"item": [
+				{
+					"name": "add DetailTask 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add DetailTask 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add DetailTask 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update DetailTask 1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"\",\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete DetailTask 1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"\",\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/delete?_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DetailTeam",
+			"item": [
+				{
+					"name": "add DetailTeam 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add DetailTeam 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add DetailTeam 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update DetailTeam 1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"\",\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete DetailTeam 1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"\",\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/detailTask/delete?_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"detailTask",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": null
+								}
 							]
 						}
 					},

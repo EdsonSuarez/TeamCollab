@@ -41,8 +41,7 @@ router.put("/update", Auth, UserAuth, TeachnicalAuth, async (req, res) => {
     if (
         !req.body._id ||
         !req.body.userId ||
-        !req.body.taskId ||
-        !req.body.status
+        !req.body.taskId
       )
         return res.status(400).send("Process failed: Incomplete data");
     

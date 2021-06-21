@@ -11,6 +11,8 @@ const Role = require("./routes/role");
 const Task = require("./routes/task");
 const Team = require("./routes/team");
 const User = require("./routes/user");
+const DetailTask = require("./routes/detailTask");
+const DetailTeam = require("./routes/detailTeam");
 
 
 const app = express();
@@ -24,6 +26,8 @@ app.use("/api/auth/", Auth);
 app.use("/api/project", Project);
 //app.use("/api/task/", Task);
 //app.use("/api/team/", Team);
+app.use("/api/detailTask", DetailTask);
+app.use("/api/detailTeam", DetailTeam);
 
 app.listen(process.env.PORT, () =>
   console.log("Backend server running on port: " + process.env.PORT)
