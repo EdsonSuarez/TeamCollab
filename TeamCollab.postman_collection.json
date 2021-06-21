@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1e07e4c4-90ad-404b-96d7-a90dd825421d",
+		"_postman_id": "dce230e3-00ba-40fa-8e28-c10162d22548",
 		"name": "TeamCollab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1277,7 +1277,7 @@
 					"response": []
 				},
 				{
-					"name": "get",
+					"name": "getUserProjects",
 					"request": {
 						"auth": {
 							"type": "bearer",
