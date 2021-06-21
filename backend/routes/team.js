@@ -4,12 +4,11 @@ const mongoose = require("mongoose");
 const Team = require("../models/team");
 const DetailTeam = require("../models/detailTeam");
 const User = require("../models/user");
-const Auth = require("../middleware/admin");
+const Auth = require("../middleware/auth");
 const UserAuth = require("../middleware/user");
-const Admin = require("../middleware/admin");
 const ScrumM = require("../middleware/scrumMaster");
 
-router.post("/addDetailTeam", Auth, UserAuth, ScrumM, async (req, res) => {
+router.post("/addTeam", Auth, UserAuth, ScrumM, async (req, res) => {
   if (!req.body.name || !req.body.projectId)
     return res.status(401).send("Process failed: Incomplete data");
   const validId = mongoose.Types.ObjectId.isValid(req.body.projectId);
@@ -17,7 +16,7 @@ router.post("/addDetailTeam", Auth, UserAuth, ScrumM, async (req, res) => {
     return res.status(401).send("Process failed: Invalid projectId");
   const team = new Team({
     name: req.body.name,
-    description: req.body.description,
+    projectId: req.body.projectId,
     active: true,
   });
   try {
