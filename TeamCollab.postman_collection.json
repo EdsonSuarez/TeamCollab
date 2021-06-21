@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2e4ebbb1-e7a2-4fac-b64b-122cd9838aa5",
+		"_postman_id": "1e07e4c4-90ad-404b-96d7-a90dd825421d",
 		"name": "TeamCollab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -321,7 +321,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{    \r\n    \"fullName\": \"Pepito Perez\",\r\n    \"email\": \"pepito@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"roleId\": \"60d0b320bfc837071081ee1e\"\r\n}",
+							"raw": "{    \r\n    \"fullName\": \"Pepito Perez\",\r\n    \"email\": \"pepito@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"roleId\": \"60d0e95dbf05991cd0e85ef9\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -392,7 +392,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNmYTQ4ZmQ5M2JhMDE1Njg5ZTY0YzAiLCJmdWxsTmFtZSI6IkNyaXN0aWFuIEdvbWV6IiwiZW1haWwiOiJjQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwY2ZhMmM1Mzc4NjMxMTJmNDhhMzU1MiIsImlhdCI6MTYyNDI4NTQ3M30.1YEbrofEDSpYxM-pGCZ5Ex0njqux7i3c3nTdZgNjM5Q",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
 									"type": "string"
 								}
 							]
@@ -401,7 +401,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{    \r\n    \"fullName\": \"Stiven Quiroga\",\r\n    \"email\": \"stiven@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"roleId\": \"60d0b323bfc837071081ee21\"\r\n}",
+							"raw": "{    \r\n    \"fullName\": \"Stiven Quiroga\",\r\n    \"email\": \"stiven@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"roleId\": \"60d0e961bf05991cd0e85efc\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1019,14 +1019,29 @@
 				{
 					"name": "add DetailTeam 1",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}"
+							"raw": "{\r\n    \"userId\": \"60d0e981bf05991cd0e85f03\",\r\n    \"teamId\": \"60d0e981bf05991cd0e85f04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/detailTask/add",
+							"raw": "http://localhost:3001/api/detailTeam/add",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1034,7 +1049,7 @@
 							"port": "3001",
 							"path": [
 								"api",
-								"detailTask",
+								"detailTeam",
 								"add"
 							]
 						}
@@ -1048,10 +1063,10 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}"
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"teamId\": \"\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/detailTask/add",
+							"raw": "http://localhost:3001/api/detailTeam/add",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1059,7 +1074,7 @@
 							"port": "3001",
 							"path": [
 								"api",
-								"detailTask",
+								"detailTeam",
 								"add"
 							]
 						}
@@ -1073,10 +1088,10 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"\",\r\n    \"taskId\": \"\"\r\n}"
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"teamId\": \"\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/detailTask/add",
+							"raw": "http://localhost:3001/api/detailTeam/add",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1084,7 +1099,7 @@
 							"port": "3001",
 							"path": [
 								"api",
-								"detailTask",
+								"detailTeam",
 								"add"
 							]
 						}
@@ -1180,6 +1195,193 @@
 									"key": "_id",
 									"value": null
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"OnlineShop\",\r\n    \"description\": \"Front y back para una tienda online\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/project/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/project/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/project/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d0eabde576f601201d10ba\",\r\n    \"name\": \"OnlineShop\",\r\n    \"description\": \"Front y back para una tienda online\",\r\n    \"status\": \"doing\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/project/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZWE1Y2Y1ZTE3MDM5ODRlZTkxMDAiLCJmdWxsTmFtZSI6IlBlcGl0byBQZXJleiIsImVtYWlsIjoicGVwaXRvQGdtYWlsLmNvbSIsInJvbGVJZCI6IjYwZDBlOTVkYmYwNTk5MWNkMGU4NWVmOSIsImlhdCI6MTYyNDMwNDIzMH0.3j9OLlT6A6-UVA56It-5e9n3FrhPtg7dldoYg8znHbo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60d0eabde576f601201d10ba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/project/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"project",
+								"delete"
 							]
 						}
 					},
