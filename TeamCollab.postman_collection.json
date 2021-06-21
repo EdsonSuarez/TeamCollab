@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "668fef42-9b15-4421-917c-6c44649660be",
+		"_postman_id": "2e4ebbb1-e7a2-4fac-b64b-122cd9838aa5",
 		"name": "TeamCollab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -601,6 +601,52 @@
 								"api",
 								"user",
 								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateImg",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQwZGVlYjkxYmRmYzE4MjRiZjA3YTEiLCJmdWxsTmFtZSI6IkZlbGlwZSBwZXJlYSIsImVtYWlsIjoiZmVAZ21haWwuY29tIiwicm9sZUlkIjoiNjBjZmEyZDYzNzg2MzExMmY0OGEzNTU1IiwiaWF0IjoxNjI0MzAyNDU3fQ.oedk4V-0kwMKnvSDJYd7g5LUTJl-vGRbR_kxiy4FlG8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_id",
+									"value": "60d0deeb91bdfc1824bf07a1",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/crisfordy/Pictures/luna.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/user/updateImg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"user",
+								"updateImg"
 							]
 						}
 					},

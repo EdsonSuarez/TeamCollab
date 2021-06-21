@@ -2,11 +2,14 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 
+// AGREGAR IMG
+
 const userSchema = mongoose.Schema({
     fullName: String,
     email: String,
     password: String,
     roleId: {type: mongoose.Schema.ObjectId, ref: 'role'},
+    imageUrl: String,
     active: {type: Boolean, default: true},
     date: {type: Date, default: Date.now}    
 })
