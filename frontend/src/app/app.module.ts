@@ -21,6 +21,10 @@ import { HomeComponent } from './home/home/home.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TeamComponent } from './team/team/team.component';
+import { DetailTeamComponent } from './team/detail-team/detail-team.component';
+import { DetailTaskComponent } from './task/detail-task/detail-task.component';
+import { TaskComponent } from './task/task/task.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     FooterComponent,
     RegisterComponent,
+    TeamComponent,
+    DetailTeamComponent,
+    DetailTaskComponent,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,
