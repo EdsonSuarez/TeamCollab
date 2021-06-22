@@ -1,0 +1,59 @@
+h1 {
+  font-size: 60px;
+}
+h2 {
+  font-size: 40px;
+}
+h2.role-title {
+  font-size: 30px;
+}
+p {
+  font-size: 20px;
+}
+.carousel-caption {
+  margin-bottom: 30px;
+  width: 80%;
+}
+.bd-placeholder-img {
+  background-repeat: no-repeat;
+}
+.bi {
+  vertical-align: -0.125em;
+  fill: white;
+  width: 1em;
+  height: 1em;
+}
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #fff;
+  border-radius: 0.75rem;
+}
+.carousel {
+  margin: 4rem 0;
+}
+.carousel-caption {
+  top: 6rem;
+  z-index: 10;
+}
+.carousel-caption.dark{
+    color: black;
+  }
+.carousel-item {
+  height: 32rem;
+}
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
+}
+.hero-banner {
+    padding-bottom: 4rem;
+}
