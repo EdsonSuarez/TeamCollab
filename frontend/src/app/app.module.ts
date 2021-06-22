@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './home/register/register.component';
 import { AuthService } from "./services/auth.service";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -36,7 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     MatExpansionModule,
     FormsModule,
-    ReactiveFormsModule  
+    ReactiveFormsModule,
+    HttpClientModule,
   ], 
   providers: [AuthService],
   bootstrap: [AppComponent]
