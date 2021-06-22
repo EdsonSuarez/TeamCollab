@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './home/register/register.component';
 import { AuthService } from "./services/auth.service";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -15,11 +14,15 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { LoginComponent } from './home/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -33,8 +36,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     MatIconModule,
     MatExpansionModule,
     FormsModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule  
+  ], 
   providers: [AuthService],
   bootstrap: [AppComponent]
 })

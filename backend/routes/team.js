@@ -5,8 +5,10 @@ const Team = require("../models/team");
 const DetailTeam = require("../models/detailTeam");
 const User = require("../models/user");
 const Auth = require("../middleware/auth");
+const Admin = require("../middleware/admin");
 const UserAuth = require("../middleware/user");
 const ScrumM = require("../middleware/scrumMaster");
+const TechnicalLeader = require("../middleware/technicalLeader");
 
 router.post("/addTeam", Auth, UserAuth, ScrumM, async (req, res) => {
   if (!req.body.name || !req.body.projectId)
@@ -29,9 +31,17 @@ router.post("/addTeam", Auth, UserAuth, ScrumM, async (req, res) => {
   }
 });
 
-router.get("/getTeamScrum", Auth, UserAuth, ScrumM, async (req, res) => {
+router.get("/getTeam", Auth, UserAuth, async (req, res) => {
   const team = await DetailTeam.find({ userId: req.user._id })
     .populate({path: "teamId", populate: "projectId"})
+    .exec();
+  if (!team) return res.status(401).send("Process dailed: Error getting team");
+  res.status(200).send({ team });
+});
+
+router.get("/getTeamAdmin", Auth, UserAuth, Admin, async (req, res) => {
+  const team = await Team.find()
+    .populate("projectId")
     .exec();
   if (!team) return res.status(401).send("Process dailed: Error getting team");
   res.status(200).send({ team });

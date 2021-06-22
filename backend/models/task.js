@@ -8,6 +8,7 @@ const taskSchema = new mongoose.Schema({
   dependency: { type: mongoose.Schema.ObjectId },
   status: String,
   priority: { type: Number, default: 1 },
+  imageUrl: String, 
   date: { type: Date, default: Date.now },
 });
 
