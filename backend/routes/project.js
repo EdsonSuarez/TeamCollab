@@ -39,7 +39,6 @@ router.get("/getAll", Auth, UserAuth, AdminAuth, async(req, res) => {
 });
 
 router.get("/getMyProjects", Auth, UserAuth, async(req, res) => {
-    // console.log(req.user._id)
     const validId = mongoose.Types.ObjectId.isValid(req.user._id);
     if (!validId) 
         return res.status(401).send("Process failed: Invalid id");
@@ -77,7 +76,7 @@ router.put("/update", Auth, UserAuth, async(req, res) => {
     return res.status(200).send({project});
 });
 
-router.put("/delete", Auth, UserAuth, async(req, res) => {
+router.put("/delete", Auth, UserAuth, ScrumAuth, async(req, res) => {
     if(!req.body._id)
         return res.status(401).send("Process failed: Incomplete data");
 
