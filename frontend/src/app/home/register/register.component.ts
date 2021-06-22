@@ -11,10 +11,12 @@ export class RegisterComponent implements OnInit {
 
   public registerData: any;
   public errorMessage: String;
+  public progress: number;
 
   constructor(private router: Router, private auth: AuthService) {
     this.registerData = {},
     this.errorMessage = '';
+    this.progress = 0;
   }
 
   ngOnInit(): void {
@@ -51,6 +53,21 @@ export class RegisterComponent implements OnInit {
 
   xAlert(){        
     this.errorMessage = ''  
+  }
+
+  progreso(){
+    if (this.registerData.fullName) {      
+      this.progress = 35;
+    }
+
+    if (this.registerData.fullName && this.registerData.email) {      
+      this.progress = 65;
+    }
+
+    if (this.registerData.fullName && this.registerData.email && this.registerData.password) {      
+      this.progress = 100;
+    }
+    
   }
 
 }

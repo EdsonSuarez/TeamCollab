@@ -16,16 +16,22 @@
         <mat-card-content>
             <div class="container">
                 <mat-form-field>
-                    <input [(ngModel)]="registerData.fullName" matInput placeholder="FullName" required>
+                    <input [(ngModel)]="registerData.fullName" matInput placeholder="FullName" (keyup)="progreso()" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input [(ngModel)]="registerData.email" matInput placeholder="Email" required>
+                    <input [(ngModel)]="registerData.email" matInput placeholder="Email" (keyup)="progreso()" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input [(ngModel)]="registerData.password" matInput placeholder="Password" required>
+                    <input [(ngModel)]="registerData.password" matInput placeholder="Password" (keyup)="progreso()" required>
                 </mat-form-field>
             </div>
         </mat-card-content>
+
+        <div class="container">
+            <mat-progress-bar  class="barra" mode="buffer" color="accent" [value]=progress ></mat-progress-bar>    
+        </div>
+        <br>
+        
 
         <mat-card-actions>
             <button (click)="register()" class="button colorButton" mat-raised-button>

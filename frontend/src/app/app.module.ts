@@ -17,6 +17,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LoginComponent } from './home/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatProgressBarModule
   ], 
   providers: [AuthService],
   bootstrap: [AppComponent]
