@@ -66,10 +66,10 @@ router.post(
     if (!validId)
       return res.status(401).send("Process failed: Invalid boardId");
     let imageUrl = "";
-    if (req.files == !undefined && req.files.image.type) {
+    if (req.files !== undefined && req.files.image.type) {
       const url = req.protocol + "://" + req.get("host") + "/";
       let serverImg =
-        "./uploads/" + moment().unix() + path.extname(req.files.image.path);
+        "./img/task/" + moment().unix() + path.extname(req.files.image.path);
       fs.createReadStream(req.files.image.path).pipe(
         fs.createWriteStream(serverImg)
       );
