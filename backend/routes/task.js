@@ -74,7 +74,7 @@ router.post(
         fs.createWriteStream(serverImg)
       );
       imageUrl =
-        url + "uploads/" + moment().unix() + path.extname(req.files.image.path);
+        url + "img/" + moment().unix() + path.extname(req.files.image.path);
     }
     if (req.body.dependency) {
       let isValid = mongoose.Types.ObjectId.isValid(req.body.dependency);

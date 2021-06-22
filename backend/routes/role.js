@@ -7,8 +7,7 @@ const Auth = require("../middleware/auth");
 const UserAuth = require("../middleware/user");
 const Admin = require("../middleware/admin");
 
-// faltan los permisos de admin 
-router.post("/add", async (req, res) => {
+router.post("/add", Auth, UserAuth, Admin, async (req, res) => {
     if (!req.body.name || !req.body.description)
         return res.status(401).send("Process failed: Incomplete data");
 
