@@ -39,7 +39,6 @@ router.get("/getAll", Auth, UserAuth, AdminAuth, async(req, res) => {
 });
 
 router.get("/getMyProjects", Auth, UserAuth, async(req, res) => {
-    // console.log(req.user._id)
     const validId = mongoose.Types.ObjectId.isValid(req.user._id);
     if (!validId) 
         return res.status(401).send("Process failed: Invalid id");
@@ -47,7 +46,6 @@ router.get("/getMyProjects", Auth, UserAuth, async(req, res) => {
     const team = await DetailTeam.find({userId: req.user._id})
         .populate({path: "teamId", populate: "projectId"})
         .exec();
-    console.log(team.teamId);
     if(!team) 
         return res.status(401).send("Process failed: Team not found in DB");
 
