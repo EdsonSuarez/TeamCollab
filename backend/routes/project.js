@@ -46,7 +46,6 @@ router.get("/getMyProjects", Auth, UserAuth, async(req, res) => {
     const team = await DetailTeam.find({userId: req.user._id})
         .populate({path: "teamId", populate: "projectId"})
         .exec();
-    console.log(team.teamId);
     if(!team) 
         return res.status(401).send("Process failed: Team not found in DB");
 
