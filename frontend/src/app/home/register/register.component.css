@@ -32,3 +32,6 @@ mat-card-title{
     height: 6px;
 }
 
+.fondo{
+    background-image: url(/frontend/src/assets/fondo.jpg);
+}
