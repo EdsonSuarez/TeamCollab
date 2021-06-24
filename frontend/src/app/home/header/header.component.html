@@ -8,8 +8,9 @@
     <span class="headerSpacer"></span>
 
     <ul>
-      <a mat-button routerLink="register">Register</a>
-      <a mat-button routerLink="login">Login</a>
+      <a *ngIf="!auth.loggedIn()" mat-button routerLink="register">Register</a>
+      <a *ngIf="!auth.loggedIn()" mat-button routerLink="login">Login</a>
+      <a *ngIf="auth.loggedIn()" mat-button (click)="auth.logout()">Logout</a>
     </ul>
   </mat-toolbar>
   
