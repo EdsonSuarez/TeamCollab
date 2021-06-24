@@ -1,54 +1,57 @@
-
-<div class="form">
-    <mat-card class="card">
-      <mat-card-title>Login</mat-card-title>
-      <div class="col-12 col-lg-12" *ngIf="errorMessage">
-        <div class="alert alert-danger alert-dismissible alertJustify" role="alert">
-          <div class="alert-message">
-            {{ errorMessage }}
-          </div>
-          <button
-            type="button"
-            mat-button
-            class="close alertButton"
-            (click)="closeX()"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">X</span>
-          </button>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <div class="fadeIn first">
+      <mat-icon class="iconHead">person</mat-icon>
+    </div>
+    <div *ngIf="errorMessage">
+      <div
+        class="alert alert-danger d-flex align-items-center m-2"
+        role="alert"
+      >
+        <svg
+          class="bi flex-shrink-0 me-2"
+          width="24"
+          height="24"
+          role="img"
+          aria-label="Info:"
+        >
+          <use xlink:href="#info-fill" />
+        </svg>
+        <div>
+          {{ errorMessage }}
         </div>
       </div>
-      <mat-card-content>
-        <div class="container">
+    </div>
+    <form>
+      <mat-form-field>
+        <input
+          type="text"
+          id="login"
+          class="fadeIn second"
+          [(ngModel)]="loginData.email"
+          name="email"
+          placeholder="User"
+          matInput
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="password"
+          id="password"
+          class="fadeIn third"
+          [(ngModel)]="loginData.password"
+          name="password"
+          placeholder="Password"
+          matInput
+          required
+        />
+      </mat-form-field>
+      <button (click)="login()" class="btn btn-pink m-2">Log in</button>
+    </form>
 
-          <mat-form-field>
-            <input
-              [(ngModel)]="loginData.email"
-              matInput
-              placeholder="Email"
-              required
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <input
-              [(ngModel)]="loginData.password"
-              matInput
-              placeholder="Password"
-              required
-            />
-          </mat-form-field>
-        </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          (click)="login()"
-          class="button colorButton"
-          mat-raised-button
-        >
-          Go !!
-        </button>
-      </mat-card-actions>
-    </mat-card>
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
   </div>
-  
+</div>

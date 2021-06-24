@@ -13,9 +13,10 @@ export class AuthService {
     this.env = environment.APP_URL;
   }
 
-  registerUser(user: any){
+  registerUser(user: any) {
     return this.http.post(this.env + 'user/add', user)
   }
+
   login(user: any) {
     return this.http.post(this.env + 'auth/login', user);
   }

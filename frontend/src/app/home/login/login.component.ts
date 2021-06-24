@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +8,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   public loginData: any;
   public errorMessage: String;
 
-  constructor(private auth: AuthService, private router: Router) { 
+  constructor( private router: Router, private authService: AuthService) {
     this.loginData = {};
     this.errorMessage = '';
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
   login() {
     if (!this.loginData.email || !this.loginData.password) {
       console.log('Failed process: Incomplete data');
@@ -24,19 +27,19 @@ export class LoginComponent implements OnInit {
       this.closeAlert();
       this.loginData = {};
     } else {
-      this.auth.login(this.loginData).subscribe(
+      this.authService.login(this.loginData).subscribe(
         (res: any) => {
           console.log(res);
           localStorage.setItem('token', res.jwtToken);
-          //this.router.navigate(['/listTasks']);
+          this.router.navigate(['/project']);
         },
         (err) => {
           console.log(err);
-          //this.errorMessage = err.error;
+          this.errorMessage = err.error;
           this.closeAlert();
           this.loginData = {};
         }
-      )
+      );
     }
   }
 
