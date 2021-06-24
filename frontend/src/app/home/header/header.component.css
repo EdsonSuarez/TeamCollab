@@ -1,0 +1,21 @@
+.headerSpacer {
+  flex: 1 1 auto;
+}
+img {
+    width: 80%;
+    height: 80%;
+    margin-top: 1.5rem;
+    align-items: center;
+
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.bgHeader {
+  background-color: #a548a2;
+}

@@ -1,0 +1,16 @@
+<mat-toolbar class="bgHeader">
+    <ul>
+      <a routerLink="">
+        <img src="../../../assets/img/teamCollab.png" alt="" >
+      </a>
+
+    </ul>
+    <span class="headerSpacer"></span>
+
+    <ul>
+      <a *ngIf="!auth.loggedIn()" mat-button routerLink="register">Register</a>
+      <a *ngIf="!auth.loggedIn()" mat-button routerLink="login">Login</a>
+      <a *ngIf="auth.loggedIn()" mat-button (click)="auth.logout()">Logout</a>
+    </ul>
+  </mat-toolbar>
+  

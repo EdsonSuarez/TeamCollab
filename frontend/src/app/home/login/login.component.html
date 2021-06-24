@@ -1,3 +1,57 @@
-<mat-toolbar class="colorHeader">
-    <span>My Applicationns</span>
-</mat-toolbar>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <div class="fadeIn first">
+      <mat-icon class="iconHead">person</mat-icon>
+    </div>
+    <div *ngIf="errorMessage">
+      <div
+        class="alert alert-danger d-flex align-items-center m-2"
+        role="alert"
+      >
+        <svg
+          class="bi flex-shrink-0 me-2"
+          width="24"
+          height="24"
+          role="img"
+          aria-label="Info:"
+        >
+          <use xlink:href="#info-fill" />
+        </svg>
+        <div>
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
+    <form>
+      <mat-form-field>
+        <input
+          type="text"
+          id="login"
+          class="fadeIn second"
+          [(ngModel)]="loginData.email"
+          name="email"
+          placeholder="User"
+          matInput
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="password"
+          id="password"
+          class="fadeIn third"
+          [(ngModel)]="loginData.password"
+          name="password"
+          placeholder="Password"
+          matInput
+          required
+        />
+      </mat-form-field>
+      <button (click)="login()" class="btn btn-pink m-2">Log in</button>
+    </form>
+
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+  </div>
+</div>

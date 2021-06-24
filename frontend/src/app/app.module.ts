@@ -4,31 +4,41 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './home/register/register.component';
-import { AuthService } from "./services/auth.service";
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LoginComponent } from './home/login/login.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { HeaderComponent } from './home/header/header.component';
+import { FooterComponent } from './home/footer/footer.component';
 
+import { AuthService } from './services/auth.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { HomeComponent } from './home/home/home.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListProjectComponent } from './project/list/listProject.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    HomeComponent,
+    LoginComponent,
+    HeaderComponent,
+    FooterComponent,
     RegisterComponent,
-    LoginComponent
+    ListProjectComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,    
+    AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
@@ -41,8 +51,15 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressBarModule
-  ], 
-  providers: [AuthService],
-  bootstrap: [AppComponent]
+  ],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

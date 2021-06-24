@@ -1,0 +1,10 @@
+
+
+footer {
+  offset-position:initial;
+  bottom: 0;
+  background-color: #2d132c;
+  color: white;
+  padding: 1rem;
+  width: 100%;
+}

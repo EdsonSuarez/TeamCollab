@@ -1,0 +1,27 @@
+.title {
+    font-size: 35px;
+    font-family: 'Inconsolata', monospace;
+    font-weight: bold;
+    color: #a548a2;
+    padding: 10px;
+    border-bottom: none;
+}
+
+mat-icon {
+    font-size: 20px;
+    vertical-align: inherit;
+    height: unset;
+    width: unset;
+}
+
+.centrarTexto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.borderContent {
+    border: #f5f5dc solid;
+    margin: 5px;
+    background-color: #f0f8ff;
+}
