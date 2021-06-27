@@ -24,6 +24,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListProjectComponent } from './project/list/listProject.component';
+import { ListBoardComponent } from './board/list-board/list-board.component';
+import { BoardService } from "./services/board.service";
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { ListProjectComponent } from './project/list/listProject.component';
     HeaderComponent,
     FooterComponent,
     RegisterComponent,
-    ListProjectComponent,
+    ListProjectComponent,    
+    ListBoardComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { ListProjectComponent } from './project/list/listProject.component';
   ],
   providers: [
     AuthService,
+    BoardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

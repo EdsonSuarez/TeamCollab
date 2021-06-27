@@ -1,0 +1,95 @@
+<div>
+    <input type="checkbox" checkbox="checkbox" (click)="cambio()">
+    <div class="menu">
+        <span class="material-icons icon">{{ toggle ? "arrow_forward_ios" : "arrow_back_ios"}}</span>
+        <div class="menuAll">
+            <div class="menuUpper">
+                <h3>teams/proyect</h3>
+            </div>
+            <div class="menuLower">
+                <h3>Sprints</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="contents">
+
+
+        <div class="containerToDo">
+            <h3 class="sections">To-Do</h3>
+
+            <div class="container" *ngIf="taskToDo.length">
+                <div class="tarjetas">
+                    <mat-card class="card" *ngFor="let task of taskToDo">
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                        </mat-card-content>
+                        
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="containerDoing">
+            <h3 class="sections">Doing</h3>
+            <div class="container" *ngIf="taskDoing.length">
+                <div class="tarjetas">
+                    <mat-card class="card" *ngFor="let task of taskDoing">
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                        </mat-card-content>
+                        
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="containerTesting">
+            <h3 class="sections">Testing</h3>
+            <div class="container" *ngIf="taskTesting.length">
+                <div class="tarjetas">
+                    <mat-card class="card" *ngFor="let task of taskTesting">
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                        </mat-card-content>
+                        
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="containerDone">
+            <h3 class="sections">Done</h3>
+            <div class="container" *ngIf="taskDone.length">
+                <div class="tarjetas">
+                    <mat-card class="card" *ngFor="let task of taskDone">
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                        </mat-card-content>
+                        
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="containerOtro">
+            <h3 class="sections">Otro</h3>
+        </div>
+    </div>
+</div>

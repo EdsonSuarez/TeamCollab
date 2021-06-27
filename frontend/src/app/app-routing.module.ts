@@ -4,6 +4,8 @@ import { RegisterComponent } from './home/register/register.component';
 import { LoginComponent } from './home/login/login.component';
 import { HomeComponent } from "./home/home/home.component";
 import { ListProjectComponent } from './project/list/listProject.component';
+import { ListBoardComponent } from "./board/list-board/list-board.component";
+
 
 const routes: Routes = [
   {
@@ -22,7 +24,11 @@ const routes: Routes = [
   {
     path: 'project',
     component: ListProjectComponent,
-  }
+  },
+  {
+    path:'board',
+    component: ListBoardComponent,
+  },
 ];
 
 @NgModule({

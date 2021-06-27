@@ -5,6 +5,8 @@ const Board = require("../models/board");
 const Team = require("../models/team");
 const Auth = require("../middleware/auth");
 const ScrumMaster = require("../middleware/scrumMaster");
+const detailTask = require("../models/detailTask");
+const UserAuth = require("../middleware/user");
 
 router.post("/add", Auth, ScrumMaster, async (req, res) => {
   if (!req.body.name || !req.body.description || !req.body.teamId)
@@ -34,6 +36,15 @@ router.get("/get/:name?", Auth, ScrumMaster, async (req, res) => {
     .exec();
   if (!board) return res.status(401).send("Error fetching user information");
   return res.status(200).send({ board });
+});
+
+router.get("/getBoardUser", Auth, UserAuth, async (req, res) => {
+  
+  const tasksUser = await detailTask.find({userId: req.user._id})
+  .populate({path:'taskId', populate:{path:'boardId', populate:{path:'teamId', populate:{path:'projectId'}}}})
+  .exec();
+  if (!tasksUser) return res.status(401).send("Error fetching tasks user");
+  return res.status(200).send({ tasksUser });
 });
 
 router.put("/update", Auth, ScrumMaster, async (req, res) => {
