@@ -31,7 +31,13 @@ export class LoginComponent implements OnInit {
         (res: any) => {
           console.log(res);
           localStorage.setItem('token', res.jwtToken);
-          this.router.navigate(['/project']);
+          if(this.authService.isAdmin()){
+            this.router.navigate(['/project']);
+          }else if(this.authService.isScrumMaster()){
+            this.router.navigate(['/project']);
+          }else{
+            this.router.navigate(['/board']);
+          }
         },
         (err) => {
           console.log(err);

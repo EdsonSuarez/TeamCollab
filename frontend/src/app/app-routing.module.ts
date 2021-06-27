@@ -5,6 +5,7 @@ import { LoginComponent } from './home/login/login.component';
 import { HomeComponent } from "./home/home/home.component";
 import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from "./board/list-board/list-board.component";
+import { AuthGuard } from './guard/auth.guard';
 
 
 const routes: Routes = [
@@ -24,10 +25,12 @@ const routes: Routes = [
   {
     path: 'project',
     component: ListProjectComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'board',
     component: ListBoardComponent,
+    canActivate:[AuthGuard]
   },
 ];
 

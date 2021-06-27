@@ -13,7 +13,19 @@ export class BoardService {
     this.env = environment.APP_URL
   }
 
-  boardUser(){
-    return this.http.get<any>(this.env + 'board/getBoardUser');
+  tasksUser(){
+    return this.http.get<any>(this.env + 'board/getTasksUser');
+  }
+
+  teamsUser(){
+    return this.http.get<any>(this.env + 'board/getTeamUser');  
+  }
+
+  boardsUser(id: String){
+    return this.http.get<any>(this.env + `board/getBoards/${id}`);  
+  }
+
+  TasksBoard(id: String){
+    return this.http.get<any>(this.env + `board/getTasks/${id}`);  
   }
 }

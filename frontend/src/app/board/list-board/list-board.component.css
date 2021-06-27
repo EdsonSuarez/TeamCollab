@@ -84,11 +84,11 @@ input[type="checkbox"]:checked{
 }
 
 .menuUpper{
-    height: 40%;
+    height: 40%;    
 }
 
 .menuLower{
-    height: 60%;
+    height: 60%;    
 }
 
 .containerToDo{
@@ -113,21 +113,24 @@ input[type="checkbox"]:checked{
 
 .container {
     padding-top: 1px;
+    display: flex;
+    flex-direction: column;    
+    align-items: center;    
 }
 
-.sections{
+.titleSections{
     text-align: center;
-    padding-top: 10px;
-    color: coral;
-    font-size: 25px;
+    padding: 1.5vh;
+    color: #00ffdd;
+    font-size: 3vh;
     margin: 0;
 }
 
 .card {
-    width: 210px;
-    height: 200px;
-    padding: 20px;
-    margin: 30px;
+    width: 70%;
+    /* height: 100%; */
+    padding: 2.5vh;
+    margin: 2.5vh;
     background-color: rgb(70, 156, 156);
 }
 
@@ -136,15 +139,13 @@ input[type="checkbox"]:checked{
     justify-content: center;
 }
 
-.tarjetas {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 30px;
-}
-
 .mat-card-content {
     padding-top: 11px;
-    font-size: 1rem;
+    font-size: 1.6vh;
+}
+
+.mat-card-title{
+    font-size: 2.5vh;
 }
 
 

@@ -10,6 +10,8 @@ import { FooterComponent } from './home/footer/footer.component';
 
 import { AuthService } from './services/auth.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { BoardService } from "./services/board.service";
+import { AuthGuard } from "./guard/auth.guard";
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,7 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from './board/list-board/list-board.component';
-import { BoardService } from "./services/board.service";
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -53,11 +55,13 @@ import { BoardService } from "./services/board.service";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatListModule,
   ],
   providers: [
     AuthService,
     BoardService,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

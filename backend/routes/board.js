@@ -7,6 +7,8 @@ const Auth = require("../middleware/auth");
 const ScrumMaster = require("../middleware/scrumMaster");
 const detailTask = require("../models/detailTask");
 const UserAuth = require("../middleware/user");
+const detailTeam = require("../models/detailTeam");
+const Task = require("../models/task");
 
 router.post("/add", Auth, ScrumMaster, async (req, res) => {
   if (!req.body.name || !req.body.description || !req.body.teamId)
@@ -38,7 +40,8 @@ router.get("/get/:name?", Auth, ScrumMaster, async (req, res) => {
   return res.status(200).send({ board });
 });
 
-router.get("/getBoardUser", Auth, UserAuth, async (req, res) => {
+// retorna todas las tareas, boards, grupos y proyectos de un usuario
+router.get("/getTasksUser", Auth, UserAuth, async (req, res) => {
   
   const tasksUser = await detailTask.find({userId: req.user._id})
   .populate({path:'taskId', populate:{path:'boardId', populate:{path:'teamId', populate:{path:'projectId'}}}})
@@ -46,6 +49,41 @@ router.get("/getBoardUser", Auth, UserAuth, async (req, res) => {
   if (!tasksUser) return res.status(401).send("Error fetching tasks user");
   return res.status(200).send({ tasksUser });
 });
+
+// retorna los projectos y grupos de una persona
+router.get("/getTeamUser", Auth, UserAuth, async (req, res) => {
+  
+  const teamsUser = await detailTeam.find({userId: req.user._id})
+  .populate({path:'teamId', populate:{path:'projectId'}})
+  .exec();
+  if (!teamsUser) return res.status(401).send("Error fetching teams");
+  return res.status(200).send({ teamsUser });
+});
+
+// retorna los board de un team
+router.get("/getBoards/:_id", Auth, UserAuth, async (req, res) => {
+    
+  const team = await Team.findById(req.params._id)
+  if(!team) return res.status(401).send("Error: the team doesn't exist");
+
+  const boards = await Board.find({teamId: req.params._id}); 
+  if (!boards) return res.status(401).send("Error fetching boards");
+  return res.status(200).send({ boards });
+});
+
+
+// retorna las task de un board
+router.get("/getTasks/:_id", Auth, UserAuth, async (req, res) => {
+    
+  const boards = await Board.findById(req.params._id)
+  if(!boards) return res.status(401).send("Error: the board doesn't exist");
+
+  const tasks = await Task.find({boardId: req.params._id}); 
+  if (!tasks) return res.status(401).send("Error fetching tasks");
+  return res.status(200).send({ tasks });
+});
+
+
 
 router.put("/update", Auth, ScrumMaster, async (req, res) => {
   if (
