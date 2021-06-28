@@ -148,11 +148,11 @@ input[type="checkbox"]:checked{
     margin-top: 10px;
     cursor: pointer;
     border-radius: 4px;
-    font-size: 1.7vh;
+    font-size: 1.8vh;
 }
 
 .containerButton:hover{
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .buttonsMenu{
@@ -172,12 +172,21 @@ input[type="checkbox"]:checked{
     align-items: center;
     justify-content: center;
 }
+
 .containerTitleMenu{
     display: flex;
     justify-content: center;    
-    /* align-items: center; */
+    align-items: center;
     width: 100%;    
-    /* background-color: chartreuse; */
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-bottom: 2vh;
+}
+
+.titleMenu{
+    margin-right: 2vh;
+    padding-top: 2.5%;    
+    font-size: 2vh;
 }
 
 
