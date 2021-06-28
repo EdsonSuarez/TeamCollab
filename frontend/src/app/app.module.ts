@@ -28,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from './board/list-board/list-board.component';
 import { MatListModule } from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { MatListModule } from '@angular/material/list';
     HttpClientModule,
     MatProgressBarModule,
     MatListModule,
+    MatDialogModule,
   ],
   providers: [
     AuthService,

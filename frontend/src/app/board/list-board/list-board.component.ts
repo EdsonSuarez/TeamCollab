@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from "../../services/board.service";
 import { Router } from "@angular/router";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-list-board',
@@ -18,7 +19,7 @@ export class ListBoardComponent implements OnInit {
   public teamProject: any;
 
 
-  constructor(private board: BoardService, private router: Router) { 
+  constructor(private board: BoardService, private router: Router, public auth: AuthService) { 
     this.toggle = true;    
     this.taskToDo = [];
     this.taskDoing = [];
