@@ -10,7 +10,7 @@ const UserAuth = require("../middleware/user");
 const ScrumM = require("../middleware/scrumMaster");
 const TechnicalLeader = require("../middleware/technicalLeader");
 
-router.post("/addTeam", Auth, UserAuth, ScrumM, async (req, res) => {
+router.post("/add", Auth, UserAuth, ScrumM, async (req, res) => {
   if (!req.body.name || !req.body.projectId)
     return res.status(401).send("Process failed: Incomplete data");
   const validId = mongoose.Types.ObjectId.isValid(req.body.projectId);
@@ -31,7 +31,7 @@ router.post("/addTeam", Auth, UserAuth, ScrumM, async (req, res) => {
   }
 });
 
-router.get("/getTeam", Auth, UserAuth, async (req, res) => {
+router.get("/get", Auth, UserAuth, async (req, res) => {
   const team = await DetailTeam.find({ userId: req.user._id })
     .populate({path: "teamId", populate: "projectId"})
     .exec();
@@ -39,7 +39,7 @@ router.get("/getTeam", Auth, UserAuth, async (req, res) => {
   res.status(200).send({ team });
 });
 
-router.get("/getTeamAdmin", Auth, UserAuth, Admin, async (req, res) => {
+router.get("/getAdmin", Auth, UserAuth, Admin, async (req, res) => {
   const team = await Team.find()
     .populate("projectId")
     .exec();
@@ -47,7 +47,7 @@ router.get("/getTeamAdmin", Auth, UserAuth, Admin, async (req, res) => {
   res.status(200).send({ team });
 });
 
-router.put("/updateTeam", Auth, UserAuth, ScrumM, async (req, res) => {
+router.put("/update", Auth, UserAuth, ScrumM, async (req, res) => {
   if (!req.body._id || !req.body.name || !req.body.projectId)
     return res.status(401).send("Process failed: Incomplete data");
   const validId = mongoose.Types.ObjectId.isValid(req.body.projectId);
@@ -62,19 +62,16 @@ router.put("/updateTeam", Auth, UserAuth, ScrumM, async (req, res) => {
   res.status(200).send({ team });
 });
 
-router.put("/deleteTeam", Auth, UserAuth, ScrumM, async (req, res) => {
-  if (!req.body._id || !req.body.name || !req.body.projectId)
-    return res.status(401).send("Process failed: Incomplete data");
-  const validId = mongoose.Types.ObjectId.isValid(req.body.projectId);
-  if (!validId)
-    return res.status(401).send("Process failed: Invalid projectId");
-  const team = await Team.findByIdAndUpdate(req.body._id, {
-    name: req.body.name,
-    projectId: req.body.projectId,
-    active: false,
-  });
-  if (!team) return res.status(401).send("Process failed: Error deleting team");
-  res.status(200).send("Process successfull: Team deleted");
+router.delete("/delete/:_id?", Auth, UserAuth, ScrumM, async (req, res) => {
+  const validId = mongoose.Types.ObjectId.isValid(req.params._id);
+  if (!validId) return res.status(401).send("Process failed: Invalid id");
+
+  const detailTeam = await DetailTeam.deleteMany({teamId: req.params._id});
+  if (!detailTeam) return res.status(401).send("Process failed: DetailTeam not found");  
+
+  const team = await Team.findByIdAndDelete(req.params._id);
+  if (!team) return res.status(401).send("Process failed: Team not found");
+  return res.status(200).send("Team deleted");
 });
 
 module.exports = router;
