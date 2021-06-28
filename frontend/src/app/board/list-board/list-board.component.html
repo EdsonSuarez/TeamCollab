@@ -1,0 +1,196 @@
+<div>
+    <input type="checkbox" checkbox="checkbox" (click)="cambio()">
+    <div class="menu">
+        <span class="material-icons icon">{{ toggle ? "arrow_forward_ios" : "arrow_back_ios"}}</span>
+        <div class="menuAll">
+            <div class="menuUpper">
+                <div class="d-flex justify-content-center">
+                    <h3>teams/proyect</h3>
+                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddTeam">add</span>
+                </div>
+                <div class="container" *ngIf="teamProject.length">
+                    <mat-list *ngFor="let team of teamProject">
+
+                        <mat-list-item class="itemList" *ngIf="!auth.isScrumMaster()"> <button class="boton"
+                                mat-stroked-button (click)="changeTeam(team)">{{team.team + " / " + team.project
+                                }}</button> </mat-list-item>
+
+                        <mat-list-item class="itemList" style="width: 300px;" *ngIf="auth.isScrumMaster()">
+                            <button class="boton" mat-stroked-button (click)="changeTeam(team)">{{team.team + " / " +
+                                team.project }} <span class="spacer"></span>
+                                <span class="material-icons" data-bs-toggle="modal"
+                                    data-bs-target="#modalTeam">edit_note</span>
+                            </button>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+            <div class="menuLower">
+                <div class="d-flex justify-content-center">
+                    <h3>Sprints</h3>
+                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddSprint">add</span>
+                </div>
+                <div class="container" *ngIf="sprints.length">
+                    <mat-list *ngFor="let sprint of sprints">
+                        <mat-list-item *ngIf="!auth.isScrumMaster()"> <button mat-stroked-button
+                                (click)="changeSprint(sprint)">{{sprint.name}}</button> </mat-list-item>
+                        <mat-list-item *ngIf="auth.isScrumMaster()"> <button mat-stroked-button
+                                (click)="changeSprint(sprint)">{{sprint.name}} <span class="spacer"></span> <span
+                                    class="material-icons" data-bs-toggle="modal"
+                                    data-bs-target="#modalSprint">edit_note</span></button> </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contents">
+
+
+        <div class="containerToDo">
+            <h3 class="titleSections">To-Do</h3>
+
+            <div class="container" *ngIf="taskToDo.length">
+                <mat-card class="card" *ngFor="let task of taskToDo">
+                    <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                    <mat-card-content>
+                        <span>{{ task.description }}</span>
+                        <p>Estado: <span>{{ task.status }}</span></p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+
+        <div class="containerDoing">
+            <h3 class="titleSections">Doing</h3>
+            <div class="container" *ngIf="taskDoing.length">
+                <mat-card class="card" *ngFor="let task of taskDoing">
+                    <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                    <mat-card-content>
+                        <span>{{ task.description }}</span>
+                        <p>Estado: <span>{{ task.status }}</span></p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+
+        <div class="containerTesting">
+            <h3 class="titleSections">Testing</h3>
+            <div class="container" *ngIf="taskTesting.length">
+                <mat-card class="card" *ngFor="let task of taskTesting">
+                    <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                    <mat-card-content>
+                        <span>{{ task.description }}</span>
+                        <p>Estado: <span>{{ task.status }}</span></p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+
+        <div class="containerDone">
+            <h3 class="titleSections">Done</h3>
+            <div class="container" *ngIf="taskDone.length">
+                <mat-card class="card" *ngFor="let task of taskDone">
+                    <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                    <mat-card-content>
+                        <span>{{ task.description }}</span>
+                        <p>Estado: <span>{{ task.status }}</span></p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+
+        <div class="containerOtro">
+            <h3 class="titleSections">Otro</h3>
+        </div>
+    </div>
+</div>
+
+<!-- MODALES -->
+
+<div class="modal fade" id="modalTeam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Team</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolor ullam tenetur pariatur aspernatur
+                    placeat ipsa consectetur delectus laudantium omnis. Repellat tenetur dolorem maiores sint cupiditate
+                    architecto explicabo autem velit?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalSprint" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sprint</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolor ullam tenetur pariatur aspernatur
+                    placeat ipsa consectetur delectus laudantium omnis. Repellat tenetur dolorem maiores sint cupiditate
+                    architecto explicabo autem velit?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalAddTeam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Team</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolor ullam tenetur pariatur aspernatur
+                    placeat ipsa consectetur delectus laudantium omnis. Repellat tenetur dolorem maiores sint cupiditate
+                    architecto explicabo autem velit?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalAddSprint" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Sprint</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolor ullam tenetur pariatur aspernatur
+                    placeat ipsa consectetur delectus laudantium omnis. Repellat tenetur dolorem maiores sint cupiditate
+                    architecto explicabo autem velit?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

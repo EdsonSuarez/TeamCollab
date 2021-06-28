@@ -1,37 +1,60 @@
-<div class="form">
-    <mat-card class="card">
-        <mat-card-title>Register user</mat-card-title>        
-
-        <div class="col-12 col-lg-12" *ngIf="errorMessage">
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <div class="alert-message">
-                    {{errorMessage}}
+<div class="all">
+    
+    
+    <div class="izq">
+        <div class="form">
+            <mat-card class="card">
+                <mat-card-title>Register user</mat-card-title>        
+        
+                <div class="col-12 col-lg-12" *ngIf="errorMessage">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <div class="alert-message">
+                            {{errorMessage}}
+                        </div>
+                        <button type="button" class="close" (click)="xAlert()" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
                 </div>
-                <button type="button" class="close" (click)="xAlert()" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">x</span>
-                </button>
-            </div>
+        
+                <mat-card-content>
+                    <div class="container">
+                        <mat-form-field>
+                            <input [(ngModel)]="registerData.fullName" matInput placeholder="FullName" (keyup)="progreso()" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input [(ngModel)]="registerData.email" matInput placeholder="Email" (keyup)="progreso()" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input [(ngModel)]="registerData.password" matInput placeholder="Password" (keyup)="progreso()" required>
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+        
+                <div class="container">
+                    <mat-progress-bar  class="barra" mode="buffer" color="accent" [value]=progress ></mat-progress-bar>    
+                </div>
+                <br>
+                
+        
+                <mat-card-actions class="containBtn">
+                    <button (click)="register()" *ngIf="progress != 100" class="button colorButton" disabled="true" mat-raised-button>
+                        Register
+                    </button>
+                    <button (click)="register()" *ngIf="progress == 100" class="button colorButton" mat-raised-button>
+                        Register
+                    </button>
+                </mat-card-actions>
+        
+            </mat-card>
         </div>
+    </div>
 
-        <mat-card-content>
-            <div class="container">
-                <mat-form-field>
-                    <input [(ngModel)]="registerData.fullName" matInput placeholder="FullName" required>
-                </mat-form-field>
-                <mat-form-field>
-                    <input [(ngModel)]="registerData.email" matInput placeholder="Email" required>
-                </mat-form-field>
-                <mat-form-field>
-                    <input [(ngModel)]="registerData.password" matInput placeholder="Password" required>
-                </mat-form-field>
-            </div>
-        </mat-card-content>
-
-        <mat-card-actions>
-            <button (click)="register()" class="button colorButton" mat-raised-button>
-                Register
-            </button>
-        </mat-card-actions>
-
-    </mat-card>
+    <div class="der">
+        <div class="fondo">
+        
+        </div>
+    </div>
+    
+    
 </div>

@@ -7,6 +7,9 @@ import { TaskComponent } from './task/task/task.component';
 import { DetailTaskComponent } from './task/detail-task/detail-task.component';
 import { TeamComponent } from './team/team/team.component';
 import { DetailTeamComponent } from './team/detail-team/detail-team.component';
+import { ListProjectComponent } from './project/list/listProject.component';
+import { ListBoardComponent } from './board/list-board/list-board.component';
+import { AuthGuard } from './guard/auth.guard';
 import { ProfileComponent } from './user/profile/profile.component';
 
 const routes: Routes = [
@@ -42,6 +45,16 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+  },
+  {
+    path: 'project',
+    component: ListProjectComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'board',
+    component: ListBoardComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

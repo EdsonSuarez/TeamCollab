@@ -13,7 +13,7 @@ const UserAuth = require("../middleware/user");
 const ScrumM = require("../middleware/scrumMaster");
 const Upload = require("../middleware/file");
 
-router.post("/addTask", Auth, UserAuth, ScrumM, async (req, res) => {
+router.post("/add", Auth, UserAuth, ScrumM, async (req, res) => {
   if (
     !req.body.name ||
     !req.body.description ||
@@ -48,7 +48,7 @@ router.post("/addTask", Auth, UserAuth, ScrumM, async (req, res) => {
 });
 
 router.post(
-  "/addTaskImg",
+  "/addImg",
   multi,
   Upload,
   Auth,
@@ -102,7 +102,7 @@ router.post(
   }
 );
 
-router.get("/getTaskUser", Auth, UserAuth, async (req, res) => {
+router.get("/get", Auth, UserAuth, async (req, res) => {
   const userTask = await DetailTask.find({ userId: req.user._id })
     .populate("taskId")
     .exec();
@@ -110,7 +110,7 @@ router.get("/getTaskUser", Auth, UserAuth, async (req, res) => {
 });
 
 router.get(
-  "/getTaskScrum/:userId",
+  "/getScrum/:userId?",
   Auth,
   UserAuth,
   ScrumM,
@@ -124,7 +124,7 @@ router.get(
   }
 );
 
-router.put("/updateTask", Auth, UserAuth, ScrumM, async (req, res) => {
+router.put("/update", Auth, UserAuth, ScrumM, async (req, res) => {
   if (
     !req.body._id ||
     !req.body.name ||
@@ -156,7 +156,13 @@ router.put("/updateTask", Auth, UserAuth, ScrumM, async (req, res) => {
   res.status(200).send({ task });
 });
 
-router.delete("/deleteTask/:_id", Auth, UserAuth, ScrumM, async (req, res) => {
+router.delete("/delete/:_id", Auth, UserAuth, ScrumM, async (req, res) => {
+  const validId = mongoose.Types.ObjectId.isValid(req.params._id);
+  if (!validId) return res.status(401).send("Process failed: Invalid id");
+
+  const detailTask = await DetailTask.deleteMany({taskId: req.params._id});
+  if (!detailTask) return res.status(401).send("Process failed: DetailTask not found");  
+
   const task = await Task.findByIdAndDelete(req.params._id);
   if (!task) return res.status(401).send("Process failed: Error deleting task");
   res.status(200).send("Process successfull: Task deleted");
