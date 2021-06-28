@@ -3,7 +3,7 @@
     <div class="col-lg-12">
       <div class="form-group float-start">Proyectos</div>
       <div class="form-group float-end">
-        <button type="button" class="btn btn-warning btn-sm">
+        <button type="button" class="btn btn-warning btn-sm" (click)="nuevo()">
           <mat-icon>add</mat-icon> Nuevo
         </button>
       </div>
@@ -11,28 +11,63 @@
   </div>
   <div class="card-body">
     <div class="col-lg-12 text-center">
-      <div class="row text-center bg-dark text-light">
-        <div class="col-lg-2">Acciones</div>
-        <div class="col-lg-3">Nombre</div>
-        <div class="col-lg-3">Descripción</div>
-        <div class="col-lg-2">Estatus</div>
-        <div class="col-lg-2">Creado en</div>
-      </div>
       <div class="spinner-border text-dark m-3" role="status" *ngIf="cargando">
         <span class="visually-hidden">Loading...</span>
       </div>
-      <div class="borderContent" *ngIf="!cargando">
-        <div class="row text-center" *ngFor="let project of projects">
-          <div class="col-lg-2">
-            <button class="btn btn-warning btn-xs m-1" title="Editar proyecto"> <mat-icon>edit</mat-icon> </button>
-            <button class="btn btn-danger btn-xs m-1" title="Borrar proyecto"> <mat-icon>delete</mat-icon> </button>
-            <button class="btn btn-success btn-xs m-1" title="Asignar grupos de trabajo"> <mat-icon>person</mat-icon> </button>
-            <button class="btn btn-info btn-xs m-1" title="Asignar sprints"> <mat-icon>dashboard</mat-icon> </button>
+      <div class="row">
+        <div [class]="listClass">
+          <div class="row justify-content-center" *ngIf="!cargando">
+            <div class="card m-2" [class.bg-secondary]="!project.active" style="width: 18rem;" *ngFor="let project of projects">
+              <div class="card-header" [class.text-light]="!project.active">
+                {{ project.name }}
+              </div>
+              <div class="card-body">
+                <p class="card-text" [class.text-light]="!project.active">{{ project.description }}</p>
+                <div class="row">
+                  <h5 class="card-title" [class.text-light]="!project.active">Estado: {{ project.status }}</h5>
+                </div>
+                <div class="row">
+                  <h5 class="card-title" [class.text-light]="!project.active">Fecha: {{ project.date | date:'dd-MM-yyyy' }}</h5>
+                </div>
+                <div class="row">
+                  <h5 class="card-title" [class]="project.active ? 'text-success' : 'text-warning'">{{ project.active ? 'Active' : 'Deleted' }}</h5>
+                </div>
+                <button class="btn btn-warning btn-xs m-1" title="Editar proyecto" (click)="editar(project)"> <mat-icon>edit</mat-icon> </button>
+                <button class="btn btn-danger btn-xs m-1" title="Borrar proyecto" (click)="delete(project)" [disabled]="!project.active"> <mat-icon>delete</mat-icon> </button>
+                <button class="btn btn-info btn-xs m-1" title="Asignar sprints" routerLink="/board"> <mat-icon>dashboard</mat-icon> </button>
+              </div>
+            </div>
           </div>
-          <div class="col-lg-3 centrarTexto">{{ project.name }}</div>
-          <div class="col-lg-3 centrarTexto">{{ project.description }}</div>
-          <div class="col-lg-2 centrarTexto">{{ project.status }}</div>
-          <div class="col-lg-2 centrarTexto">{{ project.date | date:'dd-MM-yyyy' }}</div>
+        </div>
+        <div [class]="formClass" *ngIf="formHide">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Gestion project</h5>
+              <div class="row">
+                <mat-form-field>
+                  <input [(ngModel)]="dataProject.name" matInput placeholder="Name" required>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field>
+                  <textarea [(ngModel)]="dataProject.description" matInput placeholder="Description" required></textarea>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <button class="btn btn-info" (click)="save()">Save</button>
+                </div>
+                <div class="col-lg-6">
+                  <button class="btn btn-danger" (click)="close()">Cancel</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="alert alert-danger d-flex align-items-center m-2" role="alert" *ngIf="errorMessage">
+                  {{ errorMessage }}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

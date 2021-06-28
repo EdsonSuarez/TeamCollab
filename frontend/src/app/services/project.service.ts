@@ -15,4 +15,17 @@ export class ProjectService {
   list() {
     return this.http.get<any>(this.env + 'project/getAll');
   }
+
+  add(data: any) {
+    return this.http.post<any>(this.env + 'project/add', data);
+  }
+
+  update(data: any) {
+    return this.http.put<any>(this.env + 'project/update', data);
+  }
+
+  delete(data: any) {
+    return this.http.put<any>(this.env + 'project/delete', data);
+  }
+
 }
