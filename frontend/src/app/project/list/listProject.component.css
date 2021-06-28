@@ -14,14 +14,6 @@ mat-icon {
     width: unset;
 }
 
-.centrarTexto {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.borderContent {
-    border: #f5f5dc solid;
-    margin: 5px;
-    background-color: #f0f8ff;
+.cardBorderUnset {
+    border: unset;
 }

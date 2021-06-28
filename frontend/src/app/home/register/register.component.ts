@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   public progress: number;
 
   constructor(private router: Router, private auth: AuthService) {
-    this.registerData = {},
+    this.registerData = {};
     this.errorMessage = '';
     this.progress = 0;
   }
