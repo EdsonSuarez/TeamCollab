@@ -13,3 +13,7 @@ mat-icon {
     height: unset;
     width: unset;
 }
+
+.cardBorderUnset {
+    border: unset;
+}
