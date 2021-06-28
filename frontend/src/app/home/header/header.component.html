@@ -1,15 +1,20 @@
 <mat-toolbar class="bgHeader">
-    <ul>
-      <a routerLink="">
-        <img src="../../../assets/img/teamCollab.png" alt="" >
-      </a>
+  <ul>
+    <a routerLink="">
+      <img src="../../../assets/img/teamCollab.png" alt="" />
+    </a>
+  </ul>
+  <span class="headerSpacer"></span>
 
-    </ul>
-    <span class="headerSpacer"></span>
-
-    <ul>
-      <a mat-button routerLink="register">Register</a>
-      <a mat-button routerLink="login">Login</a>
-    </ul>
-  </mat-toolbar>
-  
+  <ul>
+    <a mat-button routerLink="register">Register</a>
+    <a mat-button routerLink="login">Login</a>
+    <button mat-icon-button [matMenuTriggerFor]="account" class="accountbtn">
+      <mat-icon> account_circle </mat-icon>
+    </button>
+    <mat-menu #account="matMenu">
+      <button mat-menu-item>Profile</button>
+      <button mat-menu-item>Logout</button>
+    </mat-menu>
+  </ul>
+</mat-toolbar>

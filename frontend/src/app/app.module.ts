@@ -25,6 +25,8 @@ import { TeamComponent } from './team/team/team.component';
 import { DetailTeamComponent } from './team/detail-team/detail-team.component';
 import { DetailTaskComponent } from './task/detail-task/detail-task.component';
 import { TaskComponent } from './task/task/task.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { ProfileComponent } from './user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { TaskComponent } from './task/task/task.component';
     DetailTeamComponent,
     DetailTaskComponent,
     TaskComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { TaskComponent } from './task/task/task.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatMenuModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
