@@ -38,9 +38,11 @@ input[type="checkbox"]{
     box-sizing: border-box;
     width: 26%;
     height: 100vh;
-    background: #1e8ebb;
     transition: 0.5s;
     z-index: 1000;    
+    background: #FFDD94;
+    /* background: #FA897B; */
+    /* background: #86E3CE; */
 }
 
 input[type="checkbox"]:checked ~ .menu{
@@ -114,7 +116,7 @@ input[type="checkbox"]:checked{
     /* height: 100%; */
     padding: 2.5vh;
     margin: 2.5vh;
-    background-color: rgb(70, 156, 156);
+    background-color: #86E3CE;
 }
 
 .text_center {
@@ -131,14 +133,53 @@ input[type="checkbox"]:checked{
     font-size: 2.5vh;
 }
 
-.boton{
-    width: 100%;
-}
-
-.itemList{
-    width: 300px;
-}
-
 .spacer{
     flex: 1 1 auto;
 }
+
+.containerButton{
+    display: flex;
+    background-color: #86E3CE;
+    opacity: 0.8;
+    width: 60%;
+    height: 3.5vh;    
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1.7vh;
+}
+
+.containerButton:hover{
+    opacity: 0.8;
+}
+
+.buttonsMenu{
+    width: 100%;    
+}
+
+.change{
+    width: 90%;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icono{
+    width: 10%;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.containerTitleMenu{
+    display: flex;
+    justify-content: center;    
+    /* align-items: center; */
+    width: 100%;    
+    /* background-color: chartreuse; */
+}
+
+
+
+
