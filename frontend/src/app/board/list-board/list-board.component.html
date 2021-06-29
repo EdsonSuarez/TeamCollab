@@ -6,7 +6,7 @@
             <div class="menuUpper">
                 <div class="containerTitleMenu">
                     <h3 class="titleMenu" >teams/proyect</h3>
-                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddTeam">add_circle_outline</span>
+                    <span class="material-icons" *ngIf="auth.isScrumMaster()" data-bs-toggle="modal" data-bs-target="#modalAddTeam">add_circle_outline</span>
                 </div>
                 <div class="buttonsMenu" *ngIf="teamProject.length">
                     
@@ -26,7 +26,7 @@
             <div class="menuLower">
                 <div class="containerTitleMenu">
                     <h3 class="titleMenu"> Sprints </h3>                                       
-                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddSprint">add_circle_outline</span>
+                    <span class="material-icons" *ngIf="auth.isScrumMaster()" data-bs-toggle="modal" data-bs-target="#modalAddSprint">add_circle_outline</span>
                 </div>
                 <div class="buttonsMenu" *ngIf="sprints.length">
 
@@ -200,7 +200,7 @@
     </div>
 </div>
 <a mat-fab class="add-task-button" mat-button
-    [routerLink]="['/task/']">
+    [routerLink]="['/task/']" *ngIf="!auth.isUser()">
     <mat-icon><span class="material-icons add-task-icon">
             note_add
         </span></mat-icon>
