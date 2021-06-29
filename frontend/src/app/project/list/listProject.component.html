@@ -2,7 +2,7 @@
   <div class="card-header text-center title">
     <div class="col-lg-12">
       <div class="form-group float-start">Proyectos</div>
-      <div class="form-group float-end">
+      <div class="form-group float-end" *ngIf="!authService.isUserLeader()">
         <button type="button" class="btn btn-warning btn-sm" (click)="nuevo()">
           <mat-icon>add</mat-icon> Nuevo
         </button>
@@ -19,33 +19,46 @@
           <div class="row justify-content-center" *ngIf="!cargando">
             <div
               class="card m-2"
-              [class.bg-secondary]="!project.active"
+              [class.card-secondary]="!project.active"
+              [class.card-success]="project.active"
               style="width: 18rem"
               *ngFor="let project of projects"
             >
-              <div class="card-header" [class.text-light]="!project.active">
+              <div class="card-header">
                 {{ project.name }}
               </div>
               <div class="card-body">
-                <p class="card-text" [class.text-light]="!project.active">
+                <p class="card-text text-justify">
                   {{ project.description }}
                 </p>
                 <div class="row">
-                  <h5 class="card-title" [class.text-light]="!project.active">
-                    Estado: {{ project.status }}
+                  <h5 class="card-title text-start">
+                    Estado:
+                    <span
+                      class="badge text-dark"
+                      [class]="
+                        project.status === 'done'
+                          ? 'bg-success'
+                          : project.status === 'doing'
+                          ? 'bg-warning'
+                          : 'bg-danger'
+                      "
+                      >{{ project.status }}</span
+                    >
                   </h5>
                 </div>
                 <div class="row">
-                  <h5 class="card-title" [class.text-light]="!project.active">
+                  <h5 class="card-title text-start">
                     Fecha: {{ project.date | date: "dd-MM-yyyy" }}
                   </h5>
                 </div>
                 <div class="row">
-                  <h5
-                    class="card-title"
-                    [class]="project.active ? 'text-success' : 'text-warning'"
-                  >
-                    {{ project.active ? "Active" : "Deleted" }}
+                  <h5 class="card-title text-start">
+                    <span
+                      class="badge text-dark"
+                      [class]="project.active ? 'bg-success' : 'bg-warning'"
+                      >{{ project.active ? "Active" : "Deleted" }}</span
+                    >
                   </h5>
                 </div>
                 <button
@@ -53,6 +66,7 @@
                   title="Editar proyecto"
                   (click)="editar(project)"
                   [disabled]="!project.active"
+                  *ngIf="!authService.isUserLeader()"
                 >
                   <mat-icon>edit</mat-icon>
                 </button>
@@ -61,6 +75,7 @@
                   title="Borrar proyecto"
                   (click)="delete(project)"
                   [disabled]="!project.active"
+                  *ngIf="!authService.isUserLeader()"
                 >
                   <mat-icon>delete</mat-icon>
                 </button>

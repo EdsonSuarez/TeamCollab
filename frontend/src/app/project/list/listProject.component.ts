@@ -19,7 +19,7 @@ export class ListProjectComponent implements OnInit {
   public errorMessage: string;
   public confiEdit: Boolean;
 
-  constructor( private authService: AuthService, private projectService: ProjectService, private toastrService: ToastrService ) {
+  constructor( public authService: AuthService, private projectService: ProjectService, private toastrService: ToastrService ) {
     this.projects = {};
     this.cargando = true;
     this.dataProject = {};
