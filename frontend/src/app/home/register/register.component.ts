@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
           console.log(res);
           localStorage.setItem('token', res.jwtToken);
           this.registerData = {};
-          // this.router.navigate(['/saveTask']);                  
+          this.router.navigate(['/project']);                  
         },
         (err) =>{
           console.log(err);
