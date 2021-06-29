@@ -1,0 +1,64 @@
+<div class="bg-component">
+    <div class="accordion_display">
+        <div class="accordion_size">
+            <div class="col-12 col-lg-12" *ngIf="successMessage">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <div class="alert-message">
+                        {{ successMessage }}
+                    </div>
+
+                    <button type="button" class="close" (click)="closeX()" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 col-lg-12" *ngIf="errorMessage">
+                <div class="alert alert-danger alert-dismissible alertJustify" role="alert">
+                    <div class="alert-message">
+                        {{ errorMessage }}
+                    </div>
+                    <button type="button" class="close alertButton" (click)="closeX()" data-dismiss="alert"
+                        aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+            </div>
+
+            <mat-accordion multi="true" *ngIf="usersData.length">
+                <mat-expansion-panel *ngFor="let user of usersData" hideToggle="false"
+                    [ngClass]="{ active: user.active, noActive: !user.active }">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span class="text_center">{{ user.fullName }}</span>
+                            <span class="spacer"></span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-panel-description>
+                        <div class="row">
+                            <div class="col-lg-5">{{ user.email }}</div>
+                            <div class="col-lg-2" [class.text-success]="user.active">
+                                {{ user.active ? "Activo" : "Inactivo" }}
+                            </div>
+                            <div class="col-lg-2">{{ user.date | date: "dd-MM-yyyy" }}</div>
+                            <div class="col-lg-3">
+                                {{ user.roleId.name }}
+                            </div>
+                        </div>
+                    </mat-panel-description>
+                    <mat-action-row>
+                        <span class="spacer"></span>
+                        <mat-icon class="text-warning" (click)="changeStatus(user)">
+                            {{ user.active ? "toggle_on" : "toggle_off" }}
+                        </mat-icon>
+                        <mat-icon class="text-success" routerLink="/updateUser/{{ user._id }}">
+                            edit
+                        </mat-icon>
+                        <mat-icon color="primary" (click)="deleteUser(user)">
+                            delete
+                        </mat-icon>
+                    </mat-action-row>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>

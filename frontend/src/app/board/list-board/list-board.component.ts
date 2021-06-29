@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BoardService } from "../../services/board.service";
 import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
-
+import { TeamService } from "../../services/team.service";
 @Component({
   selector: 'app-list-board',
   templateUrl: './list-board.component.html',
@@ -17,9 +17,9 @@ export class ListBoardComponent implements OnInit {
   public taskDone: any;
   public sprints: any;
   public teamProject: any;
+  public usersTeam: any;
 
-
-  constructor(private board: BoardService, private router: Router, public auth: AuthService) { 
+  constructor(private board: BoardService, private router: Router, public auth: AuthService, public team: TeamService) { 
     this.toggle = true;    
     this.taskToDo = [];
     this.taskDoing = [];
@@ -27,6 +27,7 @@ export class ListBoardComponent implements OnInit {
     this.taskDone = [];
     this.sprints = [];
     this.teamProject = [];
+    this.usersTeam = [];
   }
 
   ngOnInit(): void {
@@ -129,4 +130,16 @@ export class ListBoardComponent implements OnInit {
     )
   }
 
+  usersTeamF(team:any){
+    team._id = team.idTeam;
+    this.team.getUsers(team).subscribe(
+      (res)=>{
+      this.usersTeam = res.team;
+      console.log("!!!!!qqqq1111111", this.usersTeam);
+      },
+      (err)=>{
+        console.log(err.error);
+      }
+    );    
+  }
 }

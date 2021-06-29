@@ -26,7 +26,7 @@ router.post("/add", Auth, UserAuth, ScrumAuth, async(req, res) => {
     return res.status(200).send({ result });
 });
 
-router.get("/getAll", Auth, UserAuth, AdminAuth, async(req, res) => {
+router.get("/getAll", Auth, UserAuth, ScrumAuth, async(req, res) => {
     const validId = mongoose.Types.ObjectId.isValid(req.user._id);
     if (!validId) 
         return res.status(401).send("Process failed: Invalid id");

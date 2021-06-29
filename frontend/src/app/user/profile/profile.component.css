@@ -25,7 +25,29 @@ mat-card-title{
 
 .container{
     display: flex;
-    flex-direction: column;    
+    flex-direction: column; 
+    text-align: center;  
+}
+
+.card-body{
+    display: flex;
+}
+
+.card-body-item{
+    margin: auto;
+    display: flex;
+}
+
+.card-body-item h3 {
+    padding: 5px ;
+    margin: 0;
+    text-align: end;
+}
+
+.card-body-item p{
+    padding: 5px;
+    margin: 0;
+    align-items: flex-end; 
 }
 
 .button{

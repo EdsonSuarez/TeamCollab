@@ -1,39 +1,32 @@
 <div class="form">
-    <mat-card class="card">
-        <mat-card-title>
-            Profile
-        </mat-card-title>
-        <div class="photoProfile" >
-            <img src="../../../assets/img/icon-users-solid.svg" alt="User">
+  <mat-card class="card">
+    <mat-card-title> Profile </mat-card-title>
+    <div class="photoProfile">
+      <img src="../../../assets/img/icon-users-solid.svg" alt="User" />
+    </div>
+    <mat-card-content>
+      <div class="container">
+        <div class="card-body">
+          <div class="card-body-item">
+            <h3><strong>Name:</strong></h3>
+            <h3>{{ profileData.fullName }}</h3>
+          </div>
+          <div class="card-body-item">
+            <h3><strong>Email: </strong></h3>
+            <h3>{{ profileData.email }}</h3>
+          </div>
         </div>
-        <div class="col-12 col-lg-12" *ngIf="errorMessage">
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <div class="alert-message">
-                    {{errorMessage}}
-                </div>
-                <button type="button" class="close" (click)="closeX()" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">x</span>
-                </button>
-            </div>
-        </div>
-        <mat-card-content>
-            <div class="container">
-                <mat-form-field>
-                    <input [(ngModel)]="profileData.fullName" matInput placeholder="FullName" required>
-                </mat-form-field>
-                <mat-form-field>
-                    <input [(ngModel)]="profileData.email" matInput placeholder="Email" required>
-                </mat-form-field>
-                <mat-form-field>
-                    <input [(ngModel)]="profileData.password" matInput placeholder="Password" required>
-                </mat-form-field>
-            </div>
-        </mat-card-content>
+      </div>
+    </mat-card-content>
 
-        <mat-card-actions>
-            <button (click)="save()" class="button colorButton" mat-raised-button>
-                Save
-            </button>
-        </mat-card-actions>
-    </mat-card>
+    <mat-card-actions>
+      <button
+        (click)="edit()"
+        class="button colorButton"
+        mat-raised-button
+      >
+        Edit
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>

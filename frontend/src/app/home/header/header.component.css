@@ -23,3 +23,8 @@ a {
   background-color: #a548a2;
   height: 7%;
 }
+
+li {
+  text-decoration: none;
+  list-style: none;
+}

@@ -158,13 +158,13 @@ router.put("/update", Auth, UserAuth, Admin, async (req, res) => {
 });
 
 router.put("/updateImg", mult, Upload, Auth, UserAuth, async (req, res) => {
-  if (!req.body._id)
+  if (!req.user._id)
     return res.status(401).send("Process failed: Incomplete data");
 
-  const validId = mongoose.isValidObjectId(req.body._id);
+  const validId = mongoose.isValidObjectId(req.user._id);
   if (!validId) return res.status(401).send("Process failed: Invalid Id");
 
-  const findUser = await User.findById(req.body._id);
+  const findUser = await User.findById(req.user._id);
   if (!findUser) return res.status(401).send("Process failed: Invalid User");
 
   const url = req.protocol + "://" + req.get("host") + "/";
@@ -180,7 +180,7 @@ router.put("/updateImg", mult, Upload, Auth, UserAuth, async (req, res) => {
       url + "img/users/" + moment().unix() + path.extname(req.files.image.path);
   }
 
-  const user = await User.findByIdAndUpdate(req.body._id, {
+  const user = await User.findByIdAndUpdate(req.user._id, {
     fullName: findUser.fullName,
     email: findUser.email,
     password: findUser.password,
@@ -188,7 +188,6 @@ router.put("/updateImg", mult, Upload, Auth, UserAuth, async (req, res) => {
     imageUrl: imageUrl,
     active: true,
   });
-
   if (!user) return res.status(401).send("Process failed: Error updating user");
   return res.status(200).send({ user });
 });

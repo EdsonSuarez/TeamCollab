@@ -11,6 +11,13 @@ import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from './board/list-board/list-board.component';
 import { AuthGuard } from './guard/auth.guard';
 import { ProfileComponent } from './user/profile/profile.component';
+import { RegisterUserComponent } from './admin/register-user/register-user.component';
+import { UpdateUserComponent } from './admin/update-user/update-user.component';
+import { ListUserComponent } from './admin/list-user/list-user.component';
+import { ListRoleComponent } from './admin/list-role/list-role.component';
+import { RegisterRoleComponent } from './admin/register-role/register-role.component';
+import { UpdateRoleComponent } from './admin/update-role/update-role.component';
+
 
 const routes: Routes = [
   {
@@ -54,6 +61,36 @@ const routes: Routes = [
   {
     path: 'board',
     component: ListBoardComponent,
+    canActivate:[AuthGuard]
+  },{
+    path: 'registerUser',
+    component: RegisterUserComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'updateUser/:id',
+    component: UpdateUserComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'listUsers',
+    component: ListUserComponent,
+    canActivate: [AuthGuard],
+  },
+  
+  {
+    path: 'listRole',
+    component: ListRoleComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'registerRole',
+    component: RegisterRoleComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'updateRole/:id',
+    component: UpdateRoleComponent,
     canActivate: [AuthGuard],
   },
 ];

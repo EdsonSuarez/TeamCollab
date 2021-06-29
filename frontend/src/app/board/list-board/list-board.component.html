@@ -4,41 +4,44 @@
         <span class="material-icons icon">{{ toggle ? "arrow_forward_ios" : "arrow_back_ios"}}</span>
         <div class="menuAll">
             <div class="menuUpper">
-                <div class="d-flex justify-content-center">
-                    <h3>teams/proyect</h3>
-                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddTeam">add</span>
+                <div class="containerTitleMenu">
+                    <h3 class="titleMenu" >teams/proyect</h3>
+                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddTeam">add_circle_outline</span>
                 </div>
-                <div class="container" *ngIf="teamProject.length">
-                    <mat-list *ngFor="let team of teamProject">
+                <div class="buttonsMenu" *ngIf="teamProject.length">
+                    
+                    <div *ngFor="let team of teamProject">
+                        <div class="containerButton" *ngIf="!auth.isScrumMaster()">
+                            <div class="change" (click)="changeTeam(team)">{{team.team + " / " + team.project }} </div>                            
+                        </div>
+                        <div class="containerButton" *ngIf="auth.isScrumMaster()">
+                            <div class="change" (click)="changeTeam(team)">{{team.team + " / " + team.project }} </div>
+                            <span class="spacer"></span>
+                            <span class="material-icons icono" data-bs-toggle="modal" data-bs-target="#modalTeam" (click)= "usersTeamF(team)">edit_note</span>
+                        </div>
+                    </div>
 
-                        <mat-list-item class="itemList" *ngIf="!auth.isScrumMaster()"> <button class="boton"
-                                mat-stroked-button (click)="changeTeam(team)">{{team.team + " / " + team.project
-                                }}</button> </mat-list-item>
-
-                        <mat-list-item class="itemList" style="width: 300px;" *ngIf="auth.isScrumMaster()">
-                            <button class="boton" mat-stroked-button (click)="changeTeam(team)">{{team.team + " / " +
-                                team.project }} <span class="spacer"></span>
-                                <span class="material-icons" data-bs-toggle="modal"
-                                    data-bs-target="#modalTeam">edit_note</span>
-                            </button>
-                        </mat-list-item>
-                    </mat-list>
                 </div>
             </div>
             <div class="menuLower">
-                <div class="d-flex justify-content-center">
-                    <h3>Sprints</h3>
-                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddSprint">add</span>
+                <div class="containerTitleMenu">
+                    <h3 class="titleMenu"> Sprints </h3>                                       
+                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddSprint">add_circle_outline</span>
                 </div>
-                <div class="container" *ngIf="sprints.length">
-                    <mat-list *ngFor="let sprint of sprints">
-                        <mat-list-item *ngIf="!auth.isScrumMaster()"> <button mat-stroked-button
-                                (click)="changeSprint(sprint)">{{sprint.name}}</button> </mat-list-item>
-                        <mat-list-item *ngIf="auth.isScrumMaster()"> <button mat-stroked-button
-                                (click)="changeSprint(sprint)">{{sprint.name}} <span class="spacer"></span> <span
-                                    class="material-icons" data-bs-toggle="modal"
-                                    data-bs-target="#modalSprint">edit_note</span></button> </mat-list-item>
-                    </mat-list>
+                <div class="buttonsMenu" *ngIf="sprints.length">
+
+                    <div *ngFor="let sprint of sprints">
+                        <div *ngIf="!auth.isScrumMaster()" class="containerButton"> 
+                            <div class="change" (click)="changeSprint(sprint)">{{sprint.name}} </div>
+                        </div>
+                                
+                        <div *ngIf="auth.isScrumMaster()" class="containerButton">                            
+                            <div class="change" (click)="changeSprint(sprint)">{{sprint.name}} </div>
+                            <span class="spacer"></span>
+                            <span class="material-icons icono" data-bs-toggle="modal" data-bs-target="#modalSprint">edit_note</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -119,10 +122,12 @@
                 <h5 class="modal-title" id="exampleModalLabel">Team</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolor ullam tenetur pariatur aspernatur
-                    placeat ipsa consectetur delectus laudantium omnis. Repellat tenetur dolorem maiores sint cupiditate
-                    architecto explicabo autem velit?</p>
+            <div class="modal-body" *ngFor="let item of usersTeam">
+                <div >
+                    <span>{{item.userId.fullName}}</span>
+                    <span class="spacer"></span>
+                    <button>lekl</button>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -180,7 +185,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add Sprint</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolor ullam tenetur pariatur aspernatur
