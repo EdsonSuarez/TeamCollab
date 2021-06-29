@@ -51,9 +51,9 @@ router.post("/add", async (req, res) => {
 })
 
 
-router.get("/get/:fullName?", Auth, UserAuth, Admin, async (req, res) => {
+router.get("/get/:fullName?", Auth, UserAuth, Admin, async (req, res) => {    
     const user = await User.find({ fullName: new RegExp(req.params["fullName"], "i") }).populate("roleId").exec();
-    if (!user) return res.status(401).send("Error fetching user information");
+    if (!user) return res.status(401).send("Error fetching user information");    
     return res.status(200).send({ user });
 });
 

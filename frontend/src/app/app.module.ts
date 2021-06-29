@@ -12,6 +12,7 @@ import { AuthService } from './services/auth.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { BoardService } from "./services/board.service";
 import { AuthGuard } from "./guard/auth.guard";
+import { AdminService } from "./services/admin.service";
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -29,6 +30,12 @@ import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from './board/list-board/list-board.component';
 import { MatListModule } from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
+import { ListUserComponent } from './admin/list-user/list-user.component';
+import { ListRoleComponent } from './admin/list-role/list-role.component';
+import { RegisterRoleComponent } from './admin/register-role/register-role.component';
+import { RegisterUserComponent } from './admin/register-user/register-user.component';
+import { UpdateUserComponent } from './admin/update-user/update-user.component';
+import { UpdateRoleComponent } from './admin/update-role/update-role.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +48,12 @@ import {MatDialogModule} from '@angular/material/dialog';
     RegisterComponent,
     ListProjectComponent,    
     ListBoardComponent,
+    ListUserComponent,
+    ListRoleComponent,
+    RegisterRoleComponent, 
+    RegisterUserComponent,  
+    UpdateUserComponent, 
+    UpdateRoleComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +76,7 @@ import {MatDialogModule} from '@angular/material/dialog';
   providers: [
     AuthService,
     BoardService,
+    AdminService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
