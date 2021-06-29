@@ -100,17 +100,36 @@
                 </mat-form-field>
               </div>
               <div class="row m-2" *ngIf="confiEdit">
-                <div class="col-lg-12">
-                  Status
+                <div class="col-lg-12">Status</div>
+                <div class="col-lg-4">
+                  <button
+                    class="btn btn-light"
+                    [class.bg-warning]="dataProject.status === 'doing'"
+                    mat-button
+                    (click)="changeStatus('doing')"
+                  >
+                    Doing
+                  </button>
                 </div>
                 <div class="col-lg-4">
-                  <button class="btn btn-light" [class.bg-warning]="dataProject.status === 'doing'" mat-button (click)="changeStatus('doing')">Doing</button>
+                  <button
+                    class="btn btn-light"
+                    [class.bg-success]="dataProject.status === 'done'"
+                    mat-button
+                    (click)="changeStatus('done')"
+                  >
+                    Done
+                  </button>
                 </div>
                 <div class="col-lg-4">
-                  <button class="btn btn-light" [class.bg-success]="dataProject.status === 'done'" mat-button (click)="changeStatus('done')">Done</button>
-                </div>
-                <div class="col-lg-4">
-                  <button class="btn btn-light" [class.bg-danger]="dataProject.status === 'to-do'" mat-button (click)="changeStatus('to-do')">To-do</button>
+                  <button
+                    class="btn btn-light"
+                    [class.bg-danger]="dataProject.status === 'to-do'"
+                    mat-button
+                    (click)="changeStatus('to-do')"
+                  >
+                    To-do
+                  </button>
                 </div>
               </div>
               <div class="row">

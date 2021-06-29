@@ -10,9 +10,9 @@ import { FooterComponent } from './home/footer/footer.component';
 
 import { AuthService } from './services/auth.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { BoardService } from "./services/board.service";
-import { AuthGuard } from "./guard/auth.guard";
-import { AdminService } from "./services/admin.service";
+import { BoardService } from './services/board.service';
+import { AuthGuard } from './guard/auth.guard';
+import { AdminService } from './services/admin.service';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -21,7 +21,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { HomeComponent } from './home/home/home.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,7 +28,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from './board/list-board/list-board.component';
 import { MatListModule } from '@angular/material/list';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
+
+import { HomeComponent } from './home/home/home.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
 import { ListRoleComponent } from './admin/list-role/list-role.component';
 import { RegisterRoleComponent } from './admin/register-role/register-role.component';
@@ -46,13 +48,13 @@ import { UpdateRoleComponent } from './admin/update-role/update-role.component';
     HeaderComponent,
     FooterComponent,
     RegisterComponent,
-    ListProjectComponent,    
+    ListProjectComponent,
     ListBoardComponent,
     ListUserComponent,
     ListRoleComponent,
-    RegisterRoleComponent, 
-    RegisterUserComponent,  
-    UpdateUserComponent, 
+    RegisterRoleComponent,
+    RegisterUserComponent,
+    UpdateUserComponent,
     UpdateRoleComponent,
   ],
   imports: [
@@ -72,6 +74,7 @@ import { UpdateRoleComponent } from './admin/update-role/update-role.component';
     MatProgressBarModule,
     MatListModule,
     MatDialogModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     AuthService,

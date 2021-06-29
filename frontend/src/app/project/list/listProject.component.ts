@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
+import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -16,7 +19,7 @@ export class ListProjectComponent implements OnInit {
   public errorMessage: string;
   public confiEdit: Boolean;
 
-  constructor(private projectService: ProjectService) {
+  constructor( private authService: AuthService, private projectService: ProjectService, private toastrService: ToastrService ) {
     this.projects = {};
     this.cargando = true;
     this.dataProject = {};
@@ -28,13 +31,41 @@ export class ListProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.list();
+    if(this.authService.isAdmin()) this.listAdmin();
+    if(this.authService.isScrumMaster()) this.listScrum();
+    if(this.authService.isUserLeader()) this.listUserLeader();
   }
 
-  list() {
-    this.projectService.list().subscribe(
+  listAdmin() {
+    this.projectService.listAdmin().subscribe(
       (res) => {
         this.projects = res.projects;
+        this.cargando = false;
+      },
+      (err) => {
+        console.log(err.error);
+        this.cargando = false;
+      }
+    );
+  }
+
+  listScrum() {
+    this.projectService.listScrum().subscribe(
+      (res) => {
+        this.projects = res.projects;
+        this.cargando = false;
+      },
+      (err) => {
+        console.log(err.error);
+        this.cargando = false;
+      }
+    );
+  }
+
+  listUserLeader() {
+    this.projectService.listUserLeader().subscribe(
+      (res) => {
+        this.projects = res.team;
         this.cargando = false;
       },
       (err) => {
@@ -56,13 +87,14 @@ export class ListProjectComponent implements OnInit {
       this.errorMessage = 'Incomplete data';
       this.closeAlert();
     } else {
-      if(!this.confiEdit) {
+      if (!this.confiEdit) {
         this.projectService.add(this.dataProject).subscribe(
           (res) => {
             this.dataProject = {};
             this.listClass = 'col-lg-12';
             this.formHide = false;
-            this.list();
+            this.projects.push(res.result);
+            this.toastrService.success("Project add with success");
           },
           (err) => {
             this.errorMessage = err.error;
@@ -72,10 +104,14 @@ export class ListProjectComponent implements OnInit {
       } else {
         this.projectService.update(this.dataProject).subscribe(
           (res) => {
-            this.dataProject = {};
             this.listClass = 'col-lg-12';
             this.formHide = false;
-            this.list();
+            const index = this.projects.indexOf(this.dataProject._id);
+            if (index > -1) {
+              this.projects[index] = this.dataProject;
+            }
+            this.dataProject = {};
+            this.toastrService.success("Project updated with success");
           },
           (err) => {
             this.errorMessage = err.error;
@@ -91,14 +127,18 @@ export class ListProjectComponent implements OnInit {
     this.formHide = true;
     this.confiEdit = true;
     this.dataProject = data;
+    window.scrollTo(0, 0);
   }
 
   delete(data: any) {
-    const resultado = window.confirm(`Esta seguro que desea eliminar el proyecto seleccionado: ${data.name}?`);
+    const resultado = window.confirm(
+      `Are you sure you want to delete the selected project: ${data.name}?`
+    );
     if (resultado === true) {
       this.projectService.delete(data).subscribe(
         (res) => {
-          this.list();
+          data.active = false;
+          this.toastrService.success("Project deleted with success");
         },
         (err) => {
           this.errorMessage = err.error;
@@ -122,5 +162,4 @@ export class ListProjectComponent implements OnInit {
     this.listClass = 'col-lg-12';
     this.formHide = false;
   }
-
 }
