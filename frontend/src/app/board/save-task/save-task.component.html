@@ -1,0 +1,67 @@
+<mat-card class="task-card">
+    <mat-card-title>Create task</mat-card-title>
+    <div class="col-12 col-lg-12" *ngIf="errorMessage">
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div class="alert-message"> {{ errorMessage }}
+                <button type="button" class="close btn-close" (click)="closeAlert(0)" data-dismiss="alert"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Task name</mat-label>
+            <input [(ngModel)]="taskData.name" matInput required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea [(ngModel)]="taskData.description" matInput required></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Select person in charge</mat-label>
+            <!-- <div class="container" *ngIf="teamProject.length">
+                <mat-list *ngFor="let team of teamProject">
+                    <mat-list-item> <button mat-stroked-button (click)="changeTeam(team)">{{team.team + " / " +
+                            team.project }}</button> </mat-list-item>
+                </mat-list>
+            </div> -->
+            <mat-select >
+              <mat-option value="one">First option</mat-option>
+              <mat-option value="two">Second option</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Priority</mat-label>
+            <mat-select [(ngModel)]="taskData.priority" required>
+              <mat-option value="low">Low</mat-option>
+              <mat-option value="medium">Medium</mat-option>
+              <mat-option value="high">High</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Dependency</mat-label>
+            <mat-select [(ngModel)]="taskData.priority">
+              <mat-option value="1">Task 1</mat-option>
+              <mat-option value="2">Task 2</mat-option>
+              <mat-option value="3">Task 3</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Load image</mat-label>
+            <ngx-mat-file-input [formControl]="fileControl" color='primary' accept="accept">
+                <mat-icon class="file-icon" ngxMatFileInputIcon>image</mat-icon>
+            </ngx-mat-file-input>
+         </mat-form-field>
+    </mat-card-content>
+    
+    <mat-card-actions>
+        <button mat-flat-button class="save-button">SAVE</button>
+    </mat-card-actions>
+</mat-card>
+
+<a mat-fab class="return-board-button" mat-button
+    [routerLink]="['/board/']">
+    <mat-icon><span class="material-icons return-board-icon">
+        dashboard
+        </span></mat-icon>
+</a>

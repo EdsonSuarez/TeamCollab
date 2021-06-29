@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const DetailTeam = require("../models/detailTeam");
+const Team = require("../models/team")
 
 const Auth = require("../middleware/auth");
 const UserAuth = require("../middleware/user");

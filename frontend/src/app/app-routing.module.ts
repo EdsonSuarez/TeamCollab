@@ -5,6 +5,7 @@ import { LoginComponent } from './home/login/login.component';
 import { HomeComponent } from "./home/home/home.component";
 import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from "./board/list-board/list-board.component";
+import { SaveTaskComponent } from "./board/save-task/save-task.component";
 import { AuthGuard } from './guard/auth.guard';
 import { RegisterUserComponent } from './admin/register-user/register-user.component';
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
@@ -67,6 +68,11 @@ const routes: Routes = [
     path: 'updateRole/:id',
     component: UpdateRoleComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path:'task',
+    component: SaveTaskComponent,
+    canActivate:[AuthGuard]
   },
 ];
 

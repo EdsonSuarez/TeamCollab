@@ -13,6 +13,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { BoardService } from "./services/board.service";
 import { AuthGuard } from "./guard/auth.guard";
 import { AdminService } from "./services/admin.service";
+import { TaskService } from "./services/task.service";
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -36,6 +37,10 @@ import { RegisterRoleComponent } from './admin/register-role/register-role.compo
 import { RegisterUserComponent } from './admin/register-user/register-user.component';
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
 import { UpdateRoleComponent } from './admin/update-role/update-role.component';
+import { SaveTaskComponent } from './board/save-task/save-task.component';
+import {MatSelectModule} from '@angular/material/select';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+
 
 @NgModule({
   declarations: [
@@ -54,6 +59,7 @@ import { UpdateRoleComponent } from './admin/update-role/update-role.component';
     RegisterUserComponent,  
     UpdateUserComponent, 
     UpdateRoleComponent,
+    SaveTaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,11 +78,14 @@ import { UpdateRoleComponent } from './admin/update-role/update-role.component';
     MatProgressBarModule,
     MatListModule,
     MatDialogModule,
+    MatSelectModule,
+    NgxMatFileInputModule,
   ],
   providers: [
     AuthService,
     BoardService,
     AdminService,
+    TaskService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
