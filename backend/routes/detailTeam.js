@@ -38,6 +38,17 @@ router.get("/get", Auth, UserAuth, ScrumMaster, async (req, res) => {
   return res.status(200).send({ detailTeam });
 });
 
+// retorna los miembros de un team
+router.get("/getTeam/:_id", async (req, res) => {
+    
+  const boards = await Team.findById(req.params._id)
+  if(!boards) return res.status(401).send("Error: the team doesn't exist");
+
+  const team = await DetailTeam.find({teamId: req.params._id}).populate("userId","fullName").exec(); 
+  if (!team) return res.status(401).send("Error fetching team");
+  return res.status(200).send({ team });
+});
+
 router.put("/update", Auth, UserAuth, ScrumMaster, async (req, res) => {
     if (
         !req.body._id ||

@@ -15,29 +15,55 @@ export class SaveTaskComponent implements OnInit {
   public errorMessage: String;
   public fileControl: FormControl;
 
-  public teamProject: any;
+  public teamMembers: any;
+  public teamTasks: any;
 
   constructor(private task: TaskService, private team:TeamService, private router: Router) { 
     this.taskData = {};
     this.errorMessage = '';
-    this.teamProject = [];
+    this.teamMembers = [];
+    this.teamTasks = [];
 
     this.fileControl = new FormControl()
   }
 
   ngOnInit(): void {
+    const teamId = localStorage.getItem('team');
+    const boardId = localStorage.getItem('sprint');
+    this.taskData.boardId = boardId;
+    console.log(teamId)
+    this.task.getTeam(teamId).subscribe(
+      (res) => {
+        console.log(res.team)
+        this.teamMembers = res.team;
+      },
+      (err) => {
+        console.log(err.error);
+      }
+    )
+    this.task.getTasks().subscribe(
+      (res) => {
+        this.teamTasks = res.userTask
+        console.log(this.teamTasks)
+      },
+      (err) => {
+        console.log(err.error);
+      }
+    )
   }
 
   saveTask(){
-    if (!this.taskData.name || !this.taskData.description) {
+    if (!this.taskData.name || !this.taskData.description || !this.taskData.boardId) {
       console.log('Failed process: Incomplete data');
       this.errorMessage = 'Failed process: Incomplete data';
       this.closeAlert(3000);
     } else {
+      console.log(this.taskData);
+      
       this.task.saveTask(this.taskData).subscribe(
         (res: any) => {
           console.log(res);
-          this.router.navigate(['/listTasks']);
+          this.router.navigate(['/board']);
           this.taskData = {};
         },
         (err) => {

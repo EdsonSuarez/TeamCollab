@@ -78,6 +78,7 @@ export class ListBoardComponent implements OnInit {
 
 
   changeTeam(team:any){      
+    localStorage.setItem('team',team.idTeam);
     this.board.boardsUser(team.idTeam).subscribe(
       (res)=>{
         console.log(res.boards)
@@ -99,6 +100,7 @@ export class ListBoardComponent implements OnInit {
     this.taskTesting = [];
     this.taskDone = [];
 
+    localStorage.setItem('sprint',sprint._id);
     this.board.TasksBoard(sprint._id).subscribe(
       (res)=>{
         console.log(res.tasks)
@@ -142,4 +144,17 @@ export class ListBoardComponent implements OnInit {
       }
     );    
   }
+
+  getTeam(team: any) {{
+    this.team.getUsers(team).subscribe(
+      (res)=>{
+      console.log("!!!!!qqqq1111111", res);
+      },
+      (err)=>{
+        console.log(err.error);
+      }
+    ); 
+    console.log(team.idTeam)
+    return team.idTeam;
+  }}
 }
