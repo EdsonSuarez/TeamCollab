@@ -108,6 +108,10 @@ export class ListProjectComponent implements OnInit {
     }
   }
 
+  changeStatus(status: string) {
+    this.dataProject.status = status;
+  }
+
   closeAlert() {
     setTimeout(() => {
       this.errorMessage = '';
