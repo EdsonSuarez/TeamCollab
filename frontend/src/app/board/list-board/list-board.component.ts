@@ -135,7 +135,6 @@ export class ListBoardComponent implements OnInit {
     this.team.getUsers(team).subscribe(
       (res)=>{
       this.usersTeam = res.team;
-      console.log("!!!!!qqqq1111111", this.usersTeam);
       },
       (err)=>{
         console.log(err.error);
