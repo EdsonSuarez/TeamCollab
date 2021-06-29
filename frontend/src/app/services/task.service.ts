@@ -13,10 +13,22 @@ export class TaskService {
   }
 
   saveTask(task: any){
-    return this.http.post<any>(this.env + 'task/saveTask', task);
+    return this.http.post<any>(this.env + 'task/add', task);
+  }
+
+  saveTaskImg(task: any){
+    return this.http.post<any>(this.env + 'task/addImg', task);
+  }
+
+  getTasks(){
+    return this.http.get<any>(this.env + 'task/get');
   }
 
   updateTask(task: any){
     return this.http.put<any>(this.env + 'task/updateTask', task);
+  }
+
+  getTeam(teamId: any) {
+    return this.http.get<any>(this.env + 'detailTeam/getTeam/' + teamId);
   }
 }
