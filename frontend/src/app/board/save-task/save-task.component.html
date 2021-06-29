@@ -33,10 +33,19 @@
                     {{task.taskId.name}}</mat-option>   
             </mat-select>
         </mat-form-field>
+
+        <!-- <mat-form-field appearance="fill">
+            <mat-label>Load image</mat-label>
+            <ngx-mat-file-input (change)="uploadImg($event)">
+                <mat-icon class="file-icon" ngxMatFileInputIcon>image</mat-icon>
+            </ngx-mat-file-input>
+        </mat-form-field> -->
+
+        <input type="file" (change)="uploadImg($event)">
     </mat-card-content>
 
     <mat-card-actions>
-        <button mat-flat-button class="save-button" (click)='saveTask()'>SAVE</button>
+        <button mat-flat-button class="save-button" (click)='saveTaskImg()'>SAVE</button>
     </mat-card-actions>
 </mat-card>
 
