@@ -3,6 +3,7 @@ import { BoardService } from "../../services/board.service";
 import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { TeamService } from "../../services/team.service";
+import { AdminService } from "../../services/admin.service";
 @Component({
   selector: 'app-list-board',
   templateUrl: './list-board.component.html',
@@ -18,8 +19,9 @@ export class ListBoardComponent implements OnInit {
   public sprints: any;
   public teamProject: any;
   public usersTeam: any;
+  public usersAll: any;
 
-  constructor(private board: BoardService, private router: Router, public auth: AuthService, public team: TeamService) { 
+  constructor(private board: BoardService, public admin: AdminService , private router: Router, public auth: AuthService, public team: TeamService) { 
     this.toggle = true;    
     this.taskToDo = [];
     this.taskDoing = [];
@@ -28,6 +30,7 @@ export class ListBoardComponent implements OnInit {
     this.sprints = [];
     this.teamProject = [];
     this.usersTeam = [];
+    this.usersAll = [];
   }
 
   ngOnInit(): void {
@@ -78,6 +81,7 @@ export class ListBoardComponent implements OnInit {
 
 
   changeTeam(team:any){      
+    localStorage.setItem('team',team.idTeam);
     this.board.boardsUser(team.idTeam).subscribe(
       (res)=>{
         console.log(res.boards)
@@ -99,6 +103,7 @@ export class ListBoardComponent implements OnInit {
     this.taskTesting = [];
     this.taskDone = [];
 
+    localStorage.setItem('sprint',sprint._id);
     this.board.TasksBoard(sprint._id).subscribe(
       (res)=>{
         console.log(res.tasks)
@@ -135,11 +140,23 @@ export class ListBoardComponent implements OnInit {
     this.team.getUsers(team).subscribe(
       (res)=>{
       this.usersTeam = res.team;
-      console.log("!!!!!qqqq1111111", this.usersTeam);
       },
       (err)=>{
         console.log(err.error);
       }
     );    
+  }
+
+  userList(){
+    this.admin.listUsers().subscribe(
+      (res) => {
+        this.usersAll = res.user;
+        console.log(this.usersAll);
+        
+      },
+      (err) => {
+        console.log(err.error);
+      }
+    )
   }
 }

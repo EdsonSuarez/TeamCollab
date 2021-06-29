@@ -13,6 +13,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { BoardService } from './services/board.service';
 import { AuthGuard } from './guard/auth.guard';
 import { AdminService } from './services/admin.service';
+import { TaskService } from './services/task.service';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -21,7 +22,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { HomeComponent } from './home/home/home.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +36,9 @@ import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from './board/list-board/list-board.component';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
+
+import { HomeComponent } from './home/home/home.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
 import { ListRoleComponent } from './admin/list-role/list-role.component';
 import { RegisterRoleComponent } from './admin/register-role/register-role.component';
@@ -43,7 +46,14 @@ import { RegisterUserComponent } from './admin/register-user/register-user.compo
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
 import { UpdateRoleComponent } from './admin/update-role/update-role.component';
 import { UpdateProfileComponent } from './user/update-profile/update-profile.component';
-import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SaveTaskComponent } from './board/save-task/save-task.component';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { ListProjectAdminComponent } from './admin/list-project-admin/list-project-admin.component';
+import { UpdateProjectAdminComponent } from './admin/update-project-admin/update-project-admin.component';
+import { ListBoardAdminComponent } from './admin/list-board-admin/list-board-admin.component';
+import { UpdateBoardAdminComponent } from './admin/update-board-admin/update-board-admin.component';
 
 @NgModule({
   declarations: [
@@ -54,11 +64,6 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     HeaderComponent,
     FooterComponent,
     RegisterComponent,
-    TeamComponent,
-    DetailTeamComponent,
-    DetailTaskComponent,
-    TaskComponent,
-    ProfileComponent,
     ListProjectComponent,
     ListBoardComponent,
     ListUserComponent,
@@ -68,6 +73,11 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     UpdateUserComponent,
     UpdateRoleComponent,
     UpdateProfileComponent,
+    SaveTaskComponent,
+    ListProjectAdminComponent,
+    UpdateProjectAdminComponent,
+    ListBoardAdminComponent,
+    UpdateBoardAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,11 +98,15 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatListModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatSelectModule,
+    NgxMatFileInputModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     AuthService,
     BoardService,
     AdminService,
+    TaskService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

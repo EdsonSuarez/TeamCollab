@@ -1,0 +1,69 @@
+.spacer {
+    flex: 1 0 auto;
+  }
+
+.container {
+    padding-top: 50px;
+}
+
+.card {
+    width: 210px;
+    height: 200px;
+    padding: 20px;
+    margin: 30px;
+    background-color: rgb(70, 156, 156);
+}
+
+.text_center {
+    display: flex;
+    justify-content: center;
+}
+
+.tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+.mat-card-content {
+    padding-top: 11px;
+    font-size: 1rem;
+}
+
+.actionsContainer {
+    width: 80%;
+    position: absolute;
+    bottom: 0;
+}
+
+.actions {
+    display: flex;  
+}
+
+.delete {
+    padding-right: 15px;
+    color: #ff0000;
+    cursor: pointer;
+}
+
+.edit {
+    padding-right: 15px;
+    color: #c4c236;
+    cursor: pointer;
+}
+
+.active {
+    color: green;
+}
+
+.deactive {
+    color: red;
+}
+
+.alert {
+    display: flex;
+}
+
+.alerta {
+    width: 500px;
+}

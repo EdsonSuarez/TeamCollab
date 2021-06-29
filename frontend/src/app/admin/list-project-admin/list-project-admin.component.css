@@ -1,0 +1,101 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.all{
+    width: 100%;
+    height: 93vh;
+    display: flex;
+}
+
+.containerTeam{
+    width: 40%;
+    height: 100%;
+    background-color: #FFDD94;    
+}
+
+.containerProject{
+    width: 60%;
+    height: 100%;
+    overflow: scroll         
+}
+
+.titleSection{
+    text-align: center;
+    padding: 1.5vh;    
+    font-size: 3vh;
+    margin: 0;
+}
+
+.container {
+    padding-top: 1px;
+    display: flex;
+    flex-direction: column;    
+    align-items: center;   
+}
+
+.card {
+    width: 70%;    
+    padding: 2.5vh;
+    margin: 2.5vh;
+    background-color: #86E3CE;
+}
+
+.card:hover{    
+    background: #20daae;
+}
+
+.text_center {
+    display: flex;
+    justify-content: center;
+}
+
+.mat-card-content {
+    padding-top: 11px;
+    font-size: 1.6vh;
+}
+
+.mat-card-title{
+    font-size: 2.5vh;
+}
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+.containerButton{
+    display: flex;
+    background-color: #86E3CE;
+    opacity: 0.8;
+    width: 60%;
+    height: 3.5vh;    
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1.8vh;
+}
+
+.containerButton:hover{
+    opacity: 1;
+}
+
+.buttonsMenu{
+    width: 100%;    
+}
+
+.change{
+    width: 90%;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icono{
+    width: 10%;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

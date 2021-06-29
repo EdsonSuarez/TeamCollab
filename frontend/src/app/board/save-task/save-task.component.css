@@ -1,0 +1,40 @@
+.task-card {
+    max-width: 450px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+mat-card-title {
+    padding-bottom: 20px;
+}
+mat-form-field {
+    width: 90%;
+}
+button {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.file-icon {
+    color: #0000008a;
+}
+.load-file-button {
+    background-color: #86e3ce;
+}
+.save-button {
+    background-color: #bcdb7f;
+    margin-bottom: 30px;
+    width: 60%;
+}
+.return-board-icon {
+    background-color: #fa897b;
+}
+.return-board-button {
+    background-color: #fa897b;
+    position: fixed;
+    right: 60px;
+    bottom: 60px;
+    transform: scale(1.5);
+}
+
+  

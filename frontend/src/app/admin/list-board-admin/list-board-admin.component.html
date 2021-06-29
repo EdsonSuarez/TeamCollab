@@ -1,0 +1,39 @@
+<div class="all">
+
+    <div class="containerProject">
+        <h2 class="titleSection">Tasks</h2>
+
+        <div class="container" *ngIf="tasks.length">
+            <mat-card class="card" *ngFor="let task of tasks" >
+                <mat-card-title><span class="text_center">{{ task.name  }}</span></mat-card-title>
+                <mat-card-content>
+                    <p>description: <span>{{task.description}}</span> </p>
+                    <hr>
+                    <div class="d-flex">
+                        <p>Estado: <span>{{task.status}}</span></p>                         
+                        <span class="spacer"></span>
+                        <mat-icon color="primary" data-bs-toggle="modal" data-bs-target="#modalProject" > edit </mat-icon>
+                        <mat-icon color="primary"> delete </mat-icon>   
+                    </div>      
+                </mat-card-content>            
+            </mat-card>
+        </div>
+        
+    </div>
+
+    <div class="containerTeam">
+        <h2 class="titleSection">Boards</h2>
+
+        <div class="buttonsMenu" *ngIf="boards.length">           
+            <div *ngFor="let board of boards" >                
+                <div class="containerButton" (click)="changeBoard(board)" >
+                    <div class="change" >{{ board.name }} </div>
+                    <span class="spacer"></span>
+                    <span class="material-icons icono" data-bs-toggle="modal" data-bs-target="#modalTeam" >edit_note</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</div>

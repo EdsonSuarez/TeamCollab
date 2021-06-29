@@ -5,6 +5,7 @@
     </a>
   </ul>
 
+<<<<<<< HEAD
   <ul>
     <li *ngIf="auth.loggedIn() && auth.isAdmin()" class="nav-item dropdown">
       <a
@@ -26,6 +27,20 @@
       </ul>
     </li>
   </ul>
+=======
+    <ul>
+      <li *ngIf="auth.loggedIn() && auth.isAdmin()" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Admin</a>
+        <ul class="dropdown-menu bg-dark">
+          <li><a class="dropdown-item" routerLink="listUsers">List Users</a></li>
+          <li><a class="dropdown-item" routerLink="registerUser">Register User</a></li>
+          <li><a class="dropdown-item" routerLink="listRole">List Roles</a></li>
+          <li><a class="dropdown-item" routerLink="registerRole">Register Role</a></li>
+          <li><a class="dropdown-item" routerLink="listProjectAdmin">List projects</a></li>
+        </ul>
+      </li>
+    </ul>
+>>>>>>> develop
 
   <ul>
     <a *ngIf="auth.loggedIn()" routerLink="project">Projects</a>

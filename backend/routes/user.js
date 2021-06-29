@@ -14,6 +14,7 @@ const Auth = require("../middleware/auth");
 const UserAuth = require("../middleware/user");
 const Admin = require("../middleware/admin");
 const Upload = require("../middleware/file");
+const ScrumMaster = require("../middleware/scrumMaster");
 
 router.post("/add", async (req, res) => {
   if (!req.body.fullName || !req.body.email || !req.body.password)

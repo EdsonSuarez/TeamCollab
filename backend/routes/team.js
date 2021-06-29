@@ -39,9 +39,9 @@ router.get("/get", Auth, UserAuth, async (req, res) => {
   res.status(200).send({ team });
 });
 
-router.get("/getUsers/:_id?", Auth, UserAuth, async (req, res) => {
+router.get("/getUsers/:_id?", async (req, res) => {
   const team = await DetailTeam.find({ teamId: req.params._id})
-  .populate("userId")
+  .populate({path: "userId", populate: "roleId"})
   .exec();
   if (!team) return res.status(401).send("Process dailed: Error getting team");
   res.status(200).send({ team });
@@ -51,6 +51,13 @@ router.get("/getAdmin", Auth, UserAuth, Admin, async (req, res) => {
   const team = await Team.find()
     .populate("projectId")
     .exec();
+  if (!team) return res.status(401).send("Process dailed: Error getting team");
+  res.status(200).send({ team });
+});
+
+router.get("/getByProject/:_id", Auth, UserAuth, Admin, async (req, res) => {
+  
+  const team = await Team.find({projectId: req.params._id});    
   if (!team) return res.status(401).send("Process dailed: Error getting team");
   res.status(200).send({ team });
 });

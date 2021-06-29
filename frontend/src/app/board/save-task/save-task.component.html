@@ -1,0 +1,56 @@
+<mat-card class="task-card">
+    <mat-card-title>Create task</mat-card-title>
+    <div class="col-12 col-lg-12" *ngIf="errorMessage">
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div class="alert-message"> {{ errorMessage }}
+                <button type="button" class="close btn-close" (click)="closeAlert(0)" data-dismiss="alert"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Task name</mat-label>
+            <input [(ngModel)]="taskData.name" matInput required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea [(ngModel)]="taskData.description" matInput required></textarea>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Priority</mat-label>
+            <mat-select [(ngModel)]="taskData.priority" required>
+                <mat-option value="1">Low</mat-option>
+                <mat-option value="2">Medium</mat-option>
+                <mat-option value="3">High</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Dependency</mat-label>
+            <mat-select [(ngModel)]="taskData.dependency">
+                <mat-option *ngFor="let task of teamTasks" value="task.taskId._id">
+                    {{task.taskId.name}}</mat-option>   
+            </mat-select>
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="fill">
+            <mat-label>Load image</mat-label>
+            <ngx-mat-file-input (change)="uploadImg($event)">
+                <mat-icon class="file-icon" ngxMatFileInputIcon>image</mat-icon>
+            </ngx-mat-file-input>
+        </mat-form-field> -->
+
+        <input type="file" (change)="uploadImg($event)">
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-flat-button class="save-button" (click)='saveTaskImg()'>SAVE</button>
+    </mat-card-actions>
+</mat-card>
+
+<a mat-fab class="return-board-button" mat-button [routerLink]="['/board/']">
+    <mat-icon><span class="material-icons return-board-icon">
+            dashboard
+        </span></mat-icon>
+</a>
