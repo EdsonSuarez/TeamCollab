@@ -11,7 +11,8 @@
                 <div class="container" *ngIf="teamProject.length">
                     <mat-list *ngFor="let team of teamProject">
 
-                        <mat-list-item class="itemList" *ngIf="!auth.isScrumMaster()"> <button class="boton"
+                        <mat-list-item class="itemList" *ngIf="!auth.isScrumMaster()"> 
+                            <button class="boton"
                                 mat-stroked-button (click)="changeTeam(team)">{{team.team + " / " + team.project
                                 }}</button> </mat-list-item>
 
@@ -19,7 +20,7 @@
                             <button class="boton" mat-stroked-button (click)="changeTeam(team)">{{team.team + " / " +
                                 team.project }} <span class="spacer"></span>
                                 <span class="material-icons" data-bs-toggle="modal"
-                                    data-bs-target="#modalTeam">edit_note</span>
+                                    data-bs-target="#modalTeam" (click)= "usersTeamF(team)">edit_note</span>
                             </button>
                         </mat-list-item>
                     </mat-list>
@@ -119,10 +120,12 @@
                 <h5 class="modal-title" id="exampleModalLabel">Team</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolor ullam tenetur pariatur aspernatur
-                    placeat ipsa consectetur delectus laudantium omnis. Repellat tenetur dolorem maiores sint cupiditate
-                    architecto explicabo autem velit?</p>
+            <div class="modal-body" *ngFor="let item of usersTeam">
+                <div >
+                    <span>{{item.userId.fullName}}</span>
+                    <span class="spacer"></span>
+                    <button>lekl</button>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
