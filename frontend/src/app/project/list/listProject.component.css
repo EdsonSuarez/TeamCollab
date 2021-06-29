@@ -17,3 +17,15 @@ mat-icon {
 .cardBorderUnset {
     border: unset;
 }
+
+.text-justify {
+    text-align: justify;
+}
+
+.card-success {
+    background-color: #85f0ba;
+}
+
+.card-secondary {
+    background-color: #999a9b;
+}

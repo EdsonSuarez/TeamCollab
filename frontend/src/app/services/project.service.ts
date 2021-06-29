@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
   private env: String;
@@ -12,8 +13,24 @@ export class ProjectService {
     this.env = environment.APP_URL;
   }
 
-  list() {
+  listAdmin() {
     return this.http.get<any>(this.env + 'project/getAll');
+  }
+
+  listScrum() {
+    return this.http.get<any>(this.env + 'project/getAllScrum');
+  }
+
+  listUserLeader() {
+    return this.http.get<any>(this.env + 'project/getMyProjects').pipe(
+      map((data) => {
+        let result: any = { team: [] };
+        data.team.forEach((data: any) => {
+          result.team.push(data.teamId.projectId);
+        });
+        return result;
+      })
+    );
   }
 
   add(data: any) {
@@ -27,5 +44,4 @@ export class ProjectService {
   delete(data: any) {
     return this.http.put<any>(this.env + 'project/delete', data);
   }
-
 }

@@ -22,7 +22,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { HomeComponent } from './home/home/home.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +29,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from './board/list-board/list-board.component';
 import { MatListModule } from '@angular/material/list';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
+
+import { HomeComponent } from './home/home/home.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
 import { ListRoleComponent } from './admin/list-role/list-role.component';
 import { RegisterRoleComponent } from './admin/register-role/register-role.component';
@@ -51,13 +53,13 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
     HeaderComponent,
     FooterComponent,
     RegisterComponent,
-    ListProjectComponent,    
+    ListProjectComponent,
     ListBoardComponent,
     ListUserComponent,
     ListRoleComponent,
-    RegisterRoleComponent, 
-    RegisterUserComponent,  
-    UpdateUserComponent, 
+    RegisterRoleComponent,
+    RegisterUserComponent,
+    UpdateUserComponent,
     UpdateRoleComponent,
     SaveTaskComponent,
   ],
@@ -80,6 +82,7 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
     MatDialogModule,
     MatSelectModule,
     NgxMatFileInputModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     AuthService,
