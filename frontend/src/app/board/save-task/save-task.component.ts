@@ -14,6 +14,7 @@ export class SaveTaskComponent implements OnInit {
   public taskData: any;
   public errorMessage: String;
   public fileControl: FormControl;
+  public selectedFile: any;
 
   public teamMembers: any;
   public teamTasks: any;
@@ -25,6 +26,7 @@ export class SaveTaskComponent implements OnInit {
     this.teamTasks = [];
 
     this.fileControl = new FormControl()
+    this.selectedFile= null;
   }
 
   ngOnInit(): void {
@@ -75,6 +77,40 @@ export class SaveTaskComponent implements OnInit {
     }
   }
 
+  uploadImg(event: any){
+    console.log(event);
+    this.selectedFile = <File>event.target.files[0]
+    // console.log(event.target.files[0].name);
+  }
+
+  saveTaskImg(){
+    if (!this.taskData.name || !this.taskData.description || !this.taskData.boardId) {
+      console.log('Failed process: Incomplete data');
+      this.errorMessage = 'Failed process: Incomplete data'
+      this.closeAlert(3000);  
+    } else {
+      const data = new FormData();
+      data.append('image', this.selectedFile, this.selectedFile.name);
+      data.append('name', this.taskData.name);
+      data.append('description', this.taskData.description);
+      data.append('boardId', this.taskData.boardId);
+      data.append('priority', this.taskData.priority);
+      console.log(data)
+      this.task.saveTaskImg(data).subscribe(
+        (res) => {
+          console.log(res);
+          this.router.navigate(['/board'])
+          
+        },
+        (err) => {
+          console.log(err.error);
+          this.errorMessage = err.error;
+          this.closeAlert(3000);
+          
+        }
+      )
+    }
+  }
   closeAlert(time: number) {
     setTimeout(() => {this.errorMessage = '' }, time)
   }
