@@ -33,6 +33,13 @@ router.get("/get", Auth, UserAuth, Admin, async(req, res)=>{
 })
 
 
+router.get("/getRole/:_id", Auth, UserAuth, Admin, async (req, res) => {
+    const role = await Role.findById(req.params._id);
+    if (!role) return res.status(401).send("No role");
+    return res.status(200).send({ role });
+});
+
+
 router.put("/update", Auth, UserAuth, Admin, async (req, res) => {
     if (!req.body.name || !req.body.description || !req.body._id) 
         return res.status(401).send("Process failed: Incomplete data");

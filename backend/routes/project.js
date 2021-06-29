@@ -31,7 +31,7 @@ router.get("/getAll", Auth, UserAuth, ScrumAuth, async(req, res) => {
     if (!validId) 
         return res.status(401).send("Process failed: Invalid id");
 
-    const projects = await Project.find();
+    const projects = await Project.find().populate("userId").exec();
     if (!projects) 
         return res.status(401).send("Process failed: No projects found");
 

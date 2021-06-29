@@ -12,6 +12,10 @@ import { ListUserComponent } from './admin/list-user/list-user.component';
 import { ListRoleComponent } from './admin/list-role/list-role.component';
 import { RegisterRoleComponent } from './admin/register-role/register-role.component';
 import { UpdateRoleComponent } from './admin/update-role/update-role.component';
+import { ListProjectAdminComponent } from "./admin/list-project-admin/list-project-admin.component";
+import { UpdateProjectAdminComponent } from "./admin/update-project-admin/update-project-admin.component";
+import { ListBoardAdminComponent } from "./admin/list-board-admin/list-board-admin.component";
+import { UpdateBoardAdminComponent } from "./admin/update-board-admin/update-board-admin.component";
 
 
 const routes: Routes = [
@@ -68,6 +72,26 @@ const routes: Routes = [
     component: UpdateRoleComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'listProjectAdmin',
+    component: ListProjectAdminComponent,
+    canActivate: [AuthGuard],    
+  },
+  {
+    path: 'updateProjectAdmin',
+    component: UpdateProjectAdminComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'listBoard/:id',
+    component: ListBoardAdminComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'updateBoard/:id',
+    component: UpdateBoardAdminComponent,
+    canActivate: [AuthGuard],
+  },  
 ];
 
 @NgModule({

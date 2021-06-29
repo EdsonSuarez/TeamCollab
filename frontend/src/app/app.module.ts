@@ -36,6 +36,12 @@ import { RegisterRoleComponent } from './admin/register-role/register-role.compo
 import { RegisterUserComponent } from './admin/register-user/register-user.component';
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
 import { UpdateRoleComponent } from './admin/update-role/update-role.component';
+import { ListProjectAdminComponent } from "./admin/list-project-admin/list-project-admin.component";
+import { UpdateProjectAdminComponent } from "./admin/update-project-admin/update-project-admin.component";
+import { ListBoardAdminComponent } from './admin/list-board-admin/list-board-admin.component';
+import { UpdateBoardAdminComponent } from './admin/update-board-admin/update-board-admin.component';
+
+
 
 @NgModule({
   declarations: [
@@ -54,6 +60,10 @@ import { UpdateRoleComponent } from './admin/update-role/update-role.component';
     RegisterUserComponent,  
     UpdateUserComponent, 
     UpdateRoleComponent,
+    ListProjectAdminComponent,
+    UpdateProjectAdminComponent,
+    ListBoardAdminComponent,
+    UpdateBoardAdminComponent,
   ],
   imports: [
     BrowserModule,
