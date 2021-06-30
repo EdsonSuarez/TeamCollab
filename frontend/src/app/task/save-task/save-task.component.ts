@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from "../../services/task.service";
 import { TeamService } from "../../services/team.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -12,45 +12,57 @@ import { FormControl } from '@angular/forms';
 export class SaveTaskComponent implements OnInit {
 
   public taskData: any;
+  public successMessage: String;
   public errorMessage: String;
+  
+  public successMessageUser: String;
+  public errorMessageUser: String;
+
   public selectedFile: any;
 
   public teamMembers: any;
   public teamTasks: any;
+  public UserSelect: any;
+  public userTemp: any;
+  public flagTask: boolean;
 
   // File variables
   fileControl: FormControl;
   public file: any;
 
-  constructor(private task: TaskService, private team:TeamService, private router: Router, public dialog: MatDialog) { 
+  public idTask: String;
+
+  constructor(private task: TaskService, private team:TeamService, private router: Router, private activatedRoute: ActivatedRoute) { 
     this.taskData = {};
+    this.successMessage = '';
     this.errorMessage = '';
+    this.successMessageUser = '';
+    this.errorMessageUser = '';
     this.teamMembers = [];
     this.teamTasks = [];
+    this.UserSelect = [];
+    this.userTemp = []; 
+    this.flagTask = false;
 
     // File variables
     this.fileControl = new FormControl(this.file)
     this.fileControl = new FormControl()
     this.selectedFile = null;
     this.file = null;
+
+    this.idTask = '';
+    this.activatedRoute.params.subscribe((params: any) => {
+      this.idTask = params.id;
+    });
   }
 
   ngOnInit(): void {
-    
+    localStorage.removeItem('task')
 
     const teamId = localStorage.getItem('team');
     const boardId = localStorage.getItem('sprint');
     this.taskData.boardId = boardId;
     console.log(teamId)
-    this.task.getTeam(teamId).subscribe(
-      (res) => {
-        console.log(res.team)
-        this.teamMembers = res.team;
-      },
-      (err) => {
-        console.log(err.error);
-      }
-    )
     this.task.getTasks().subscribe(
       (res) => {
         this.teamTasks = res.userTask
@@ -80,6 +92,19 @@ export class SaveTaskComponent implements OnInit {
   //   console.log(this.selectedFile);
   // }
 
+  usersTeam() {
+    const teamId = localStorage.getItem('team');
+    this.task.getTeam(teamId).subscribe(
+      (res) => {
+        console.log(res.team)
+        this.teamMembers = res.team;
+      },
+      (err) => {
+        console.log(err.error);
+      }
+    )
+  }
+
   saveTaskImg(){
     if (!this.taskData.name || !this.taskData.description || !this.taskData.boardId) {
       console.log('Failed process: Incomplete data');
@@ -99,8 +124,10 @@ export class SaveTaskComponent implements OnInit {
         
         this.task.saveTaskImg(data).subscribe(
           (res) => {
-            console.log(res);
-            this.router.navigate(['/board/inicio'])
+            localStorage.setItem('task', res.result._id );
+            this.flagTask = true;
+            this.successMessage = 'Task created successfully';
+            this.closeAlert(3000);
           },
           (err) => {
             console.log(err.error);
@@ -112,11 +139,10 @@ export class SaveTaskComponent implements OnInit {
       else {
         this.task.saveTask(this.taskData).subscribe(
           (res: any) => {
-            console.log(res);
-            console.log(this.taskData.dependency);
-            
-            this.router.navigate(['/board/inicio']);
-            this.taskData = {};
+            localStorage.setItem('task', res.result._id);
+            this.flagTask = true;
+            this.successMessage = 'Task created successfully';
+            this.closeAlert(3000);
           },
           (err) => {
             console.log(err);
@@ -125,12 +151,48 @@ export class SaveTaskComponent implements OnInit {
           }
         )
       }
-      
     }
   }
 
+  userAdd(member: any){
+    let taskId = localStorage.getItem('task');
+    let taskDetail = {userId: member.userId._id, taskId: taskId}
+
+    console.log(member);
+    
+    this.task.addDetail(taskDetail).subscribe(
+      (res: any) => {
+        this.successMessageUser = `Task assigned to ${member.userId.fullName}`;
+        this.closeAlert(3000);
+        this.teamMembers.member.flagAssigned = true;
+        console.log(this.teamMembers);
+        
+      },
+      (err) => {
+        console.log(err);
+        this.errorMessageUser = err.error;
+        this.closeAlert(3000);
+      }
+    )
+  }
+
+  userDelete(userId: any){
+    this.task.addDetail(userId).subscribe(
+      (res: any) => {
+        this.successMessageUser = 'Task unassigned';
+        this.closeAlert(3000);
+        
+      },
+      (err) => {
+        console.log(err);
+        this.errorMessageUser = err.error;
+        this.closeAlert(3000);
+      }
+    )
+  }
+
   closeAlert(time: number) {
-    setTimeout(() => {this.errorMessage = '' }, time)
+    setTimeout(() => {this.errorMessage = '', this.successMessage = '', this.errorMessageUser = '', this.successMessageUser = '' }, time)
   }
 
 }

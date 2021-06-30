@@ -241,4 +241,8 @@ export class ListBoardComponent implements OnInit {
       }
     )
   }
+
+  getTask(taskId: any){
+    this.router.navigate(['/listTasks', taskId]);
+  }
 }

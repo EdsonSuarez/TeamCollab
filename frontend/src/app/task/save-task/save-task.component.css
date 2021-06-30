@@ -1,7 +1,7 @@
 .task-card {
     max-width: 450px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 70px;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -41,5 +41,15 @@ button {
     bottom: 60px;
     transform: scale(1.5);
 }
+.displayFlex{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.spacer {
+    flex: 1 0 auto;
+  }
 
   
