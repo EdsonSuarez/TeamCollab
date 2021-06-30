@@ -16,5 +16,4 @@ const upload = (req, res, next) => {
     }
   };
   
-module.exports = upload;
-  
+  module.exports = upload;

@@ -12,7 +12,6 @@ const Auth = require("../middleware/auth");
 const UserAuth = require("../middleware/user");
 const ScrumM = require("../middleware/scrumMaster");
 const Upload = require("../middleware/file");
-const Admin = require("../middleware/admin");
 
 router.post("/add", Auth, UserAuth, ScrumM, async (req, res) => {
   if (
@@ -69,13 +68,16 @@ router.post(
     let imageUrl = "";
     if (req.files !== undefined && req.files.image.type) {
       const url = req.protocol + "://" + req.get("host") + "/";
+      // let serverImg =
+      //   "./img/task/" + moment().unix() + path.extname(req.files.image.path);
       let serverImg =
-        "./img/task/" + moment().unix() + path.extname(req.files.image.path);
+        "./uploads/" + moment().unix() + path.extname(req.files.image.path);
       fs.createReadStream(req.files.image.path).pipe(
         fs.createWriteStream(serverImg)
       );
       imageUrl =
-        url + "img/" + moment().unix() + path.extname(req.files.image.path);
+        // url + "img/" + moment().unix() + path.extname(req.files.image.path);
+        url + "uploads/" + moment().unix() + path.extname(req.files.image.path);
     }
     if (req.body.dependency) {
       let isValid = mongoose.Types.ObjectId.isValid(req.body.dependency);
@@ -119,12 +121,6 @@ router.get("/getScrum/:userId?", Auth, UserAuth, ScrumM, async (req, res) => {
   res.status(200).send({ userTasks });
 });
 
-router.get("/getByTeam/:_id", Auth, UserAuth, Admin, async (req, res) => {
-  const tasks = await Task.find({ boardId: req.params._id })
-  if(!tasks) return res.status(401).send("Error: tasks don't find")    
-  res.status(200).send({ tasks });
-});
-
 router.put("/update", Auth, UserAuth, ScrumM, async (req, res) => {
   if (
     !req.body._id ||
@@ -162,7 +158,8 @@ router.delete("/delete/:_id", Auth, UserAuth, ScrumM, async (req, res) => {
   if (!validId) return res.status(401).send("Process failed: Invalid id");
 
   const detailTask = await DetailTask.deleteMany({ taskId: req.params._id });
-  if (!detailTask) return res.status(401).send("Process failed: DetailTask not found");
+  if (!detailTask)
+    return res.status(401).send("Process failed: DetailTask not found");
 
   const task = await Task.findByIdAndDelete(req.params._id);
   if (!task) return res.status(401).send("Process failed: Error deleting task");

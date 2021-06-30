@@ -54,33 +54,9 @@ export class SaveTaskComponent implements OnInit {
     )
   }
 
-  saveTask(){
-    if (!this.taskData.name || !this.taskData.description || !this.taskData.boardId) {
-      console.log('Failed process: Incomplete data');
-      this.errorMessage = 'Failed process: Incomplete data';
-      this.closeAlert(3000);
-    } else {
-      console.log(this.taskData);
-      
-      this.task.saveTask(this.taskData).subscribe(
-        (res: any) => {
-          console.log(res);
-          this.router.navigate(['/board']);
-          this.taskData = {};
-        },
-        (err) => {
-          console.log(err);
-          this.errorMessage = err.error;
-          this.closeAlert(3000);
-        }
-      )
-    }
-  }
-
   uploadImg(event: any){
     console.log(event);
-    this.selectedFile = <File>event.target.files[0]
-    // console.log(event.target.files[0].name);
+    this.selectedFile = <File>event.target.files[0];
   }
 
   saveTaskImg(){
@@ -90,25 +66,45 @@ export class SaveTaskComponent implements OnInit {
       this.closeAlert(3000);  
     } else {
       const data = new FormData();
-      data.append('image', this.selectedFile, this.selectedFile.name);
-      data.append('name', this.taskData.name);
-      data.append('description', this.taskData.description);
-      data.append('boardId', this.taskData.boardId);
-      data.append('priority', this.taskData.priority);
-      console.log(data)
-      this.task.saveTaskImg(data).subscribe(
-        (res) => {
-          console.log(res);
-          this.router.navigate(['/board'])
-          
-        },
-        (err) => {
-          console.log(err.error);
-          this.errorMessage = err.error;
-          this.closeAlert(3000);
-          
-        }
-      )
+      if (this.selectedFile) {
+        data.append('image', this.selectedFile, this.selectedFile.name);
+        data.append('name', this.taskData.name);
+        data.append('description', this.taskData.description);
+        data.append('boardId', this.taskData.boardId);
+        data.append('priority', this.taskData.priority);
+        data.append('dependency', this.taskData.dependency);
+        console.log(data)
+        console.log(this.taskData.dependency);
+        
+        this.task.saveTaskImg(data).subscribe(
+          (res) => {
+            console.log(res);
+            this.router.navigate(['/board'])
+          },
+          (err) => {
+            console.log(err.error);
+            this.errorMessage = err.error;
+            this.closeAlert(3000);
+          }
+        )
+      }
+      else {
+        this.task.saveTask(this.taskData).subscribe(
+          (res: any) => {
+            console.log(res);
+            console.log(this.taskData.dependency);
+            
+            this.router.navigate(['/board']);
+            this.taskData = {};
+          },
+          (err) => {
+            console.log(err);
+            this.errorMessage = err.error;
+            this.closeAlert(3000);
+          }
+        )
+      }
+      
     }
   }
   closeAlert(time: number) {
