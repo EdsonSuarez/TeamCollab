@@ -21,18 +21,17 @@ a {
 
 .accountbtn{
   width: auto;
+  height: auto;
   align-content: flex-end;
 }
 
 .photo_container {
-  width: auto;
-  display: flex;
-  align-items: flex-end;
-  align-content: space-between;
+  width: 100%;
 }
 
 .photo_default {
   width: auto;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -43,10 +42,10 @@ a {
   width: auto;
   margin: 0px 0px 0px 5px;
   align-content: flex-end;
-  margin: 0px;
 }
 
 .photo_default mat-icon{
+  margin-top: 20px;
   padding: 18px 0px;
   font-size: 36px;
 }
@@ -57,20 +56,22 @@ a {
 }
 
 .user_photo{
-  width: auto;
+  width: 100%;
+  height: 10%;
+  margin-bottom: 0px;
   display: flex;
-  align-items: flex-end;
-  align-content: space-between;
 }
 
 .user_photo img{
+  margin-top: 20px;
   width: 40px;
+  padding: 0px;
   border-radius: 25px;
 }
 
 .user_photo p{
   width: auto;
-  margin: 0px 0px 0px 5px;
+  margin: 20px 0px 0px 5px;
 }
 
 li {
