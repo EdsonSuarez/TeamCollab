@@ -15,6 +15,10 @@ export class TeamService {
     return this.http.post<any>(this.env + "team/add", team);
   }
 
+  addDetail(team: any) {
+    return this.http.post<any>(this.env + "detailTeam/add", team);
+  }
+
   getTeams() {
     return this.http.get<any>(this.env + "team/getTeams");
   }
@@ -29,5 +33,9 @@ export class TeamService {
 
   delete(team: any) {
     return this.http.delete<any>(this.env + 'team/delete/' + team._id)
+  }
+
+  deleteDetail(team: any) {
+    return this.http.delete<any>(this.env + 'detailTeam/delete/' + team._id);
   }
 }

@@ -53,7 +53,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.get("/get/:fullName?", Auth, UserAuth, Admin, async (req, res) => {
+router.get("/get/:fullName?", Auth, UserAuth, ScrumMaster, async (req, res) => {
   const user = await User.find({
     fullName: new RegExp(req.params["fullName"], "i"),
   })

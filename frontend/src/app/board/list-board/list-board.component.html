@@ -119,7 +119,7 @@
 <!-- MODALES -->
 
 <div class="modal fade" id="modalTeam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Team</h5>
@@ -130,24 +130,19 @@
                     <span class="spacer"></span>
                     <span>{{item.userId.roleId.name}}</span>
                     <span class="spacer"></span>
-                    <button
-                    class="btn btn-warning btn-xs m-1"
-                    title="Editar Usuario"
-                  >
-                    <mat-icon>edit</mat-icon>
-                  </button>
                   <button
                     class="btn btn-danger btn-xs m-1"
-                    title="Borrar Usuario"
+                    title="Delete User"
+                    (click) = "userDelete(item)"
                   >
                     <mat-icon>delete</mat-icon>
                   </button>
 
             </div>
             <div class="displayFlex modal-body">
-                <select *ngIf="usersAll.length" class="form-select ancho" aria-label="Default select example">
+                <select *ngIf="usersAll.length" class="form-select ancho" aria-label="Default select example" [(ngModel)]="UserSelect">
                     <option selected >Seleccionar usuario</option>
-                    <option *ngFor="let user of usersAll">{{user.fullName}}</option>
+                    <option [value]="user._id" *ngFor="let user of usersAll">{{user.fullName}}</option>
                   </select>
                   <span class="spacer"></span>
                 <button type="button" class="btn btn-success btn-sm" (click) = "userList()">
@@ -159,7 +154,7 @@
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" (click) = "userAdd()">Add User</button>
             </div>
         </div>
     </div>

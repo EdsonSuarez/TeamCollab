@@ -20,6 +20,9 @@ export class ListBoardComponent implements OnInit {
   public teamProject: any;
   public usersTeam: any;
   public usersAll: any;
+  public UserSelect: any;
+  public userTemp: any;
+  public teamTemp: any;
 
   constructor(private board: BoardService, public admin: AdminService , private router: Router, public auth: AuthService, public team: TeamService) { 
     this.toggle = true;    
@@ -29,8 +32,11 @@ export class ListBoardComponent implements OnInit {
     this.taskDone = [];
     this.sprints = [];
     this.teamProject = [];
+    this.teamTemp = [];
     this.usersTeam = [];
     this.usersAll = [];
+    this.UserSelect = [];
+    this.userTemp = []; 
   }
 
   ngOnInit(): void {
@@ -151,8 +157,44 @@ export class ListBoardComponent implements OnInit {
     this.admin.listUsers().subscribe(
       (res) => {
         this.usersAll = res.user;
-        console.log(this.usersAll);
-        
+      },
+      (err) => {
+        console.log(err.error);
+      }
+    )
+  }
+
+  userAdd(){
+    let team = {userId: this.UserSelect, teamId: this.usersTeam[0].teamId }
+    this.team.addDetail(team).subscribe(
+      (res) => {
+        team = res.result;
+        this.usersAll.forEach((element:any)=> {
+          if (element._id === this.UserSelect) {
+            this.userTemp.userId = element;
+            this.userTemp._id = this.usersTeam[0]._id ;
+          }
+        });
+        this.usersTeam.push(this.userTemp);
+        let team1 = {idTeam: this.usersTeam[0].teamId};
+        this.usersTeamF(team1);
+      },
+      (err) => {
+        console.log(err.error);
+      }
+    )
+  }
+
+  userDelete(detail:any){
+    let team = {_id: detail._id}
+    console.log(team);
+    this.team.deleteDetail(team).subscribe(
+      (res) => {
+        console.log(res);
+        const index = this.usersTeam.indexOf(detail);
+        if (index > -1){
+          this.usersTeam.splice(index, 1);
+        }
       },
       (err) => {
         console.log(err.error);
