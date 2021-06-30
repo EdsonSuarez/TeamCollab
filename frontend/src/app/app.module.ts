@@ -78,6 +78,7 @@ import { UpdateBoardAdminComponent } from './admin/update-board-admin/update-boa
     UpdateProjectAdminComponent,
     ListBoardAdminComponent,
     UpdateBoardAdminComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
