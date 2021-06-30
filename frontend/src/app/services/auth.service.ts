@@ -34,6 +34,18 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  profile() {
+    let jwtToken = localStorage.getItem('token');
+    if (jwtToken == null) {
+      return;
+    } else {
+      let jwtData = jwtToken.split('.')[1];
+      let decoded = window.atob(jwtData);
+      let decodetJwt = JSON.parse(decoded);
+      return {'fullname': decodetJwt.fullName, 'photo': decodetJwt.imageUrl}
+    }
+  }
+
   isAdmin() {
     let jwtToken = localStorage.getItem('token');
     if (jwtToken == null) {
@@ -66,7 +78,10 @@ export class AuthService {
       let jwtData = jwtToken.split('.')[1];
       let decodedJwtJsonData = window.atob(jwtData);
       let decodedJwtData = JSON.parse(decodedJwtJsonData);
-      return decodedJwtData.roleId.name !== 'user' && decodedJwtData.roleId.name !== 'technicalLeader' ? false : true;
+      return decodedJwtData.roleId.name !== 'user' &&
+        decodedJwtData.roleId.name !== 'technicalLeader'
+        ? false
+        : true;
     }
   }
 
@@ -81,5 +96,4 @@ export class AuthService {
       return decodedJwtData.roleId.name !== 'user' ? false : true;
     }
   }
-  
 }

@@ -15,13 +15,63 @@ a {
   padding-top: 1rem;
 }
 
-.accountbtn mat-icon{
-  font-size: 36px;
-}
-
 .bgHeader {
   background-color: #ccabda;
   height: 7%;
+}
+
+.accountbtn{
+  width: auto;
+  align-content: flex-end;
+}
+
+.photo_container {
+  width: auto;
+  display: flex;
+  align-items: flex-end;
+  align-content: space-between;
+}
+
+.photo_default {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  align-content: space-between;
+}
+
+.photo_default div{
+  width: auto;
+  margin: 0px 0px 0px 5px;
+  align-content: flex-end;
+  margin: 0px;
+}
+
+.photo_default mat-icon{
+  padding: 18px 0px;
+  font-size: 36px;
+}
+
+.photo_default p{
+  width: auto;
+  padding: 0px 15px;
+}
+
+.user_photo{
+  width: auto;
+  display: flex;
+  align-items: flex-end;
+  align-content: space-between;
+}
+
+.user_photo img{
+  width: 40px;
+  border-radius: 25px;
+}
+
+.user_photo p{
+  width: auto;
+  margin: 0px 0px 0px 5px;
 }
 
 li {

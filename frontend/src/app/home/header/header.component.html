@@ -5,26 +5,40 @@
     </a>
   </ul>
 
-    <ul>
-      <li *ngIf="auth.loggedIn() && auth.isAdmin()" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Admin</a>
-        <ul class="dropdown-menu bg-dark">
-          <li><a class="dropdown-item" routerLink="listUsers">List Users</a></li>
-          <li><a class="dropdown-item" routerLink="registerUser">Register User</a></li>
-          <li><a class="dropdown-item" routerLink="listRole">List Roles</a></li>
-          <li><a class="dropdown-item" routerLink="registerRole">Register Role</a></li>
-          <li><a class="dropdown-item" routerLink="listProjectAdmin">List projects</a></li>
-        </ul>
-      </li>
-    </ul>
+  <ul>
+    <li *ngIf="auth.loggedIn() && auth.isAdmin()" class="nav-item dropdown">
+      <a
+        class="nav-link dropdown-toggle"
+        data-bs-toggle="dropdown"
+        role="button"
+        aria-expanded="false"
+        >Admin</a
+      >
+      <ul class="dropdown-menu bg-dark">
+        <li><a class="dropdown-item" routerLink="listUsers">List Users</a></li>
+        <li>
+          <a class="dropdown-item" routerLink="registerUser">Register User</a>
+        </li>
+        <li><a class="dropdown-item" routerLink="listRole">List Roles</a></li>
+        <li>
+          <a class="dropdown-item" routerLink="registerRole">Register Role</a>
+        </li>
+        <li>
+          <a class="dropdown-item" routerLink="listProjectAdmin"
+            >List projects</a
+          >
+        </li>
+      </ul>
+    </li>
+  </ul>
 
   <ul>
     <a *ngIf="auth.loggedIn()" routerLink="project">Projects</a>
   </ul>
 
-    <ul>
-      <a *ngIf="auth.loggedIn()" routerLink="/board/inicio">Board</a>
-    </ul>
+  <ul>
+    <a *ngIf="auth.loggedIn()" routerLink="/board/inicio">Board</a>
+  </ul>
 
   <span class="headerSpacer"></span>
 
@@ -37,12 +51,23 @@
       class="accountbtn"
       *ngIf="auth.loggedIn()"
     >
-      <mat-icon> account_circle </mat-icon>
+      <div class="photo_container">
+        <div *ngIf="!photo" class="photo_default">
+          <div><mat-icon> account_circle </mat-icon></div>
+          <div>
+            <p>{{ profile.fullname }}</p>
+          </div>
+        </div>
+        <div *ngIf="photo" class="user_photo">
+          <img src="{{ profile.photo }}" alt="User photo" />
+          <p>{{ profile.fullname }}</p>
+        </div>
+      </div>
     </button>
     <mat-menu #account="matMenu">
       <button mat-menu-item routerLink="/profile">Profile</button>
       <button mat-menu-item (click)="auth.logout()">Logout</button>
     </mat-menu>
-    <a *ngIf="auth.loggedIn()" mat-button (click)="auth.logout()">Logout</a>
+    <!-- <a *ngIf="auth.loggedIn()" mat-button (click)="auth.logout()">Logout</a> -->
   </ul>
 </mat-toolbar>
