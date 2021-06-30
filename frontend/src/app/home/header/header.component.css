@@ -1,17 +1,16 @@
 .headerSpacer {
-  flex: 1 1 auto;
+  flex: 1 0 auto;
 }
-img {
-  width: 80%;
-  height: 80%;
-  margin-top: 1.5rem;
+img {  
+  width: 200px;
+  margin: 0 0 0 0;
+  padding: 5px 0 0 0;
   align-items: center;
 }
 
 a {
   text-decoration: none;
   color: white;
-  align-items: center;
   padding-top: 1rem;
 }
 
@@ -77,4 +76,14 @@ a {
 li {
   text-decoration: none;
   list-style: none;
+}
+
+.displayFlex{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paddingTop{
+  padding-top: 1.5rem;
 }
