@@ -30,6 +30,7 @@ export class ListBoardComponent implements OnInit {
   public UserSelect: any;
   public userTemp: any;
   public teamTemp: any;
+  public sprint: any;
 
   constructor(private board: BoardService, public admin: AdminService , private router: Router, public auth: AuthService, public team: TeamService, private activatedRoute: ActivatedRoute, private project: ProjectService) { 
     this.toggle = true;    
@@ -52,6 +53,7 @@ export class ListBoardComponent implements OnInit {
     });
     this.UserSelect = [];
     this.userTemp = []; 
+    this.sprint = [];
   }
 
   ngOnInit(): void {
@@ -206,7 +208,7 @@ export class ListBoardComponent implements OnInit {
     localStorage.setItem('team',team.idTeam);
     this.board.boardsUser(team.idTeam).subscribe(
       (res)=>{
-        console.log("Sprint", res.boards)
+        console.log("Sprint1", res.boards)
         this.sprints = res.boards;
         if(this.sprints.length > 0){
           this.changeSprint(this.sprints[0])
@@ -226,7 +228,7 @@ export class ListBoardComponent implements OnInit {
 
   changeSprint(sprint: any){
 
-    console.log(sprint)
+    console.log("change sprint",sprint)
     this.taskToDo = [];
     this.taskDoing = [];
     this.taskTesting = [];
@@ -416,4 +418,29 @@ export class ListBoardComponent implements OnInit {
 
 
 
+  SprintF(sprint:any){
+    console.log("!111!!!!1", sprint)
+    this.sprint = sprint;
+    console.log("tttttttttt",this.teamInitial);
+  }
+
+  sprintEdit(){
+    let board = {}
+    board = {
+              _id: this.sprint._id, 
+              name: this.sprint.name, 
+              description: this.sprint.description, 
+              teamId: this.sprint.teamId,
+              status: this.sprint.status, 
+              active: this.sprint.active,
+            };
+    this.board.update(board).subscribe(
+      (res) => {
+        console.log(res.board);
+      },
+      (err) => {
+        console.log(err.error);
+      }
+            ); 
+  }
 }
