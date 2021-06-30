@@ -41,7 +41,16 @@
             </ngx-mat-file-input>
         </mat-form-field> -->
 
-        <input type="file" (change)="uploadImg($event)">
+        <mat-form-field appearance="fill">
+            <mat-label>Load image</mat-label>
+            <ngx-mat-file-input [formControl]="fileControl" accept= '.png, .jpg, .jpeg, .gif, image/*'>
+                <mat-icon class="file-icon" ngxMatFileInputIcon>image</mat-icon>
+            </ngx-mat-file-input>
+        </mat-form-field>
+
+        <!-- <input type="file" (change)="uploadImg($event)"> -->
+
+
     </mat-card-content>
 
     <mat-card-actions>
@@ -49,7 +58,7 @@
     </mat-card-actions>
 </mat-card>
 
-<a mat-fab class="return-board-button" mat-button [routerLink]="['/board/']">
+<a mat-fab class="return-board-button" mat-button [routerLink]="['/board/inicio']">
     <mat-icon><span class="material-icons return-board-icon">
             dashboard
         </span></mat-icon>

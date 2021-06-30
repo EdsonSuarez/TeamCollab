@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from "../../services/task.service";
 import { TeamService } from "../../services/team.service";
 import { Router } from "@angular/router";
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-save-task',
@@ -13,11 +13,14 @@ export class SaveTaskComponent implements OnInit {
 
   public taskData: any;
   public errorMessage: String;
-  public fileControl: FormControl;
   public selectedFile: any;
 
   public teamMembers: any;
   public teamTasks: any;
+
+  // File variables
+  fileControl: FormControl;
+  public file: any;
 
   constructor(private task: TaskService, private team:TeamService, private router: Router) { 
     this.taskData = {};
@@ -25,11 +28,16 @@ export class SaveTaskComponent implements OnInit {
     this.teamMembers = [];
     this.teamTasks = [];
 
+    // File variables
+    this.fileControl = new FormControl(this.file)
     this.fileControl = new FormControl()
-    this.selectedFile= null;
+    this.selectedFile = null;
+    this.file = null;
   }
 
   ngOnInit(): void {
+    
+
     const teamId = localStorage.getItem('team');
     const boardId = localStorage.getItem('sprint');
     this.taskData.boardId = boardId;
@@ -52,12 +60,25 @@ export class SaveTaskComponent implements OnInit {
         console.log(err.error);
       }
     )
+    this.fileControl.valueChanges.subscribe((files: any) => {
+      this.file = files;
+    })
   }
 
-  uploadImg(event: any){
-    console.log(event);
-    this.selectedFile = <File>event.target.files[0];
+  onDisabledChanged(value: boolean) {
+    if (!value) {
+      this.fileControl.enable();
+    } else {
+      this.fileControl.disable();
+    }
   }
+
+  // Not in use
+  // uploadImg(event: any){
+  //   console.log(event);
+  //   this.selectedFile = <File>event.target.files[0];
+  //   console.log(this.selectedFile);
+  // }
 
   saveTaskImg(){
     if (!this.taskData.name || !this.taskData.description || !this.taskData.boardId) {
@@ -66,8 +87,8 @@ export class SaveTaskComponent implements OnInit {
       this.closeAlert(3000);  
     } else {
       const data = new FormData();
-      if (this.selectedFile) {
-        data.append('image', this.selectedFile, this.selectedFile.name);
+      if (this.file) {
+        data.append('image', this.file, this.file.name);
         data.append('name', this.taskData.name);
         data.append('description', this.taskData.description);
         data.append('boardId', this.taskData.boardId);
@@ -79,7 +100,7 @@ export class SaveTaskComponent implements OnInit {
         this.task.saveTaskImg(data).subscribe(
           (res) => {
             console.log(res);
-            this.router.navigate(['/board'])
+            this.router.navigate(['/board/inicio'])
           },
           (err) => {
             console.log(err.error);
@@ -94,7 +115,7 @@ export class SaveTaskComponent implements OnInit {
             console.log(res);
             console.log(this.taskData.dependency);
             
-            this.router.navigate(['/board']);
+            this.router.navigate(['/board/inicio']);
             this.taskData = {};
           },
           (err) => {

@@ -28,6 +28,7 @@ app.use("/api/task/", Task);
 app.use("/api/team/", Team);
 app.use("/api/detailTask", DetailTask);
 app.use("/api/detailTeam", DetailTeam);
+app.use("/uploads", express.static("uploads"))
 app.use("/img", express.static("img/users"));
 
 app.listen(process.env.PORT, () =>

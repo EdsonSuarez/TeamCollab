@@ -39,10 +39,6 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'task',
-    component: TaskComponent,
-  },
-  {
     path: 'detailTask',
     component: DetailTaskComponent,
   },
