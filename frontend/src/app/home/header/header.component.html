@@ -1,5 +1,5 @@
 <mat-toolbar class="bgHeader">
-  <ul>
+  <ul class="displayFlex">
     <a routerLink="">
       <img src="../../../assets/img/teamCollab.png" alt="" />
     </a>
@@ -7,7 +7,7 @@
 
     <ul>
       <li *ngIf="auth.loggedIn() && auth.isAdmin()" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Admin</a>
+        <a class="nav-link dropdown-toggle paddingTop" data-bs-toggle="dropdown" role="button" aria-expanded="false">Admin</a>
         <ul class="dropdown-menu bg-dark">
           <li><a class="dropdown-item" routerLink="listUsers">List Users</a></li>
           <li><a class="dropdown-item" routerLink="registerUser">Register User</a></li>
@@ -18,12 +18,12 @@
       </li>
     </ul>
 
-  <ul>
-    <a *ngIf="auth.loggedIn()" routerLink="project">Projects</a>
+  <ul >
+    <a class="displayFlex" *ngIf="auth.loggedIn()" routerLink="project">Projects</a>
   </ul>
 
     <ul>
-      <a *ngIf="auth.loggedIn()" routerLink="/board/inicio">Board</a>
+      <a class="displayFlex" *ngIf="auth.loggedIn()" routerLink="/board/inicio">Board</a>
     </ul>
 
   <span class="headerSpacer"></span>
