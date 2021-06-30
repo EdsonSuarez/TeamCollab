@@ -47,7 +47,7 @@ import { UpdateUserComponent } from './admin/update-user/update-user.component';
 import { UpdateRoleComponent } from './admin/update-role/update-role.component';
 import { UpdateProfileComponent } from './user/update-profile/update-profile.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SaveTaskComponent } from './board/save-task/save-task.component';
+import { SaveTaskComponent } from "./task/save-task/save-task.component";
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { ListProjectAdminComponent } from './admin/list-project-admin/list-project-admin.component';
@@ -78,7 +78,7 @@ import { UpdateBoardAdminComponent } from './admin/update-board-admin/update-boa
     UpdateProjectAdminComponent,
     ListBoardAdminComponent,
     UpdateBoardAdminComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

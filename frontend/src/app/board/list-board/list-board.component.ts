@@ -442,5 +442,7 @@ export class ListBoardComponent implements OnInit {
         console.log(err.error);
       }
             ); 
-  }
+}
+getTask(taskId: any){
+  this.router.navigate(['/listTasks', taskId]);
 }
