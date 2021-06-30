@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { TeamService } from "../../services/team.service";
 import { AdminService } from "../../services/admin.service";
+import { ProjectService } from "../../services/project.service";
+
 @Component({
   selector: 'app-list-board',
   templateUrl: './list-board.component.html',
@@ -22,11 +24,14 @@ export class ListBoardComponent implements OnInit {
   public usersAll: any;  
   public idProject: String;
   public teamInitial: any;
+  public projects: any;
+  public registerTeam:any;
+  public message: String;
   public UserSelect: any;
   public userTemp: any;
   public teamTemp: any;
 
-  constructor(private board: BoardService, public admin: AdminService , private router: Router, public auth: AuthService, public team: TeamService, private activatedRoute: ActivatedRoute) { 
+  constructor(private board: BoardService, public admin: AdminService , private router: Router, public auth: AuthService, public team: TeamService, private activatedRoute: ActivatedRoute, private project: ProjectService) { 
     this.toggle = true;    
     this.taskToDo = [];
     this.taskDoing = [];
@@ -39,6 +44,9 @@ export class ListBoardComponent implements OnInit {
     this.usersAll = [];
     this.idProject = '';
     this.teamInitial = [];
+    this.projects = [];
+    this.registerTeam = {};
+    this.message = '';
     this.activatedRoute.params.subscribe((params: any) => {
       this.idProject = params.id;
     });
@@ -47,77 +55,145 @@ export class ListBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    
     let firstTeam = {}
-
     if(this.idProject != 'inicio'){
-      this.board.getTeamsByProyect(this.idProject).subscribe(
-        (res)=>{
-          console.log("teams by project",res.teamsUser)
-          this.teamInitial = res.teamsUser;
-          let cont = 0;
-          this.teamInitial.forEach((element:any) => {
-            if (element.teamId != null) {
+      if(this.auth.isAdmin()){
+
+        this.admin.getTeamByProject(this.idProject).subscribe(
+          (res)=>{
+            console.log("teams by project",res.team)
+            this.teamInitial = res.team;
+            let cont = 0;
+            this.teamInitial.forEach((element:any) => {              
               if(cont == 0){                
                 firstTeam = {
-                  team: element.teamId.name,  
-                  idTeam: element.teamId._id
+                  team: element.name,  
+                  idTeam: element._id
                 };
               }
               cont++;
+                
+            });
+          },
+          (err)=>{
+            console.log(err.error)
+          }
+        )
+      }else{
+        this.board.getTeamsByProyect(this.idProject).subscribe(
+          (res)=>{
+            console.log("teams by project",res.teamsUser)
+            this.teamInitial = res.teamsUser;
+            let cont = 0;
+            this.teamInitial.forEach((element:any) => {
+              if (element.teamId != null) {
+                if(cont == 0){                
+                  firstTeam = {
+                    team: element.teamId.name,  
+                    idTeam: element.teamId._id
+                  };
+                }
+                cont++;
+              }  
+            });
+          },
+          (err)=>{
+            console.log(err.error)
+          }
+        )
+      }
+    }
+
+
+    if (this.auth.isAdmin()) {
+
+      this.team.getTeamAdmin().subscribe(
+        (res)=>{
+          console.log(res.team)
+          const data = res.team;
+          let cont = 0;        
+          data.forEach((board: any) => { 
+  
+            const objBoard = {
+              team: board.name,
+              project: board.projectId.name,
+              idTeam: board._id
             }
-            
-          });
+    
+            let noExiste = true;
+            this.teamProject.forEach((element:any) => {
+              if(element.team == objBoard.team){
+                noExiste = false;
+              }
+            });
+    
+            if(noExiste){
+              this.teamProject.push(objBoard)
+            }
+  
+            if(this.idProject == 'inicio'){
+              if(cont == 0){
+                this.changeTeam(objBoard)
+              }
+            }else{            
+              if(cont == 0){
+                console.log("first team", firstTeam)
+                this.changeTeam(firstTeam)
+              }
+            }
+            cont++;  
+          }) 
         },
         (err)=>{
           console.log(err.error)
         }
       )
-    }
+      
+    }else{
+      this.board.teamsUser().subscribe(
+        (res)=>{
+          console.log("teamsUser", res.teamsUser)
+          const data = res.teamsUser;
+          let cont = 0;        
+          data.forEach((board: any) => { 
+  
+            const objBoard = {
+              team: board.teamId.name,
+              project: board.teamId.projectId.name,
+              idTeam: board.teamId._id
+            }
     
-    // add team y project
-    this.board.teamsUser().subscribe(
-      (res)=>{
-        console.log("teamsUser", res.teamsUser)
-        const data = res.teamsUser;
-        let cont = 0;        
-        data.forEach((board: any) => { 
-
-          const objBoard = {
-            team: board.teamId.name,
-            project: board.teamId.projectId.name,
-            idTeam: board.teamId._id
-          }
+            let noExiste = true;
+            this.teamProject.forEach((element:any) => {
+              if(element.team == objBoard.team){
+                noExiste = false;
+              }
+            });
+    
+            if(noExiste){
+              this.teamProject.push(objBoard)
+            }
   
-          let noExiste = true;
-          this.teamProject.forEach((element:any) => {
-            if(element.team == objBoard.team){
-              noExiste = false;
+            if(this.idProject == 'inicio'){
+              if(cont == 0){
+                this.changeTeam(objBoard)
+              }
+            }else{            
+              if(cont == 0){
+                console.log("first team", firstTeam)
+                this.changeTeam(firstTeam)
+              }
             }
-          });
+            cont++;  
+          })  
   
-          if(noExiste){
-            this.teamProject.push(objBoard)
-          }
-
-          if(this.idProject == 'inicio'){
-            if(cont == 0){
-              this.changeTeam(objBoard)
-            }
-          }else{            
-            if(cont == 0){
-              this.changeTeam(firstTeam)
-            }
-          }  
-
-          cont++;  
-        })  
-
-      },
-      (err)=>{
-        console.log(err.error)
-      }
-    )
+        },
+        (err)=>{
+          console.log(err.error)
+        }
+      )
+    }  
   }
 
 
@@ -132,7 +208,14 @@ export class ListBoardComponent implements OnInit {
       (res)=>{
         console.log("Sprint", res.boards)
         this.sprints = res.boards;
-        this.changeSprint(this.sprints[0])
+        if(this.sprints.length > 0){
+          this.changeSprint(this.sprints[0])
+        }else{
+          this.taskToDo = [];
+          this.taskDoing = [];
+          this.taskTesting = [];
+          this.taskDone = [];
+        }
       },
       (err)=>{
         console.log(err.error)
@@ -241,4 +324,96 @@ export class ListBoardComponent implements OnInit {
       }
     )
   }
+
+
+  viewProjects(){
+    if(this.auth.isAdmin()){
+      this.project.listTrue().subscribe(
+        (res)=>{  
+          this.projects = res.projects;
+        },
+        (err)=>{
+          console.log(err)
+        }
+      )
+    }else{
+      this.project.listTrueScrum().subscribe(
+        (res)=>{  
+          this.projects = res.projects;
+        },
+        (err)=>{
+          console.log(err)
+        }
+      )
+    }
+  }
+
+
+  saveProject(){
+    if(!this.registerTeam.name && !this.registerTeam.projectId){  
+      this.message = 'Imcomplete Data'
+      this.closeAlert();
+    }else{
+      console.log("datos team",this.registerTeam)
+      this.team.add(this.registerTeam).subscribe(
+        (res)=>{
+          console.log(res);
+          const objBoard = {
+            team: res.teamResult.name,
+            project: res.teamResult.projectId.name,
+            idTeam: res.teamResult._id
+          }
+          this.teamProject.push(objBoard)
+          this.registerTeam = {};
+          this.message = 'Team add successful'
+          this.closeAlert();
+        },
+        (err)=>{
+          console.log(err.error);
+          this.message = err.error;
+          this.closeAlert();
+        }
+      )
+    }
+  }
+
+  saveSprint(){
+    if(!this.registerTeam.name && !this.registerTeam.description){  
+      this.message = 'Imcomplete Data'
+      this.closeAlert();
+    }else{
+      this.registerTeam.teamId = localStorage.getItem('team');  
+      this.board.addBoard(this.registerTeam).subscribe(
+        (res)=>{          
+          this.sprints.push(res.result)
+          this.registerTeam = {};
+          this.message = 'Team add successful'
+          this.closeAlert();     
+        },
+        (err)=>{
+          console.log(err.error)
+          this.message = err.error;
+          this.closeAlert();
+        }
+      )
+    }
+    
+    
+  }
+
+  
+
+
+  closeAlert() {
+    setTimeout(() => {
+      this.message = '';
+    }, 3000);
+  }
+
+  closeX() {
+    this.message = '';
+  }
+
+
+
 }

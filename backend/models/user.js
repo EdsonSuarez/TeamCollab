@@ -21,6 +21,7 @@ userSchema.methods.generateJWT = function(){
         fullName: this.fullName,
         email: this.email,
         roleId: this.roleId,
+        imageUrl: this.imageUrl,
         iat: moment().unix()
     },process.env.SECRET_kEY_JWT
     )
