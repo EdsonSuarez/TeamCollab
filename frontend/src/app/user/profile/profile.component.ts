@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
         console.log(this.profileData);
       },
       (err) => {
-        this.errorMessage = err.error;
+        this.errorMessage = err.error; 
         this.closeAlert();
       }
     );

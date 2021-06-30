@@ -17,13 +17,14 @@
         </ul>
       </li>
     </ul>
+
   <ul>
     <a *ngIf="auth.loggedIn()" routerLink="project">Projects</a>
   </ul>
 
-  <ul>
-    <a *ngIf="auth.loggedIn()" routerLink="board">Board</a>
-  </ul>
+    <ul>
+      <a *ngIf="auth.loggedIn()" routerLink="/board/inicio">Board</a>
+    </ul>
 
   <span class="headerSpacer"></span>
 

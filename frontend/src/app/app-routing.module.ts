@@ -39,10 +39,6 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'task',
-    component: TaskComponent,
-  },
-  {
     path: 'detailTask',
     component: DetailTaskComponent,
   },
@@ -64,7 +60,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'board',
+    path:'board/:id',
     component: ListBoardComponent,
     canActivate:[AuthGuard]
   },{

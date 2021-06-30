@@ -29,6 +29,8 @@ app.use("/api/team/", Team);
 app.use("/api/detailTask", DetailTask);
 app.use("/api/detailTeam", DetailTeam);
 app.use("/img", express.static("img"));
+app.use("/uploads", express.static("uploads"))
+
 
 app.listen(process.env.PORT, () =>
   console.log("Backend server running on port: " + process.env.PORT)

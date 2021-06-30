@@ -55,7 +55,7 @@ router.get("/getAdmin", Auth, UserAuth, Admin, async (req, res) => {
   res.status(200).send({ team });
 });
 
-router.get("/getByProject/:_id", Auth, UserAuth, Admin, async (req, res) => {
+router.get("/getByProject/:_id", Auth, UserAuth, async (req, res) => {
   
   const team = await Team.find({projectId: req.params._id});    
   if (!team) return res.status(401).send("Process dailed: Error getting team");

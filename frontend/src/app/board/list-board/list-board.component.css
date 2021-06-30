@@ -98,6 +98,12 @@ input[type="checkbox"]:checked{
     flex-direction: column;    
     align-items: center;    
 }
+.image_center {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
 
 .titleSections{
     text-align: center;
@@ -108,13 +114,23 @@ input[type="checkbox"]:checked{
 }
 
 .card {
+    min-width: 200px;
     width: 70%;
     /* height: 100%; */
     padding: 2.5vh;
-    margin: 2.5vh;
-    background-color: #86E3CE;
+    /* margin: 2.5vh; */
+    margin: 2.5vh auto;
+    
 }
-
+.lowPriority {
+    background-color: #d0e6a5;
+}
+.mediumPriority {
+    background-color: #ffdd95;
+}
+.highPriority {
+    background-color: #fc887b;
+}
 .text_center {
     display: flex;
     justify-content: center;

@@ -6,7 +6,7 @@
             <div class="menuUpper">
                 <div class="containerTitleMenu">
                     <h3 class="titleMenu" >teams/proyect</h3>
-                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddTeam">add_circle_outline</span>
+                    <span class="material-icons" *ngIf="auth.isScrumMaster()" data-bs-toggle="modal" data-bs-target="#modalAddTeam">add_circle_outline</span>
                 </div>
                 <div class="buttonsMenu" *ngIf="teamProject.length">
                     
@@ -26,7 +26,7 @@
             <div class="menuLower">
                 <div class="containerTitleMenu">
                     <h3 class="titleMenu"> Sprints </h3>                                       
-                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddSprint">add_circle_outline</span>
+                    <span class="material-icons" *ngIf="auth.isScrumMaster()" data-bs-toggle="modal" data-bs-target="#modalAddSprint">add_circle_outline</span>
                 </div>
                 <div class="buttonsMenu" *ngIf="sprints.length">
 
@@ -54,30 +54,74 @@
             <h3 class="titleSections">To-Do</h3>
 
             <div class="container" *ngIf="taskToDo.length">
-                <mat-card class="card" *ngFor="let task of taskToDo">
-                    <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
-                    <mat-card-content>
-                        <span>{{ task.description }}</span>
-                        <p>Estado: <span>{{ task.status }}</span></p>
-                    </mat-card-content>
-                    <mat-panel-description>
-                        <img class="image_center" src="{{ task.imageUrl}}">
-                    </mat-panel-description>
-                </mat-card>
+                <div *ngFor="let task of taskToDo">
+                    <mat-card class="card lowPriority" *ngIf="task.priority == '1'" >
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                        <mat-panel-description>
+                            <img class="image_center" src="{{ task.imageUrl}}">
+                        </mat-panel-description>
+                    </mat-card>
+                    <mat-card class="card mediumPriority" *ngIf="task.priority == '2'">
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                        <mat-panel-description>
+                            <img class="image_center" src="{{ task.imageUrl}}">
+                        </mat-panel-description>
+                    </mat-card>
+                    <mat-card class="card highPriority" *ngIf="task.priority == '3'">
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                        <mat-panel-description>
+                            <img class="image_center" src="{{ task.imageUrl}}">
+                        </mat-panel-description>
+                    </mat-card>
+                </div>
+                
             </div>
         </div>
-
 
         <div class="containerDoing">
             <h3 class="titleSections">Doing</h3>
             <div class="container" *ngIf="taskDoing.length">
-                <mat-card class="card" *ngFor="let task of taskDoing">
-                    <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
-                    <mat-card-content>
-                        <span>{{ task.description }}</span>
-                        <p>Estado: <span>{{ task.status }}</span></p>
-                    </mat-card-content>
-                </mat-card>
+                <div *ngFor="let task of taskDoing">
+                    <mat-card class="card lowPriority" *ngIf="task.priority == '1'" >
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="card mediumPriority" *ngIf="task.priority == '2'" >
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="card highPriority" *ngIf="task.priority == '3'" >
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
             </div>
         </div>
 
@@ -85,27 +129,64 @@
         <div class="containerTesting">
             <h3 class="titleSections">Testing</h3>
             <div class="container" *ngIf="taskTesting.length">
-                <mat-card class="card" *ngFor="let task of taskTesting">
-                    <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
-                    <mat-card-content>
-                        <span>{{ task.description }}</span>
-                        <p>Estado: <span>{{ task.status }}</span></p>
-                    </mat-card-content>
-                </mat-card>
+                <div *ngFor="let task of taskTesting">
+                    <mat-card class="card lowPriority" *ngIf="task.priority == '1'" >
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="card mediumPriority" *ngIf="task.priority == '2'" >
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="card highPriority" *ngIf="task.priority == '3'" >
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
             </div>
         </div>
-
 
         <div class="containerDone">
             <h3 class="titleSections">Done</h3>
             <div class="container" *ngIf="taskDone.length">
-                <mat-card class="card" *ngFor="let task of taskDone">
-                    <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
-                    <mat-card-content>
-                        <span>{{ task.description }}</span>
-                        <p>Estado: <span>{{ task.status }}</span></p>
-                    </mat-card-content>
-                </mat-card>
+                <div *ngFor="let task of taskDone">
+                    <mat-card class="card lowPriority" *ngIf="task.priority == '1'">
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="card mediumPriority" *ngIf="task.priority == '2'">
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="card highPriority" *ngIf="task.priority == '3'">
+                        <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
+                        <mat-card-content>
+                            <span>{{ task.description }}</span>
+                            <p>Estado: <span>{{ task.status }}</span></p>
+                            <p>Priority: <span>{{ task.priority}}</span></p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
             </div>
         </div>
 
@@ -228,7 +309,7 @@
     </div>
 </div>
 <a mat-fab class="add-task-button" mat-button
-    [routerLink]="['/task/']">
+    [routerLink]="['/task/']" *ngIf="!auth.isUser()">
     <mat-icon><span class="material-icons add-task-icon">
             note_add
         </span></mat-icon>
