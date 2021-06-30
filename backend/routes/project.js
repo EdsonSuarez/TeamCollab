@@ -33,6 +33,13 @@ router.get("/getAll", Auth, UserAuth, AdminAuth, async (req, res) => {
   return res.status(200).send({ projects });
 });
 
+router.get("/getAllTrue", Auth, UserAuth, AdminAuth, async (req, res) => {
+  const projects = await Project.find({active: true});
+  if (!projects)
+    return res.status(401).send("Process failed: No projects found");
+  return res.status(200).send({ projects });
+});
+
 router.get("/getAllScrum", Auth, UserAuth, ScrumAuth, async (req, res) => {
   const validId = mongoose.Types.ObjectId.isValid(req.user._id);
   if (!validId) return res.status(401).send("Process failed: Invalid id");
@@ -45,6 +52,21 @@ router.get("/getAllScrum", Auth, UserAuth, ScrumAuth, async (req, res) => {
 
   return res.status(200).send({ projects });
 });
+
+
+router.get("/getAllTrueScrum", Auth, UserAuth, ScrumAuth, async (req, res) => {
+  const validId = mongoose.Types.ObjectId.isValid(req.user._id);
+  if (!validId) return res.status(401).send("Process failed: Invalid id");
+
+  const projects = await Project.find({ userId: req.user._id, active: true })
+    .populate("userId")
+    .exec();
+  if (!projects)
+    return res.status(401).send("Process failed: No projects found");
+
+  return res.status(200).send({ projects });
+});
+
 
 router.get("/getMyProjects", Auth, UserAuth, async (req, res) => {
   const validId = mongoose.Types.ObjectId.isValid(req.user._id);

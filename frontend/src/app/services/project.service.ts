@@ -17,9 +17,17 @@ export class ProjectService {
     return this.http.get<any>(this.env + 'project/getAll');
   }
 
+  listTrue() {
+    return this.http.get<any>(this.env + 'project/getAllTrue');
+  }
+
   listScrum() {
     return this.http.get<any>(this.env + 'project/getAllScrum');
   }
+
+  listTrueScrum() {
+    return this.http.get<any>(this.env + 'project/getAllTrueScrum');
+  }  
 
   listUserLeader() {
     return this.http.get<any>(this.env + 'project/getMyProjects').pipe(

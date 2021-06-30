@@ -21,15 +21,13 @@ router.post("/add", Auth, UserAuth, ScrumM, async (req, res) => {
     projectId: req.body.projectId,
     active: true,
   });
-  try {
+  
     const result = await team.save();
-    if (!result)
-      return res.status(401).send("Process failed: Error adding team");
-    res.status(200).send({ result });
-  } catch (e) {
-    return res.status(401).send("Process failed: Error adding team");
-  }
-});
+    if (!result) return res.status(401).send("Process failed: Error adding team");
+    const teamResult = await Team.findById(result._id).populate("projectId").exec();
+    res.status(200).send({ teamResult });  
+  
+  });
 
 router.get("/get", Auth, UserAuth, async (req, res) => {
   const team = await DetailTeam.find({ userId: req.user._id })
