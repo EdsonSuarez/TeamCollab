@@ -337,7 +337,14 @@ export class ListBoardComponent implements OnInit {
         }
       )
     }else{
-
+      this.project.listTrueScrum().subscribe(
+        (res)=>{  
+          this.projects = res.projects;
+        },
+        (err)=>{
+          console.log(err)
+        }
+      )
     }
   }
 
