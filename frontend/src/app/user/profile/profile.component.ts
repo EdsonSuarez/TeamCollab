@@ -3,10 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { AdminService } from '../../services/admin.service';
 import { UpdateProfileComponent } from '../update-profile/update-profile.component';
 
-export interface profileData{
+export interface profileData {
   fullName: String;
   email: String;
   password: String;
+  imageUrl: String;
 }
 
 @Component({
@@ -32,7 +33,6 @@ export class ProfileComponent implements OnInit {
       (res) => {
         this.profileData = res.user;
         console.log(this.profileData);
-        
       },
       (err) => {
         this.errorMessage = err.error;
@@ -42,16 +42,25 @@ export class ProfileComponent implements OnInit {
   }
 
   edit() {
+    const temData = this.profileData;
     const dialogRef = this.dialog.open(UpdateProfileComponent, {
       width: '400px',
       data: this.profileData,
     });
-    dialogRef.afterClosed().subscribe((res) => {
-      this.profileData = res;
-    }, (err)=>{
-      this.errorMessage = 'Process failed: Error editing data';
-      this.closeAlert();
-    });    
+    dialogRef.afterClosed().subscribe(
+      (res) => {
+        if (res) {
+          this.profileData = res
+        } else {
+          this.profileData = temData;
+        }
+      },
+      (err) => {
+        this.errorMessage = 'Process failed: Error editing data';
+        this.profileData = temData;
+        this.closeAlert();
+      }
+    );
   }
 
   closeAlert() {

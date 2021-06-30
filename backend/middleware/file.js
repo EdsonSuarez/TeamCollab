@@ -1,9 +1,7 @@
 const upload = (req, res, next) => {
-  console.log("Hola", typeof(req.files));
   if ( req.files.type == undefined || req.files.type == null){
     next();
   } else {
-    console.log("entro");
     if (req.files.image.type) {
       let type = req.files.image.type;
       if (

@@ -1,10 +1,10 @@
 <div class="form">
   <mat-card class="card">
     <mat-card-title> Profile </mat-card-title>
-    <div class="photoProfile">
-      <img src="../../../assets/img/icon-users-solid.svg" alt="User" />
-    </div>
     <mat-card-content>
+      <div class="photoProfile">
+        <img src="{{ profileData.imageUrl }}" alt="User" />
+      </div>
       <div class="container">
         <div class="card-body">
           <div class="card-body-item">
@@ -20,11 +20,7 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button
-        (click)="edit()"
-        class="button colorButton"
-        mat-raised-button
-      >
+      <button (click)="edit()" class="button colorButton" mat-raised-button>
         Edit
       </button>
     </mat-card-actions>
