@@ -39,7 +39,7 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
-    path:'board',
+    path:'board/:id',
     component: ListBoardComponent,
     canActivate:[AuthGuard]
   },{

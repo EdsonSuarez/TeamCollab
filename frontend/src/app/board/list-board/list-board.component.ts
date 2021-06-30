@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from "../../services/board.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { TeamService } from "../../services/team.service";
 import { AdminService } from "../../services/admin.service";
@@ -19,9 +19,11 @@ export class ListBoardComponent implements OnInit {
   public sprints: any;
   public teamProject: any;
   public usersTeam: any;
-  public usersAll: any;
+  public usersAll: any;  
+  public idProject: String;
+  public teamInitial: any;
 
-  constructor(private board: BoardService, public admin: AdminService , private router: Router, public auth: AuthService, public team: TeamService) { 
+  constructor(private board: BoardService, public admin: AdminService , private router: Router, public auth: AuthService, public team: TeamService, private activatedRoute: ActivatedRoute) { 
     this.toggle = true;    
     this.taskToDo = [];
     this.taskDoing = [];
@@ -31,16 +33,48 @@ export class ListBoardComponent implements OnInit {
     this.teamProject = [];
     this.usersTeam = [];
     this.usersAll = [];
+    this.idProject = '';
+    this.teamInitial = [];
+    this.activatedRoute.params.subscribe((params: any) => {
+      this.idProject = params.id;
+    });
   }
 
   ngOnInit(): void {
+
+    let firstTeam = {}
+
+    if(this.idProject != 'inicio'){
+      this.board.getTeamsByProyect(this.idProject).subscribe(
+        (res)=>{
+          console.log("teams by project",res.teamsUser)
+          this.teamInitial = res.teamsUser;
+          let cont = 0;
+          this.teamInitial.forEach((element:any) => {
+            if (element.teamId != null) {
+              if(cont == 0){                
+                firstTeam = {
+                  team: element.teamId.name,  
+                  idTeam: element.teamId._id
+                };
+              }
+              cont++;
+            }
+            
+          });
+        },
+        (err)=>{
+          console.log(err.error)
+        }
+      )
+    }
     
     // add team y project
     this.board.teamsUser().subscribe(
       (res)=>{
         console.log("teamsUser", res.teamsUser)
         const data = res.teamsUser;
-        let cont = 0;
+        let cont = 0;        
         data.forEach((board: any) => { 
 
           const objBoard = {
@@ -60,9 +94,15 @@ export class ListBoardComponent implements OnInit {
             this.teamProject.push(objBoard)
           }
 
-          if(cont == 0){
-            this.changeTeam(objBoard)
-          }
+          if(this.idProject == 'inicio'){
+            if(cont == 0){
+              this.changeTeam(objBoard)
+            }
+          }else{            
+            if(cont == 0){
+              this.changeTeam(firstTeam)
+            }
+          }  
 
           cont++;  
         })  
@@ -84,7 +124,7 @@ export class ListBoardComponent implements OnInit {
     localStorage.setItem('team',team.idTeam);
     this.board.boardsUser(team.idTeam).subscribe(
       (res)=>{
-        console.log(res.boards)
+        console.log("Sprint", res.boards)
         this.sprints = res.boards;
         this.changeSprint(this.sprints[0])
       },
@@ -106,7 +146,7 @@ export class ListBoardComponent implements OnInit {
     localStorage.setItem('sprint',sprint._id);
     this.board.TasksBoard(sprint._id).subscribe(
       (res)=>{
-        console.log(res.tasks)
+        console.log("tasks", res.tasks)
         const data = res.tasks;
         data.forEach((task: any) => {  
           

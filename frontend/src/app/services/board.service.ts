@@ -28,4 +28,8 @@ export class BoardService {
   TasksBoard(id: String){
     return this.http.get<any>(this.env + `board/getTasks/${id}`);  
   }
+
+  getTeamsByProyect(id: String) {
+    return this.http.get<any>(this.env + 'board/getTeamsByProject/' + id);
+  }
 }
