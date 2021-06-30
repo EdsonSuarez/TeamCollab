@@ -31,4 +31,8 @@ export class TaskService {
   getTeam(teamId: any) {
     return this.http.get<any>(this.env + 'detailTeam/getTeam/' + teamId);
   }
+
+  setTaskUser(userId: any) {
+    return this.http.post<any>(this.env + 'detailTask/get/', userId);
+  }
 }

@@ -5,11 +5,11 @@ import { LoginComponent } from './home/login/login.component';
 import { HomeComponent } from './home/home/home.component';
 import { TaskComponent } from './task/task/task.component';
 import { DetailTaskComponent } from './task/detail-task/detail-task.component';
+import { SaveTaskComponent } from "./task/save-task/save-task.component";
 import { TeamComponent } from './team/team/team.component';
 import { DetailTeamComponent } from './team/detail-team/detail-team.component';
 import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from "./board/list-board/list-board.component";
-import { SaveTaskComponent } from "./board/save-task/save-task.component";
 import { AuthGuard } from './guard/auth.guard';
 import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterUserComponent } from './admin/register-user/register-user.component';
@@ -37,6 +37,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'task',
+    component: TaskComponent,
   },
   {
     path: 'detailTask',
@@ -95,7 +99,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path:'task',
+    path:'saveTask',
     component: SaveTaskComponent,
     canActivate:[AuthGuard]
   },

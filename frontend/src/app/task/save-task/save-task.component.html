@@ -17,7 +17,7 @@
             <mat-label>Description</mat-label>
             <textarea [(ngModel)]="taskData.description" matInput required></textarea>
         </mat-form-field>
-        
+
         <mat-form-field appearance="fill">
             <mat-label>Priority</mat-label>
             <mat-select [(ngModel)]="taskData.priority" required>
@@ -30,31 +30,32 @@
             <mat-label>Dependency</mat-label>
             <mat-select [(ngModel)]="taskData.dependency">
                 <mat-option *ngFor="let task of teamTasks" value={{task.taskId._id}}>
-                    {{task.taskId.name}}</mat-option>   
+                    {{task.taskId.name}}</mat-option>
             </mat-select>
         </mat-form-field>
 
-        <!-- <mat-form-field appearance="fill">
-            <mat-label>Load image</mat-label>
-            <ngx-mat-file-input (change)="uploadImg($event)">
-                <mat-icon class="file-icon" ngxMatFileInputIcon>image</mat-icon>
-            </ngx-mat-file-input>
-        </mat-form-field> -->
-
         <mat-form-field appearance="fill">
             <mat-label>Load image</mat-label>
-            <ngx-mat-file-input [formControl]="fileControl" accept= '.png, .jpg, .jpeg, .gif, image/*'>
+            <ngx-mat-file-input [formControl]="fileControl" accept='.png, .jpg, .jpeg, .gif, image/*'>
                 <mat-icon class="file-icon" ngxMatFileInputIcon>image</mat-icon>
             </ngx-mat-file-input>
         </mat-form-field>
 
         <!-- <input type="file" (change)="uploadImg($event)"> -->
 
-
     </mat-card-content>
 
     <mat-card-actions>
-        <button mat-flat-button class="save-button" (click)='saveTaskImg()'>SAVE</button>
+        <button mat-flat-button class="btn save-button btn-xs m-1" (click)='saveTaskImg()'>SAVE</button>
+        <button class="btn btn-warning btn-xs m-1" (click)='assignTask()'>
+            <mat-icon>face</mat-icon>
+        </button>
+        <button class="btn btn-danger btn-xs m-1">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button class="btn btn-info btn-xs m-1">
+            <mat-icon>dashboard</mat-icon>
+        </button>
     </mat-card-actions>
 </mat-card>
 

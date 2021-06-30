@@ -22,7 +22,7 @@ export class SaveTaskComponent implements OnInit {
   fileControl: FormControl;
   public file: any;
 
-  constructor(private task: TaskService, private team:TeamService, private router: Router) { 
+  constructor(private task: TaskService, private team:TeamService, private router: Router, public dialog: MatDialog) { 
     this.taskData = {};
     this.errorMessage = '';
     this.teamMembers = [];
@@ -128,6 +128,7 @@ export class SaveTaskComponent implements OnInit {
       
     }
   }
+
   closeAlert(time: number) {
     setTimeout(() => {this.errorMessage = '' }, time)
   }
