@@ -70,13 +70,13 @@ router.put("/update", Auth, UserAuth, ScrumMaster, async (req, res) => {
   return res.status(200).send({ detailTeam });
 });
 
-router.delete("/delete/:_id", Auth, UserAuth, ScrumMaster, async (req, res) => {
+router.delete("/delete/:_id?", Auth, UserAuth, ScrumMaster, async (req, res) => {
   const validId = mongoose.Types.ObjectId.isValid(req.params._id);
   if (!validId) return res.status(401).send("Process failed: Invalid id");
 
   const detailTeam = await DetailTeam.findByIdAndDelete(req.params._id);
   if (!detailTeam) return res.status(401).send("Process failed: DetailTeam not found");
-  return res.status(200).send("DetailTeam deleted");
+  return res.status(200).send({result :"DetailTeam deleted"});
 });
 
 module.exports = router;
