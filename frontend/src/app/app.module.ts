@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,10 +10,10 @@ import { FooterComponent } from './home/footer/footer.component';
 
 import { AuthService } from './services/auth.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { BoardService } from "./services/board.service";
-import { AuthGuard } from "./guard/auth.guard";
-import { AdminService } from "./services/admin.service";
-import { TaskService } from "./services/task.service";
+import { BoardService } from './services/board.service';
+import { AuthGuard } from './guard/auth.guard';
+import { AdminService } from './services/admin.service';
+import { TaskService } from './services/task.service';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,6 +26,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TeamComponent } from './team/team/team.component';
+import { DetailTeamComponent } from './team/detail-team/detail-team.component';
+import { DetailTaskComponent } from './task/detail-task/detail-task.component';
+import { TaskComponent } from './task/task/task.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { ProfileComponent } from './user/profile/profile.component';
 import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from './board/list-board/list-board.component';
 import { MatListModule } from '@angular/material/list';
@@ -39,15 +45,15 @@ import { RegisterRoleComponent } from './admin/register-role/register-role.compo
 import { RegisterUserComponent } from './admin/register-user/register-user.component';
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
 import { UpdateRoleComponent } from './admin/update-role/update-role.component';
+import { UpdateProfileComponent } from './user/update-profile/update-profile.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SaveTaskComponent } from './board/save-task/save-task.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
-import { ListProjectAdminComponent } from "./admin/list-project-admin/list-project-admin.component";
-import { UpdateProjectAdminComponent } from "./admin/update-project-admin/update-project-admin.component";
+import { ListProjectAdminComponent } from './admin/list-project-admin/list-project-admin.component';
+import { UpdateProjectAdminComponent } from './admin/update-project-admin/update-project-admin.component';
 import { ListBoardAdminComponent } from './admin/list-board-admin/list-board-admin.component';
 import { UpdateBoardAdminComponent } from './admin/update-board-admin/update-board-admin.component';
-
-
 
 @NgModule({
   declarations: [
@@ -66,6 +72,7 @@ import { UpdateBoardAdminComponent } from './admin/update-board-admin/update-boa
     RegisterUserComponent,
     UpdateUserComponent,
     UpdateRoleComponent,
+    UpdateProfileComponent,
     SaveTaskComponent,
     ListProjectAdminComponent,
     UpdateProjectAdminComponent,
@@ -86,9 +93,11 @@ import { UpdateBoardAdminComponent } from './admin/update-board-admin/update-boa
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatMenuModule,
     MatProgressBarModule,
     MatListModule,
     MatDialogModule,
+    MatCheckboxModule,
     MatSelectModule,
     NgxMatFileInputModule,
     ToastrModule.forRoot(),
@@ -106,5 +115,7 @@ import { UpdateBoardAdminComponent } from './admin/update-board-admin/update-boa
     },
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [UpdateProfileComponent],
 })
 export class AppModule {}

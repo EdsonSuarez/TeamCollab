@@ -21,12 +21,16 @@ export class AdminService {
   }
 
 
-  getUser(id: String) {
-    return this.http.get<any>(this.env + `user/getUser/${id}`);
+  getUser() {
+    return this.http.get<any>(this.env + `user/getUser`);
   }
 
   updateUser(user: any) {
     return this.http.put<any>(this.env + 'user/update', user);
+  }
+
+  updateProfile(user: any){
+    return this.http.put<any>(this.env + 'user/updateImg', user)
   }
 
   deleteUser(user: any) {

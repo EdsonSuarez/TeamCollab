@@ -2,11 +2,10 @@
   flex: 1 1 auto;
 }
 img {
-    width: 80%;
-    height: 80%;
-    margin-top: 1.5rem;
-    align-items: center;
-
+  width: 80%;
+  height: 80%;
+  margin-top: 1.5rem;
+  align-items: center;
 }
 
 a {
@@ -14,6 +13,10 @@ a {
   color: white;
   align-items: center;
   padding-top: 1rem;
+}
+
+.accountbtn mat-icon{
+  font-size: 36px;
 }
 
 .bgHeader {

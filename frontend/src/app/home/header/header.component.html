@@ -1,9 +1,9 @@
 <mat-toolbar class="bgHeader">
-    <ul>
-      <a routerLink="">
-        <img src="../../../assets/img/teamCollab.png" alt="" >
-      </a>
-    </ul>
+  <ul>
+    <a routerLink="">
+      <img src="../../../assets/img/teamCollab.png" alt="" />
+    </a>
+  </ul>
 
     <ul>
       <li *ngIf="auth.loggedIn() && auth.isAdmin()" class="nav-item dropdown">
@@ -18,20 +18,31 @@
       </li>
     </ul>
 
-    <ul>
-      <a *ngIf="auth.loggedIn()" routerLink="project">Projects</a>
-    </ul>
+  <ul>
+    <a *ngIf="auth.loggedIn()" routerLink="project">Projects</a>
+  </ul>
 
     <ul>
       <a *ngIf="auth.loggedIn()" routerLink="/board/inicio">Board</a>
     </ul>
 
-    <span class="headerSpacer"></span>
+  <span class="headerSpacer"></span>
 
-    <ul>
-      <a *ngIf="!auth.loggedIn()" mat-button routerLink="register">Register</a>
-      <a *ngIf="!auth.loggedIn()" mat-button routerLink="login">Login</a>
-      <a *ngIf="auth.loggedIn()" mat-button (click)="auth.logout()">Logout</a>
-    </ul>
-  </mat-toolbar>
-  
+  <ul>
+    <a *ngIf="!auth.loggedIn()" mat-button routerLink="register">Register</a>
+    <a *ngIf="!auth.loggedIn()" mat-button routerLink="login">Login</a>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="account"
+      class="accountbtn"
+      *ngIf="auth.loggedIn()"
+    >
+      <mat-icon> account_circle </mat-icon>
+    </button>
+    <mat-menu #account="matMenu">
+      <button mat-menu-item routerLink="/profile">Profile</button>
+      <button mat-menu-item (click)="auth.logout()">Logout</button>
+    </mat-menu>
+    <a *ngIf="auth.loggedIn()" mat-button (click)="auth.logout()">Logout</a>
+  </ul>
+</mat-toolbar>

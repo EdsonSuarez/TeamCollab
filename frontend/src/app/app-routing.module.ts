@@ -2,11 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './home/register/register.component';
 import { LoginComponent } from './home/login/login.component';
-import { HomeComponent } from "./home/home/home.component";
+import { HomeComponent } from './home/home/home.component';
+import { TaskComponent } from './task/task/task.component';
+import { DetailTaskComponent } from './task/detail-task/detail-task.component';
+import { TeamComponent } from './team/team/team.component';
+import { DetailTeamComponent } from './team/detail-team/detail-team.component';
 import { ListProjectComponent } from './project/list/listProject.component';
 import { ListBoardComponent } from "./board/list-board/list-board.component";
 import { SaveTaskComponent } from "./board/save-task/save-task.component";
 import { AuthGuard } from './guard/auth.guard';
+import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterUserComponent } from './admin/register-user/register-user.component';
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
@@ -34,9 +39,29 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
+    path: 'task',
+    component: TaskComponent,
+  },
+  {
+    path: 'detailTask',
+    component: DetailTaskComponent,
+  },
+  {
+    path: 'team',
+    component: TeamComponent,
+  },
+  {
+    path: 'detailTeam',
+    component: DetailTeamComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+  },
+  {
     path: 'project',
     component: ListProjectComponent,
-    canActivate:[AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path:'board/:id',
@@ -101,7 +126,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
