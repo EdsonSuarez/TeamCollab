@@ -32,4 +32,9 @@ export class BoardService {
   getTeamsByProyect(id: String) {
     return this.http.get<any>(this.env + 'board/getTeamsByProject/' + id);
   }
+
+  update(board: any) {
+    return this.http.put<any>(this.env + 'board/update', board);
+  }
+
 }
