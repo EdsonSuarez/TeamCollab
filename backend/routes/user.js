@@ -19,22 +19,17 @@ const ScrumMaster = require("../middleware/scrumMaster");
 router.post("/add", async (req, res) => {
   if (!req.body.fullName || !req.body.email || !req.body.password)
     return res.status(401).send("Process failed: Incomplete data");
-
   let user = await User.findOne({ email: req.body.email });
   if (user)
     return res
       .status(401)
       .send("Process failed: The user is already registered");
-
   const hash = await bcrypt.hash(req.body.password, 10);
-
   const role = await Role.findOne({ name: "user" });
   if (!role)
     return res.status(401).send("Process failed: No role was assigned");
-
   const imageUrl =
     req.protocol + "://" + req.get("host") + "/img/users/1234567890.jpg";
-
   user = new User({
     fullName: req.body.fullName,
     email: req.body.email,
@@ -46,6 +41,7 @@ router.post("/add", async (req, res) => {
   try {
     const result = await user.save();
     if (!result) return res.status(401).send("Failed to register user");
+    user = await User.findById(user._id).populate("roleId", "name").exec();
     const jwtToken = user.generateJWT();
     res.status(200).send({ jwtToken });
   } catch (e) {
@@ -53,7 +49,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.get("/get/:fullName?", Auth, UserAuth, Admin, async (req, res) => {
+router.get("/get/:fullName?", Auth, UserAuth, ScrumMaster, async (req, res) => {
   const user = await User.find({
     fullName: new RegExp(req.params["fullName"], "i"),
   })
@@ -67,6 +63,20 @@ router.get("/getUser", Auth, UserAuth, async (req, res) => {
   const user = await User.findById(req.user._id);
   if (!user) return res.status(401).send("Error fetching user information");
   return res.status(200).send({ user });
+});
+
+router.get("/getUserAdmin/:_id", Auth, UserAuth, async (req, res) => {
+  const validId = mongoose.Types.ObjectId.isValid(req.params._id);
+  if (!validId) return res.status(401).send("Process failed: Invalid id");
+  const user = await User.findById(req.params._id).populate("roleId").exec();
+  if (!user) return res.status(401).send("Error fetching user information");
+  user.password = "";
+  return res.status(200).send({ user });
+});
+
+router.get("/valiEmail/:email", Auth, UserAuth, Admin, async (req, res) => {
+  const users = await User.find({ email: req.params["email"] });
+  return res.status(200).send({ vali: users.length ? true : false });
 });
 
 router.post("/addUserAdmin", Auth, UserAuth, Admin, async (req, res) => {
@@ -86,10 +96,7 @@ router.post("/addUserAdmin", Auth, UserAuth, Admin, async (req, res) => {
 
   const hash = await bcrypt.hash(req.body.password, 10);
 
-  const validRole = mongoose.isValidObjectId(req.body.roleId);
-  if (!validRole) return res.status(401).send("Process failed: Invalid role");
-
-  const role = await Role.findById(req.body.roleId);
+  const role = await Role.findOne({ name: req.body.roleId });
   if (!role)
     return res.status(401).send("Process failed: No role was assigned");
 
@@ -116,11 +123,10 @@ router.post("/addUserAdmin", Auth, UserAuth, Admin, async (req, res) => {
 
 router.put("/update", Auth, UserAuth, Admin, async (req, res) => {
   if (
+    !req.body._id ||
     !req.body.fullName ||
     !req.body.email ||
-    !req.body.password ||
-    !req.body.roleId ||
-    !req.body._id
+    !req.body.roleId
   )
     return res.status(401).send("Process failed: Incomplete data");
 
@@ -136,12 +142,11 @@ router.put("/update", Auth, UserAuth, Admin, async (req, res) => {
       return res.status(401).send("Process failed: The email isn't available");
   }
 
-  const hash = await bcrypt.hash(req.body.password, 10);
+  let hash = await User.findById(req.body._id);
+  hash = hash.password;
+  if (req.body.password) hash = await bcrypt.hash(req.body.password, 10);
 
-  const validRole = mongoose.isValidObjectId(req.body.roleId);
-  if (!validRole) return res.status(401).send("Process failed: Invalid role");
-
-  const role = await Role.findById(req.body.roleId);
+  const role = await Role.findOne({ name: req.body.roleId });
   if (!role)
     return res.status(401).send("Process failed: No role was assigned");
 
@@ -151,7 +156,7 @@ router.put("/update", Auth, UserAuth, Admin, async (req, res) => {
     password: hash,
     roleId: role._id,
     imageUrl: findUser.imageUrl,
-    active: true,
+    active: req.body.active,
   });
 
   if (!user) return res.status(401).send("Process failed: Error updating user");
@@ -161,36 +166,51 @@ router.put("/update", Auth, UserAuth, Admin, async (req, res) => {
 router.put("/updateImg", mult, Upload, Auth, UserAuth, async (req, res) => {
   if (!req.user._id)
     return res.status(401).send("Process failed: Incomplete data");
-
-  const validId = mongoose.isValidObjectId(req.user._id);
-  if (!validId) return res.status(401).send("Process failed: Invalid Id");
-
   const findUser = await User.findById(req.user._id);
   if (!findUser) return res.status(401).send("Process failed: Invalid User");
-
+  const email = await User.findOne({ email: req.body.email });
+  if (email && email.email != req.body.email)
+    return res.status(401).send("Process failed: Email already exists");
+  let hash = "";
+  if (findUser.password == req.body.password || !req.body.password) {
+    hash = findUser.password;
+  } else {
+    hash = await bcrypt.hash(req.body.password, 10);
+  }
   const url = req.protocol + "://" + req.get("host") + "/";
-  let imageUrl = url + "img/users/1234567890.jpg";
-
-  if (req.files !== undefined && req.files.image.type) {
-    let serverImg =
-      "./img/users/" + moment().unix() + path.extname(req.files.image.path);
-    fs.createReadStream(req.files.image.path).pipe(
-      fs.createWriteStream(serverImg)
-    );
-    imageUrl =
-      url + "img/users/" + moment().unix() + path.extname(req.files.image.path);
+  let imageUrl = url + "img/users/1234567890.png";
+  try {
+    if (req.files !== undefined && req.files.image.type) {
+      let serverImg =
+        "./img/users/" + moment().unix() + path.extname(req.files.image.path);
+      fs.createReadStream(req.files.image.path).pipe(
+        fs.createWriteStream(serverImg)
+      );
+      imageUrl =
+        url +
+        "img/users/" +
+        moment().unix() +
+        path.extname(req.files.image.path);
+    }
+  } catch (error) {
+    if (findUser.imageUrl) {
+      imageUrl = findUser.imageUrl;
+    } else {
+      imageUrl = url + "img/users/1234567890.png";
+    }
   }
 
   const user = await User.findByIdAndUpdate(req.user._id, {
-    fullName: findUser.fullName,
-    email: findUser.email,
-    password: findUser.password,
+    fullName: req.body.fullName,
+    email: req.body.email,
+    password: hash,
     roleId: findUser.roleId,
     imageUrl: imageUrl,
     active: true,
   });
   if (!user) return res.status(401).send("Process failed: Error updating user");
-  return res.status(200).send({ user });
+  const result = await User.findById(req.user._id);
+  return res.status(200).send({ result });
 });
 
 router.put("/delete", Auth, UserAuth, Admin, async (req, res) => {

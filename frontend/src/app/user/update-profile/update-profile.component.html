@@ -1,9 +1,6 @@
 <div class="form mat-dialog">
   <mat-card class="card">
     <mat-dialog-title> Profile </mat-dialog-title>
-    <div class="photoProfile">
-      <img src="../../../assets/img/icon-users-solid.svg" alt="User" />
-    </div>
     <div class="col-12 col-lg-12" *ngIf="errorMessage">
       <div class="alert alert-danger alert-dismissible" role="alert">
         <div class="alert-message">
@@ -22,7 +19,16 @@
     </div>
     <mat-dialog-content>
       <div class="container">
-        <input type="file" (change)="uploadImg($event)" class="changImg" />
+        <div class="photoProfile">
+          <img src="{{ data.imageUrl }}" alt="User" />
+        </div>
+        <input
+          *ngIf="changImg"
+          type="file"
+          (change)="uploadImg($event)"
+          class="changImg"
+          accept=".png, .jpg, .jpeg, .gif, image/*"
+        />
         <mat-form-field>
           <input
             [(ngModel)]="data.fullName"
@@ -41,7 +47,7 @@
         </mat-form-field>
         <mat-form-field *ngIf="enabledP">
           <input
-            (ngModel)="(data.password)"
+            [(ngModel)]="data.password"
             type="password"
             matInput
             placeholder="Password"
@@ -50,7 +56,7 @@
         </mat-form-field>
         <mat-form-field *ngIf="enabledP">
           <input
-            (ngModel)="(confPassword)"
+            [(ngModel)]="confPassword"
             type="password"
             matInput
             placeholder="Confirm Pasword"
@@ -58,7 +64,7 @@
           />
         </mat-form-field>
         <mat-checkbox [(ngModel)]="enabledP">Change password</mat-checkbox>
-        <!-- <mat-checkbox [(ngModel)]="changImg">Change photo</mat-checkbox> -->
+        <mat-checkbox [(ngModel)]="changImg">Change photo</mat-checkbox>
       </div>
     </mat-dialog-content>
 

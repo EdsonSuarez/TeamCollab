@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AdminService } from '../../services/admin.service';
 import { profileData } from '../profile/profile.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-profile',
@@ -18,11 +19,13 @@ export class UpdateProfileComponent implements OnInit {
   constructor(
     private admin: AdminService,
     public dialogRef: MatDialogRef<UpdateProfileComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: profileData
+    @Inject(MAT_DIALOG_DATA) public data: profileData,
+    private router: Router
   ) {
     this.errorMessage = '';
     this.enabledP = false;
     this.changImg = false;
+    this.data.password = '';
     this.confPassword = '';
     this.selectedFile = null;
   }
@@ -57,18 +60,15 @@ export class UpdateProfileComponent implements OnInit {
       dataProfile.append('password', String(this.data.password));
       if (this.selectedFile) {
         dataProfile.append('image', this.selectedFile, this.selectedFile.name);
-      } 
+      }
       this.admin.updateProfile(dataProfile).subscribe(
         (res) => {
-          this.data = res.user;
-          console.log(this.data);
-          
+          this.data = res.result;
+          this.onNoClick();
         },
         (err) => {
           this.errorMessage = err.error;
           this.closeAlert();
-          console.log(err.error);
-          
         }
       );
     }
