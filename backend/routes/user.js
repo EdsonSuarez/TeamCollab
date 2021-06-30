@@ -41,6 +41,7 @@ router.post("/add", async (req, res) => {
   try {
     const result = await user.save();
     if (!result) return res.status(401).send("Failed to register user");
+    user = await User.findById(user._id).populate("roleId", "name").exec();
     const jwtToken = user.generateJWT();
     res.status(200).send({ jwtToken });
   } catch (e) {
@@ -64,6 +65,20 @@ router.get("/getUser", Auth, UserAuth, async (req, res) => {
   return res.status(200).send({ user });
 });
 
+router.get("/getUserAdmin/:_id", Auth, UserAuth, async (req, res) => {
+  const validId = mongoose.Types.ObjectId.isValid(req.params._id);
+  if (!validId) return res.status(401).send("Process failed: Invalid id");
+  const user = await User.findById(req.params._id).populate("roleId").exec();
+  if (!user) return res.status(401).send("Error fetching user information");
+  user.password = "";
+  return res.status(200).send({ user });
+});
+
+router.get("/valiEmail/:email", Auth, UserAuth, Admin, async (req, res) => {
+  const users = await User.find({ email: req.params["email"] });
+  return res.status(200).send({ vali: users.length ? true : false });
+});
+
 router.post("/addUserAdmin", Auth, UserAuth, Admin, async (req, res) => {
   if (
     !req.body.fullName ||
@@ -81,10 +96,7 @@ router.post("/addUserAdmin", Auth, UserAuth, Admin, async (req, res) => {
 
   const hash = await bcrypt.hash(req.body.password, 10);
 
-  const validRole = mongoose.isValidObjectId(req.body.roleId);
-  if (!validRole) return res.status(401).send("Process failed: Invalid role");
-
-  const role = await Role.findById(req.body.roleId);
+  const role = await Role.findOne({ name: req.body.roleId });
   if (!role)
     return res.status(401).send("Process failed: No role was assigned");
 
@@ -111,11 +123,10 @@ router.post("/addUserAdmin", Auth, UserAuth, Admin, async (req, res) => {
 
 router.put("/update", Auth, UserAuth, Admin, async (req, res) => {
   if (
+    !req.body._id ||
     !req.body.fullName ||
     !req.body.email ||
-    !req.body.password ||
-    !req.body.roleId ||
-    !req.body._id
+    !req.body.roleId
   )
     return res.status(401).send("Process failed: Incomplete data");
 
@@ -131,12 +142,11 @@ router.put("/update", Auth, UserAuth, Admin, async (req, res) => {
       return res.status(401).send("Process failed: The email isn't available");
   }
 
-  const hash = await bcrypt.hash(req.body.password, 10);
+  let hash = await User.findById(req.body._id);
+  hash = hash.password;
+  if (req.body.password) hash = await bcrypt.hash(req.body.password, 10);
 
-  const validRole = mongoose.isValidObjectId(req.body.roleId);
-  if (!validRole) return res.status(401).send("Process failed: Invalid role");
-
-  const role = await Role.findById(req.body.roleId);
+  const role = await Role.findOne({ name: req.body.roleId });
   if (!role)
     return res.status(401).send("Process failed: No role was assigned");
 
@@ -146,7 +156,7 @@ router.put("/update", Auth, UserAuth, Admin, async (req, res) => {
     password: hash,
     roleId: role._id,
     imageUrl: findUser.imageUrl,
-    active: true,
+    active: req.body.active,
   });
 
   if (!user) return res.status(401).send("Process failed: Error updating user");
