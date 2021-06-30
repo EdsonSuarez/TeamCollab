@@ -15,6 +15,10 @@ export class AdminService {
   listUsers() {
     return this.http.get<any>(this.env + 'user/get');
   }
+
+  validEmailUser(email: string) {
+    return this.http.get<any>(this.env + `user/valiEmail/${email}`);
+  }
   
   registerAdmin(user: any) {
     return this.http.post<any>(this.env + 'user/addUserAdmin', user);
@@ -24,23 +28,22 @@ export class AdminService {
     return this.http.get<any>(this.env + `user/getUser`);
   }
 
+  getUserAdmin(id: string) {
+    return this.http.get<any>(this.env + `user/getUserAdmin/${id}`);
+  }
+
   updateUser(user: any) {
     return this.http.put<any>(this.env + 'user/update', user);
   }
 
-  updateProfile(user: any){
+  updateProfile(user: any) {
     return this.http.put<any>(this.env + 'user/updateImg', user)
-  }
-
-  deleteUser(user: any) {
-    return this.http.delete<any>(this.env + 'user/deleteUser/' + user._id);
   }
 
   emailUser(email: String) {
     return this.http.get<any>(this.env + `user/emailUser/${email}`);
   }
   
-
   listRole() {
     return this.http.get<any>(this.env + 'role/get');
   }
@@ -57,29 +60,24 @@ export class AdminService {
     return this.http.put<any>(this.env + 'role/update', role);
   }
   
-  deleteRole(role: any){
+  deleteRole(role: any) {
     return this.http.put<any>(this.env + 'role/delete', role);
   }
-
 
   getAllProjects() {
     return this.http.get<any>(this.env + 'project/getAll');
   }
 
-  getTeamByProject(id:String){
+  getTeamByProject(id:String) {
     return this.http.get<any>(this.env + `team/getByProject/${id}`);
   }
 
-  getBoardsByTeam(id: String){
+  getBoardsByTeam(id: String) {
     return this.http.get<any>(this.env + `board/getBoards/${id}`);  
   }
 
-  getTasksByBoard(id: String){
+  getTasksByBoard(id: String) {
     return this.http.get<any>(this.env + `task/getByTeam/${id}`);  
   }
-
-  
-
-
 
 }

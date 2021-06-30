@@ -1,35 +1,53 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
 }
-.button{
+
+.button {
     width: 100%;
 }
-.card{
+
+.card {
     min-width: 150px;
     max-width: 500px;
     width: 100%;
 }
-.form{
+
+.form {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 120px 0px;
 }
-mat-card-title{
+
+mat-card-title {
     text-align: center;
 }
-.colorButton{
+
+.colorButton {
     background-color: #2d132c;
     color: #ffffff;
 }
 
-.alertJustify{
+.alertJustify {
     display: flex;
     justify-content: space-between;
-  }
+}
 
-.alertButton{
+.alertButton {
     border-radius: 5px;
     background-color: #646464;
-  }
+}
+
+.icon-size {
+    font-size: unset;
+}
+
+.btn-purple {
+    background-color: #2d132c;
+    color: #ffffff;
+}
+
+.form-control:focus {
+   box-shadow: unset; 
+}

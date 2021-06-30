@@ -19,10 +19,13 @@
                     <input [(ngModel)]="dataUser.fullName" matInput placeholder="Full Name" required />
                 </mat-form-field>
                 <mat-form-field>
-                    <input [(ngModel)]="dataUser.email" matInput placeholder="Email" required />
+                    <input [(ngModel)]="dataUser.email" matInput placeholder="Email" (keyup)="valiEmail()" required />
                 </mat-form-field>
                 <mat-form-field>
-                    <input type="password" [(ngModel)]="dataUser.password" matInput placeholder="Password" required />
+                    <div class="input-group mb-3">
+                        <input [type]="hide" class="form-control" [(ngModel)]="dataUser.password" matInput placeholder="Password" required />
+                        <button class="input-group-text btn btn-purple" id="basic-addon2" title="Show password" (click)="showPass()"><mat-icon class="icon-size">visibility</mat-icon></button>
+                      </div>
                 </mat-form-field> 
                 <mat-form-field appearance="fill">
                     <mat-label>Role</mat-label>
@@ -33,9 +36,18 @@
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <button (click)="register()" class="button colorButton" mat-raised-button>
-                Register
-            </button>
+            <div class="row">
+                <div class="col-lg-6">
+                    <button (click)="register()" class="button colorButton" mat-raised-button>
+                        Register
+                    </button>
+                </div>
+                <div class="col-lg-6">
+                    <button class="button bg-danger" routerLink="/listUsers" mat-raised-button>
+                        Cancel
+                    </button>
+                </div>
+            </div>
         </mat-card-actions>
     </mat-card>
 </div>
