@@ -1,1 +1,41 @@
-<p>register-user works!</p>
+<div class="form">
+    <mat-card class="card">
+        <mat-card-title>Register User</mat-card-title>
+        
+        <div class="col-12 col-lg-12" *ngIf="errorMessage">
+            <div class="alert alert-danger alert-dismissible alertJustify" role="alert">
+                <div class="alert-message">
+                    {{ errorMessage }}
+                </div>
+                <button type="button" class="close alertButton" (click)="closeX()" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+            </div>
+        </div>
+
+        <mat-card-content>
+            <div class="container">                
+                <mat-form-field>
+                    <input [(ngModel)]="dataUser.fullName" matInput placeholder="Full Name" required />
+                </mat-form-field>
+                <mat-form-field>
+                    <input [(ngModel)]="dataUser.email" matInput placeholder="Email" required />
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="password" [(ngModel)]="dataUser.password" matInput placeholder="Password" required />
+                </mat-form-field> 
+                <mat-form-field appearance="fill">
+                    <mat-label>Role</mat-label>
+                    <mat-select [(ngModel)]="dataUser.roleId">
+                        <mat-option value="{{ role.name }}" *ngFor="let role of listRoles">{{ role.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>                                
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="register()" class="button colorButton" mat-raised-button>
+                Register
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -73,10 +73,7 @@ router.post("/addUserAdmin", Auth, UserAuth, Admin, async (req, res) => {
 
     const hash = await bcrypt.hash(req.body.password, 10);
 
-    const validRole = mongoose.isValidObjectId(req.body.roleId);
-    if (!validRole) return res.status(401).send("Process failed: Invalid role");
-
-    const role = await Role.findById(req.body.roleId)
+    const role = await Role.findOne({ name: req.body.roleId });
     if (!role) return res.status(401).send("Process failed: No role was assigned");
 
     const imageUrl = req.protocol + "://" + req.get("host") + "/img/users/1234567890.jpg";

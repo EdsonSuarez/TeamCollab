@@ -43,7 +43,6 @@ import { SaveTaskComponent } from './board/save-task/save-task.component';
 import {MatSelectModule} from '@angular/material/select';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
-
 @NgModule({
   declarations: [
     AppComponent,

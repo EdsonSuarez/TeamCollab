@@ -17,9 +17,8 @@ export class AdminService {
   }
   
   registerAdmin(user: any) {
-    return this.http.post<any>(this.env + 'user/registerAdmin', user);
+    return this.http.post<any>(this.env + 'user/addUserAdmin', user);
   }
-
 
   getUser(id: String) {
     return this.http.get<any>(this.env + `user/getUser/${id}`);
@@ -38,7 +37,7 @@ export class AdminService {
   }
 
   listRole() {
-    return this.http.get<any>(this.env + 'role/listRole');
+    return this.http.get<any>(this.env + 'role/get');
   }
 
   getRole(id: String) {
