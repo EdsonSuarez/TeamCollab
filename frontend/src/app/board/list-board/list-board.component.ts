@@ -41,9 +41,8 @@ export class ListBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    
     let firstTeam = {}
-
     if(this.idProject != 'inicio'){
       this.board.getTeamsByProyect(this.idProject).subscribe(
         (res)=>{
@@ -59,8 +58,7 @@ export class ListBoardComponent implements OnInit {
                 };
               }
               cont++;
-            }
-            
+            }  
           });
         },
         (err)=>{
@@ -68,50 +66,98 @@ export class ListBoardComponent implements OnInit {
         }
       )
     }
+
+
+    if (this.auth.isAdmin()) {
+
+      this.team.getTeamAdmin().subscribe(
+        (res)=>{
+          console.log(res.team)
+          const data = res.team;
+          let cont = 0;        
+          data.forEach((board: any) => { 
+  
+            const objBoard = {
+              team: board.name,
+              project: board.projectId.name,
+              idTeam: board._id
+            }
     
-    // add team y project
-    this.board.teamsUser().subscribe(
-      (res)=>{
-        console.log("teamsUser", res.teamsUser)
-        const data = res.teamsUser;
-        let cont = 0;        
-        data.forEach((board: any) => { 
-
-          const objBoard = {
-            team: board.teamId.name,
-            project: board.teamId.projectId.name,
-            idTeam: board.teamId._id
-          }
+            let noExiste = true;
+            this.teamProject.forEach((element:any) => {
+              if(element.team == objBoard.team){
+                noExiste = false;
+              }
+            });
+    
+            if(noExiste){
+              this.teamProject.push(objBoard)
+            }
   
-          let noExiste = true;
-          this.teamProject.forEach((element:any) => {
-            if(element.team == objBoard.team){
-              noExiste = false;
+            if(this.idProject == 'inicio'){
+              if(cont == 0){
+                this.changeTeam(objBoard)
+              }
+            }else{            
+              if(cont == 0){
+                this.changeTeam(firstTeam)
+              }
             }
-          });
+            cont++;  
+          }) 
+        },
+        (err)=>{
+          console.log(err.error)
+        }
+      )
+      
+    }else{
+      this.board.teamsUser().subscribe(
+        (res)=>{
+          console.log("teamsUser", res.teamsUser)
+          const data = res.teamsUser;
+          let cont = 0;        
+          data.forEach((board: any) => { 
   
-          if(noExiste){
-            this.teamProject.push(objBoard)
-          }
-
-          if(this.idProject == 'inicio'){
-            if(cont == 0){
-              this.changeTeam(objBoard)
+            const objBoard = {
+              team: board.teamId.name,
+              project: board.teamId.projectId.name,
+              idTeam: board.teamId._id
             }
-          }else{            
-            if(cont == 0){
-              this.changeTeam(firstTeam)
+    
+            let noExiste = true;
+            this.teamProject.forEach((element:any) => {
+              if(element.team == objBoard.team){
+                noExiste = false;
+              }
+            });
+    
+            if(noExiste){
+              this.teamProject.push(objBoard)
             }
-          }  
+  
+            if(this.idProject == 'inicio'){
+              if(cont == 0){
+                this.changeTeam(objBoard)
+              }
+            }else{            
+              if(cont == 0){
+                this.changeTeam(firstTeam)
+              }
+            }
+            cont++;  
+          })  
+  
+        },
+        (err)=>{
+          console.log(err.error)
+        }
+      )
 
-          cont++;  
-        })  
-
-      },
-      (err)=>{
-        console.log(err.error)
-      }
-    )
+    }
+    
+    
+    
   }
 
 
@@ -126,7 +172,14 @@ export class ListBoardComponent implements OnInit {
       (res)=>{
         console.log("Sprint", res.boards)
         this.sprints = res.boards;
-        this.changeSprint(this.sprints[0])
+        if(this.sprints.length > 0){
+          this.changeSprint(this.sprints[0])
+        }else{
+          this.taskToDo = [];
+          this.taskDoing = [];
+          this.taskTesting = [];
+          this.taskDone = [];
+        }
       },
       (err)=>{
         console.log(err.error)

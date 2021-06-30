@@ -30,5 +30,9 @@ export class TeamService {
   delete(team: any) {
     return this.http.delete<any>(this.env + 'team/delete/' + team._id)
   }
+
+  getTeamAdmin() {
+    return this.http.get<any>(this.env + "team/getAdmin");
+  }
   
 }
