@@ -60,6 +60,16 @@ router.get("/getTeamUser", Auth, UserAuth, async (req, res) => {
   return res.status(200).send({ teamsUser });
 });
 
+// retorna los teams de una persona dado un project
+router.get("/getTeamsByProject/:_id", Auth, UserAuth, async (req, res) => {
+  
+  const teamsUser = await detailTeam.find({userId: req.user._id})
+  .populate({path:'teamId', match:{projectId: req.params._id}})
+  .exec();
+  if (!teamsUser) return res.status(401).send("Error fetching teams");
+  return res.status(200).send({ teamsUser });
+});
+
 // retorna los board de un team
 router.get("/getBoards/:_id", Auth, UserAuth, async (req, res) => {
     

@@ -1,0 +1,39 @@
+.form {
+    display: flex;
+    justify-content: center;
+    padding-top: 70px;
+  }
+  
+  .card {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  mat-card-title{
+      text-align: center;
+  }
+  
+  .photoProfile{
+      display: flex;
+      justify-content: center;
+  }
+  
+  .photoProfile img{
+      width: 200px;
+  } 
+  
+  .container{
+      display: flex;
+      flex-direction: column;    
+  }
+  
+.changImg{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+  .button{
+      width: 40%;
+      margin: auto;
+  }

@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
           }else if(this.authService.isScrumMaster()){
             this.router.navigate(['/project']);
           }else{
-            this.router.navigate(['/board']);
+            this.router.navigate(['/board/inicio']);
           }
         },
         (err) => {

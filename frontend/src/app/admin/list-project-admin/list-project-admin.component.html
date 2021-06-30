@@ -1,0 +1,87 @@
+<div class="all">
+
+    <div class="containerProject">
+        <h2 class="titleSection">Projects</h2>
+
+        <div class="container" *ngIf="projects.length">
+            <mat-card class="card" *ngFor="let project of projects" (click)="changeProject(project)">
+                <mat-card-title><span class="text_center">{{ project.name  }}</span></mat-card-title>
+                <mat-card-content>
+                    <p>description: <span>{{project.description}}</span> </p>
+                    <hr>
+                    <div class="d-flex">
+                        <p>Creador: <span>{{project.userId.fullName}}</span></p> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <p>Estado: <span>{{ project.active }}</span></p>
+                        <span class="spacer"></span>
+                        <mat-icon color="primary" data-bs-toggle="modal" data-bs-target="#modalProject" > edit </mat-icon>
+                        <mat-icon color="primary"> delete </mat-icon>   
+                    </div>      
+                </mat-card-content>            
+            </mat-card>
+        </div>
+        
+    </div>
+
+    <div class="containerTeam">
+        <h2 class="titleSection">Teams</h2>
+
+        <div class="buttonsMenu" *ngIf="teams.length">           
+            <div *ngFor="let team of teams" >                
+                <div class="containerButton" routerLink="/listBoard/{{team._id}}">
+                    <div class="change" >{{ team.name }} </div>
+                    <span class="spacer"></span>
+                    <span class="material-icons icono" data-bs-toggle="modal" data-bs-target="#modalTeam" >edit_note</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</div>
+
+
+<!-- MODALES -->
+
+<div class="modal fade" id="modalTeam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Team</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- <div class="modal-body" *ngFor="let item of usersTeam">
+                <div >
+                    <span>{{item.userId.fullName}}</span>
+                    <span class="spacer"></span>
+                    <button>lekl</button>
+                </div>
+            </div> -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalProject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sprint</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolor ullam tenetur pariatur aspernatur
+                    placeat ipsa consectetur delectus laudantium omnis. Repellat tenetur dolorem maiores sint cupiditate
+                    architecto explicabo autem velit?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

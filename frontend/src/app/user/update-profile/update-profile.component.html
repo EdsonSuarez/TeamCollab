@@ -1,0 +1,78 @@
+<div class="form mat-dialog">
+  <mat-card class="card">
+    <mat-dialog-title> Profile </mat-dialog-title>
+    <div class="photoProfile">
+      <img src="../../../assets/img/icon-users-solid.svg" alt="User" />
+    </div>
+    <div class="col-12 col-lg-12" *ngIf="errorMessage">
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <div class="alert-message">
+          {{ errorMessage }}
+        </div>
+        <button
+          type="button"
+          class="close"
+          (click)="closeX()"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">x</span>
+        </button>
+      </div>
+    </div>
+    <mat-dialog-content>
+      <div class="container">
+        <input type="file" (change)="uploadImg($event)" class="changImg" />
+        <mat-form-field>
+          <input
+            [(ngModel)]="data.fullName"
+            matInput
+            placeholder="FullName"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            [(ngModel)]="data.email"
+            matInput
+            placeholder="Email"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field *ngIf="enabledP">
+          <input
+            (ngModel)="(data.password)"
+            type="password"
+            matInput
+            placeholder="Password"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field *ngIf="enabledP">
+          <input
+            (ngModel)="(confPassword)"
+            type="password"
+            matInput
+            placeholder="Confirm Pasword"
+            required
+          />
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]="enabledP">Change password</mat-checkbox>
+        <!-- <mat-checkbox [(ngModel)]="changImg">Change photo</mat-checkbox> -->
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button
+        (click)="onNoClick()"
+        class="button colorButton"
+        mat-raised-button
+      >
+        Cancel
+      </button>
+      <button (click)="save()" class="button colorButton" mat-raised-button>
+        Save
+      </button>
+    </mat-dialog-actions>
+  </mat-card>
+</div>

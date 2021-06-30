@@ -137,6 +137,7 @@ input[type="checkbox"]:checked{
     right: 60px;
     bottom: 60px;
     transform: scale(1.5);
+    z-index: 1000;
 }
 
 .spacer{
@@ -193,4 +194,32 @@ input[type="checkbox"]:checked{
     margin-right: 2vh;
     padding-top: 2.5%;    
     font-size: 2vh;
+}
+
+.displayFlex{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.spacer {
+    flex: 1 0 auto;
+  }
+
+  mat-icon {
+    font-size: 20px;
+    vertical-align: inherit;
+    height: unset;
+    width: unset;
+}
+
+.arriba{
+    z-index: 9999999;
+    display: float;
+}
+
+.ancho{
+    width: 200px;
 }

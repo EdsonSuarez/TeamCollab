@@ -20,12 +20,16 @@ export class AdminService {
     return this.http.post<any>(this.env + 'user/addUserAdmin', user);
   }
 
-  getUser(id: String) {
-    return this.http.get<any>(this.env + `user/getUser/${id}`);
+  getUser() {
+    return this.http.get<any>(this.env + `user/getUser`);
   }
 
   updateUser(user: any) {
     return this.http.put<any>(this.env + 'user/update', user);
+  }
+
+  updateProfile(user: any){
+    return this.http.put<any>(this.env + 'user/updateImg', user)
   }
 
   deleteUser(user: any) {
@@ -35,6 +39,7 @@ export class AdminService {
   emailUser(email: String) {
     return this.http.get<any>(this.env + `user/emailUser/${email}`);
   }
+  
 
   listRole() {
     return this.http.get<any>(this.env + 'role/get');
@@ -45,14 +50,36 @@ export class AdminService {
   }
 
   registerRole(role: any) {
-    return this.http.post<any>(this.env + 'role/registerRole', role);
+    return this.http.post<any>(this.env + 'role/add', role);
   }
 
   updateRole(role: any) {
-    return this.http.put<any>(this.env + 'role/updateRole', role);
+    return this.http.put<any>(this.env + 'role/update', role);
   }
   
   deleteRole(role: any){
-    return this.http.put<any>(this.env + 'role/deleteRole', role);
+    return this.http.put<any>(this.env + 'role/delete', role);
   }
+
+
+  getAllProjects() {
+    return this.http.get<any>(this.env + 'project/getAll');
+  }
+
+  getTeamByProject(id:String){
+    return this.http.get<any>(this.env + `team/getByProject/${id}`);
+  }
+
+  getBoardsByTeam(id: String){
+    return this.http.get<any>(this.env + `board/getBoards/${id}`);  
+  }
+
+  getTasksByBoard(id: String){
+    return this.http.get<any>(this.env + `task/getByTeam/${id}`);  
+  }
+
+  
+
+
+
 }

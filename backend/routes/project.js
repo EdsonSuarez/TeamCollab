@@ -37,9 +37,9 @@ router.get("/getAllScrum", Auth, UserAuth, ScrumAuth, async (req, res) => {
   const validId = mongoose.Types.ObjectId.isValid(req.user._id);
   if (!validId) return res.status(401).send("Process failed: Invalid id");
 
-  const projects = await Project.find({ userId: req.user._id });
-  if (!projects)
-    return res.status(401).send("Process failed: No projects found");
+    const projects = await Project.find().populate("userId").exec();
+    if (!projects) 
+        return res.status(401).send("Process failed: No projects found");
 
   return res.status(200).send({ projects });
 });

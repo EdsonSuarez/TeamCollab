@@ -6,7 +6,7 @@
             <div class="menuUpper">
                 <div class="containerTitleMenu">
                     <h3 class="titleMenu" >teams/proyect</h3>
-                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddTeam">add_circle_outline</span>
+                    <span class="material-icons" *ngIf="auth.isScrumMaster()" data-bs-toggle="modal" data-bs-target="#modalAddTeam">add_circle_outline</span>
                 </div>
                 <div class="buttonsMenu" *ngIf="teamProject.length">
                     
@@ -26,7 +26,7 @@
             <div class="menuLower">
                 <div class="containerTitleMenu">
                     <h3 class="titleMenu"> Sprints </h3>                                       
-                    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#modalAddSprint">add_circle_outline</span>
+                    <span class="material-icons" *ngIf="auth.isScrumMaster()" data-bs-toggle="modal" data-bs-target="#modalAddSprint">add_circle_outline</span>
                 </div>
                 <div class="buttonsMenu" *ngIf="sprints.length">
 
@@ -60,6 +60,9 @@
                         <span>{{ task.description }}</span>
                         <p>Estado: <span>{{ task.status }}</span></p>
                     </mat-card-content>
+                    <mat-panel-description>
+                        <img class="image_center" src="{{ task.imageUrl}}">
+                    </mat-panel-description>
                 </mat-card>
             </div>
         </div>
@@ -122,14 +125,39 @@
                 <h5 class="modal-title" id="exampleModalLabel">Team</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" *ngFor="let item of usersTeam">
-                <div >
+            <div class="modal-body displayFlex" *ngFor="let item of usersTeam">              
                     <span>{{item.userId.fullName}}</span>
                     <span class="spacer"></span>
-                    <button>lekl</button>
-                </div>
+                    <span>{{item.userId.roleId.name}}</span>
+                    <span class="spacer"></span>
+                    <button
+                    class="btn btn-warning btn-xs m-1"
+                    title="Editar Usuario"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button
+                    class="btn btn-danger btn-xs m-1"
+                    title="Borrar Usuario"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+
+            </div>
+            <div class="displayFlex modal-body">
+                <select *ngIf="usersAll.length" class="form-select ancho" aria-label="Default select example">
+                    <option selected >Seleccionar usuario</option>
+                    <option *ngFor="let user of usersAll">{{user.fullName}}</option>
+                  </select>
+                  <span class="spacer"></span>
+                <button type="button" class="btn btn-success btn-sm" (click) = "userList()">
+                    <mat-icon>add</mat-icon>Nuevo
+                </button>
+                   
+
             </div>
             <div class="modal-footer">
+
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
@@ -200,7 +228,7 @@
     </div>
 </div>
 <a mat-fab class="add-task-button" mat-button
-    [routerLink]="['/task/']">
+    [routerLink]="['/task/']" *ngIf="!auth.isUser()">
     <mat-icon><span class="material-icons add-task-icon">
             note_add
         </span></mat-icon>

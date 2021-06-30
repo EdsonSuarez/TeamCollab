@@ -30,4 +30,5 @@ export class TeamService {
   delete(team: any) {
     return this.http.delete<any>(this.env + 'team/delete/' + team._id)
   }
+  
 }
