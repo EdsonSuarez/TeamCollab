@@ -1,7 +1,7 @@
 .task-card {
     max-width: 450px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 70px;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -22,9 +22,14 @@ button {
     background-color: #86e3ce;
 }
 .save-button {
-    background-color: #bcdb7f;
-    margin-bottom: 30px;
+    background-color: #0dcaf0;
     width: 60%;
+}
+.add-user-button {
+    background-color: #ffc107;
+    width: 60%;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 .return-board-icon {
     background-color: #fa897b;
@@ -36,5 +41,15 @@ button {
     bottom: 60px;
     transform: scale(1.5);
 }
+.displayFlex{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.spacer {
+    flex: 1 0 auto;
+  }
 
   

@@ -135,7 +135,9 @@ input[type="checkbox"]:checked{
     display: flex;
     justify-content: center;
 }
-
+.mat-card {
+    cursor: pointer;
+}
 .mat-card-content {
     padding-top: 11px;
     font-size: 1.6vh;

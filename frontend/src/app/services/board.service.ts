@@ -36,4 +36,8 @@ export class BoardService {
   addBoard(board: any){
     return this.http.post<any>(this.env + 'board/add', board);
   }
+  update(board: any) {
+    return this.http.put<any>(this.env + 'board/update', board);
+  }
+
 }

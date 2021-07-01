@@ -31,4 +31,12 @@ export class TaskService {
   getTeam(teamId: any) {
     return this.http.get<any>(this.env + 'detailTeam/getTeam/' + teamId);
   }
+
+  addDetail(user: any) {
+    return this.http.post<any>(this.env + "detailTask/add", user);
+  }
+
+  deleteDetail(userId: any) {
+    return this.http.delete<any>(this.env + 'detailTask/delete/' + userId);
+  }
 }

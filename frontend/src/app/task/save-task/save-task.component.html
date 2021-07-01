@@ -1,0 +1,126 @@
+<mat-card class="task-card">
+    <mat-card-title>Create task</mat-card-title>
+    <div class="col-12 col-lg-12" *ngIf="successMessage">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <div class="alert-message"> {{ successMessage }} </div>
+            <button type="button" class="btn-close" (click)="closeAlert(0)" data-dismiss="alert"
+                aria-label="Close">
+            </button>
+        </div>
+    </div>
+    <div class="col-12 col-lg-12" *ngIf="errorMessage">
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div class="alert-message"> {{ errorMessage }}
+                <button type="button" class="close btn-close" (click)="closeAlert(0)" data-dismiss="alert"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Task name</mat-label>
+            <input [(ngModel)]="taskData.name" matInput required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea [(ngModel)]="taskData.description" matInput required></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Priority</mat-label>
+            <mat-select [(ngModel)]="taskData.priority" required>
+                <mat-option value="1">Low</mat-option>
+                <mat-option value="2">Medium</mat-option>
+                <mat-option value="3">High</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Dependency</mat-label>
+            <mat-select [(ngModel)]="taskData.dependency">
+                <mat-option *ngFor="let task of teamTasks" value={{task.taskId._id}}>
+                    {{task.taskId.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Load image</mat-label>
+            <ngx-mat-file-input [formControl]="fileControl" accept='.png, .jpg, .jpeg, .gif, image/*'>
+                <mat-icon class="file-icon" ngxMatFileInputIcon>image</mat-icon>
+            </ngx-mat-file-input>
+        </mat-form-field>
+
+        <!-- <input type="file" (change)="uploadImg($event)"> -->
+
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button class="btn btn-info btn-xs m-1" (click)='saveTaskImg()'>
+            <mat-icon>save</mat-icon>
+        </button>
+        <button *ngIf="flagTask==true" class="btn btn-success btn-xs m-1">
+            <span class="material-icons icono" data-bs-toggle="modal" data-bs-target="#modalTeam"
+                (click)="usersTeam()">face</span>
+        </button>
+        <button *ngIf="flagTask==true" class="btn btn-warning btn-xs m-1">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="flagTask==true" class="btn btn-danger btn-xs m-1">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>
+
+<a mat-fab class="return-board-button" mat-button [routerLink]="['/board/inicio']">
+    <mat-icon>
+        <span class="material-icons return-board-icon">dashboard</span>
+    </mat-icon>
+</a>
+
+<!-- <span class="material-icons icono" data-bs-toggle="modal" data-bs-target="#modalTeam" (click)= "usersTeamF(team)">edit_note</span> -->
+
+<div class="modal fade" id="modalTeam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">Team</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-lg-12" *ngIf="successMessageUser">
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <div class="alert-message"> {{ successMessageUser }} </div>
+                        <button type="button" class="btn-close" (click)="closeAlert(0)" data-dismiss="alert"
+                            aria-label="Close">
+                        </button>
+                    </div>
+                </div>
+    
+                <div class="col-12 col-lg-12" *ngIf="errorMessageUser">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <div class="alert-message"> {{ errorMessageUser }}
+                            <button type="button" class="close btn-close" (click)="closeAlert(0)" data-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+                <div  *ngFor="let member of teamMembers">
+                    <div class="displayFlex" *ngIf="member.userId!=null">
+                        <span>{{member.userId.fullName}}</span>
+                        <span class="spacer"></span>
+                        <button class="btn btn-success btn-xs m-1" (click)="userAdd(member)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <button class="btn btn-danger btn-xs m-1" (click)="userDelete(member.userId)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary" (click)="userAdd(member)">Add User</button> -->
+            </div>
+        </div>
+    </div>
+</div>
