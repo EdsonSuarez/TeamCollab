@@ -96,23 +96,6 @@
             >
           </div>
         </div>
-
-        <div
-          *ngIf="auth.isScrumMaster() || auth.isAdmin()"
-          class="containerButton"
-        >
-          <div class="change" (click)="changeSprint(sprint)">
-            {{ sprint.name }}
-          </div>
-          <span class="spacer"></span>
-          <span
-            class="material-icons icono"
-            data-bs-toggle="modal"
-            data-bs-target="#modalSprint"
-            (click)="SprintF(sprint)"
-            >edit_note</span
-          >
-        </div>
       </div>
     </div>
   </div>
