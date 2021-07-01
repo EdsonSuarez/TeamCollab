@@ -133,10 +133,8 @@ export class ListBoardComponent implements OnInit {
               }
             });
 
-            if (noExiste) {
-              this.teamProject.push(objBoard);
-            }
-
+            if (noExiste) this.teamProject.push(objBoard);
+            
             if (this.idProject == 'inicio') {
               if (cont == 0) {
                 this.changeTeam(objBoard);
@@ -174,10 +172,8 @@ export class ListBoardComponent implements OnInit {
               }
             });
 
-            if (noExiste) {
-              this.teamProject.push(objBoard);
-            }
-
+            if (noExiste) this.teamProject.push(objBoard);
+            
             if(this.idProject == 'inicio') {            
               if(localStorage.getItem('sprint') && localStorage.getItem('team')) {
                 if(cont == 0) {
