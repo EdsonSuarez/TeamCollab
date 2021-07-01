@@ -76,6 +76,9 @@
         <button *ngIf="flagTask==true" class="btn btn-danger btn-xs m-1" (click)='deleteTask()'>
             <mat-icon>delete</mat-icon>
         </button>
+        <button *ngIf="flagTask==true" class="btn btn-warning btn-xs m-1" (click)='newTask()'>
+            <mat-icon>add</mat-icon>
+        </button>
     </mat-card-actions>
 </mat-card>
 

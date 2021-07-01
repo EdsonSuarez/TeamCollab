@@ -26,6 +26,10 @@ export class SaveTaskComponent implements OnInit {
   public userTemp: any;
   public flagTask: boolean;
   public flagImage: boolean;
+  public flagEditTask: boolean;
+  public teamId: any;
+  public boardId: any;
+  public projectId: any;
 
   // File variables
   fileControl: FormControl;
@@ -45,6 +49,7 @@ export class SaveTaskComponent implements OnInit {
     this.userTemp = []; 
     this.flagTask = false;
     this.flagImage = true;
+    this.flagEditTask = false;
 
     // File variables
     this.fileControl = new FormControl(this.file)
@@ -56,14 +61,19 @@ export class SaveTaskComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: any) => {
       this.idTask = params.id;
     });
+    this.teamId = localStorage.getItem('team');
+    this.boardId = localStorage.getItem('sprint');
+    this.projectId = localStorage.getItem('project');
   }
 
   ngOnInit(): void {
     localStorage.removeItem('task')
     if(this.idTask != 'inicio'){
       console.log(this.idTask);
+      this.flagEditTask = true;
+      
       this.flagTask = true;
-      this.flagImage = false
+      this.flagImage = false;
       this.task.getOneTask(this.idTask).subscribe(
         (res) => {
           this.taskData = res.userTask;
@@ -74,23 +84,16 @@ export class SaveTaskComponent implements OnInit {
         }
       )
     }
-    const teamId = localStorage.getItem('team');
-    const boardId = localStorage.getItem('sprint');
-    this.taskData.boardId = boardId;
-    try {
-      this.task.getTasks().subscribe(
-        (res) => {
-          this.teamTasks = res.userTask
-          console.log("tareas se supone",this.teamTasks)
-        },
-        (err) => {
-          console.log(err.error);
-        }
-      )
-    } catch (error) {
-      console.log(error);
-      
-    }
+    this.taskData.boardId = this.boardId;
+    this.task.getTasks().subscribe(
+      (res) => {
+        this.teamTasks = res.userTask
+        // console.log(this.teamTasks)
+      },
+      (err) => {
+        console.log(err.error);
+      }
+    )
 
     this.fileControl.valueChanges.subscribe((files: any) => {
       this.file = files;
@@ -126,50 +129,65 @@ export class SaveTaskComponent implements OnInit {
   }
 
   saveTaskImg(){
-    if (!this.taskData.name || !this.taskData.description || !this.taskData.boardId) {
-      console.log('Failed process: Incomplete data');
-      this.errorMessage = 'Failed process: Incomplete data'
-      this.closeAlert(3000);  
+    if (this.flagEditTask == true) {
+      this.task.updateTask(this.taskData).subscribe(
+        (res) => {
+          console.log(res.team)
+          this.successMessage = 'Task updated successfully';
+              this.closeAlert(3000);
+        },
+        (err) => {
+          console.log(err.error);
+          this.errorMessage = 'Error updating Task';
+              this.closeAlert(3000);
+        }
+      )
     } else {
-      const data = new FormData();
-      if (this.file) {
-        data.append('image', this.file, this.file.name);
-        data.append('name', this.taskData.name);
-        data.append('description', this.taskData.description);
-        data.append('boardId', this.taskData.boardId);
-        data.append('priority', this.taskData.priority);
-        data.append('dependency', this.taskData.dependency);
-        console.log(data)
-        console.log(this.taskData.dependency);
-        
-        this.task.saveTaskImg(data).subscribe(
-          (res) => {
-            localStorage.setItem('task', res.result._id );
-            this.flagTask = true;
-            this.successMessage = 'Task created successfully';
-            this.closeAlert(3000);
-          },
-          (err) => {
-            console.log(err.error);
-            this.errorMessage = err.error;
-            this.closeAlert(3000);
-          }
-        )
-      }
-      else {
-        this.task.saveTask(this.taskData).subscribe(
-          (res: any) => {
-            localStorage.setItem('task', res.result._id);
-            this.flagTask = true;
-            this.successMessage = 'Task created successfully';
-            this.closeAlert(3000);
-          },
-          (err) => {
-            console.log(err);
-            this.errorMessage = err.error;
-            this.closeAlert(3000);
-          }
-        )
+      if (!this.taskData.name || !this.taskData.description || !this.taskData.boardId) {
+        console.log('Failed process: Incomplete data');
+        this.errorMessage = 'Failed process: Incomplete data'
+        this.closeAlert(3000);  
+      } else {
+        const data = new FormData();
+        if (this.file) {
+          data.append('image', this.file, this.file.name);
+          data.append('name', this.taskData.name);
+          data.append('description', this.taskData.description);
+          data.append('boardId', this.taskData.boardId);
+          data.append('priority', this.taskData.priority);
+          data.append('dependency', this.taskData.dependency);
+          console.log(data)
+          console.log(this.taskData.dependency);
+          
+          this.task.saveTaskImg(data).subscribe(
+            (res) => {
+              localStorage.setItem('task', res.result._id );
+              this.flagTask = true;
+              this.successMessage = 'Task created successfully';
+              this.closeAlert(3000);
+            },
+            (err) => {
+              console.log(err.error);
+              this.errorMessage = err.error;
+              this.closeAlert(3000);
+            }
+          )
+        }
+        else {
+          this.task.saveTask(this.taskData).subscribe(
+            (res: any) => {
+              localStorage.setItem('task', res.result._id);
+              this.flagTask = true;
+              this.successMessage = 'Task created successfully';
+              this.closeAlert(3000);
+            },
+            (err) => {
+              console.log(err);
+              this.errorMessage = err.error;
+              this.closeAlert(3000);
+            }
+          )
+        }
       }
     }
   }
@@ -204,6 +222,7 @@ export class SaveTaskComponent implements OnInit {
       (res: any) => {
         this.successMessageUser = `Task assigned to ${member.userId.fullName}`;
         this.closeAlert(3000);
+        // this.teamMembers.member.flagAssigned = true;
         console.log(this.teamMembers);
         
       },
@@ -228,6 +247,12 @@ export class SaveTaskComponent implements OnInit {
         this.closeAlert(3000);
       }
     )
+  }
+
+  newTask(){
+    this.taskData = {};
+    const boardId = localStorage.getItem('sprint');
+    this.taskData.boardId = boardId;
   }
 
   closeAlert(time: number) {

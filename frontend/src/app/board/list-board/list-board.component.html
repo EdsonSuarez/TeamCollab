@@ -16,7 +16,7 @@
           >add_circle_outline</span
         >
       </div>
-      <div class="buttonsMenu overflow-auto" *ngIf="teamProject.length">
+      <div class="buttonsMenu" *ngIf="teamProject.length">
         <div *ngFor="let team of teamProject">
           <div
             class="containerButton"
@@ -62,7 +62,7 @@
           >add_circle_outline</span
         >
       </div>
-      <div class="buttonsMenu overflow-auto" *ngIf="sprints.length">
+      <div class="buttonsMenu" *ngIf="sprints.length">
         <div *ngFor="let sprint of sprints">
           <div
             *ngIf="!auth.isScrumMaster() && !auth.isAdmin()"
@@ -118,6 +118,7 @@
   </div>
 </div>
 
+<h1>{{projectTitle}}</h1>
 <div class="contents">
   <div class="containerToDo">
     <h3 class="titleSections">To-Do</h3>
@@ -227,15 +228,15 @@
     </div>
   </div>
 
-  <div class="containerTesting">
-    <h3 class="titleSections">Testing</h3>
-    <div class="container" *ngIf="taskTesting.length">
+  <div class="containerDone">
+    <h3 class="titleSections">Done</h3>
+    <div class="container" *ngIf="taskDone.length">
       <mat-card
         class="card"
         [class.lowPriority]="task.priority == '1'"
         [class.mediumPriority]="task.priority == '2'"
         [class.highPriority]="task.priority == '3'"
-        *ngFor="let task of taskTesting"
+        *ngFor="let task of taskDone"
       >
         <mat-card-title>
           <a
@@ -281,15 +282,15 @@
     </div>
   </div>
 
-  <div class="containerDone">
-    <h3 class="titleSections">Done</h3>
-    <div class="container" *ngIf="taskDone.length">
+  <div class="containerTesting">
+    <h3 class="titleSections">Testing</h3>
+    <div class="container" *ngIf="taskTesting.length">
       <mat-card
         class="card"
         [class.lowPriority]="task.priority == '1'"
         [class.mediumPriority]="task.priority == '2'"
         [class.highPriority]="task.priority == '3'"
-        *ngFor="let task of taskDone"
+        *ngFor="let task of taskTesting"
       >
         <mat-card-title>
           <a
@@ -352,7 +353,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Team</h5>
+        <h2 class="modal-title" id="exampleModalLabel">Team {{teamName}}</h2>
         <button
           type="button"
           class="btn-close"
@@ -433,7 +434,7 @@
           aria-label="Default"
           aria-describedby="inputGroup-sizing-default"
         />
-        <br>
+        <br />
         <label for="">Description</label>
         <input
           [(ngModel)]="sprint.description"
@@ -442,7 +443,7 @@
           aria-label="Default"
           aria-describedby="inputGroup-sizing-default"
         />
-        <br>
+        <br />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -503,7 +504,7 @@
           aria-describedby="inputGroup-sizing-default"
           placeholder="Name Team"
         />
-        <br>
+        <br />
         <select
           class="form-select"
           aria-label="Default select example"
@@ -729,11 +730,11 @@
         ></button>
       </div>
       <div class="modal-body">
+        <div class="row text-justify">
+          <p>{{ detaTask.description }}</p>
+        </div>
         <div class="row">
           <div class="col-lg-6">
-            <p>
-              {{ detaTask.description }}
-            </p>
             <h3>Fecha: {{ detaTask.date | date: "dd-MM-yyyy" }}</h3>
             <h3>
               Prioridad:
@@ -764,10 +765,23 @@
               >local_offer</mat-icon
             >
           </div>
+            <h3 class="assigned">Assigned user</h3>
+            <div class="usersDiv" >
+                <div *ngFor="let user of detaTask.users">
+                    <h3 >{{user.userId.fullName}}</h3>
+                </div>
+
+            </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning btn-sm" (click)="getTask(detaTask._id)" data-bs-dismiss="modal" *ngIf="!auth.isUser()">
+        <button
+          type="button"
+          class="btn btn-warning btn-sm"
+          (click)="getTask(detaTask._id)"
+          data-bs-dismiss="modal"
+          *ngIf="!auth.isUser()"
+        >
           <mat-icon>edit</mat-icon>
         </button>
         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
