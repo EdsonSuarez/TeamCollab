@@ -182,7 +182,9 @@ input[type="checkbox"]:checked {
 .add-task-icon {
     background-color: #fa897b;
 }
-
+.modal-header {
+    background-color: #fc998e;
+}
 .add-task-button {
     background-color: #fa897b;
     position: fixed;
@@ -191,7 +193,15 @@ input[type="checkbox"]:checked {
     transform: scale(1.5);
     z-index: 1000;
 }
-
+.title {
+    font-size: 35px;
+    /* font-family: 'Inconsolata', monospace; */
+    font-weight: bold;
+    color: #FA897B;
+    padding: 10px;
+    border-bottom: none;
+    height: 60px;
+}
 .spacer {
     flex: 1 1 auto;
 }
