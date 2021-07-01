@@ -7,6 +7,15 @@
     border-bottom: none;
     height: 60px;
 }
+.modal-header {
+    background-color: #fc998e;
+    text-align: center;
+    padding-top: 20px;
+}
+.card-header {
+    margin-top: 30px;
+    
+}
 
 .titleSections{
     text-align: center;

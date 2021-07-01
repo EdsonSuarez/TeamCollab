@@ -236,6 +236,11 @@ export class SaveTaskComponent implements OnInit {
     }
   }
 
+  getImage() {
+    // let imageUrl
+    console.log(this.taskData);
+    
+  }
   addImage() {
     this.flagImage = true;
   }
@@ -294,6 +299,8 @@ export class SaveTaskComponent implements OnInit {
   }
 
   newTask(){
+    this.flagTask = false;
+    this.flagImage = true
     this.taskData = {};
     const boardId = localStorage.getItem('sprint');
     this.taskData.boardId = boardId;

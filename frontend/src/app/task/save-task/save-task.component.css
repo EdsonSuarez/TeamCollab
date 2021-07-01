@@ -15,6 +15,12 @@ button {
     margin-left: 10px;
     margin-right: 10px;
 }
+.modal-body {
+    margin: 0 auto;
+}
+.modal-body img {
+    width: 80%;
+}
 .image-name {
     color: #0000008a;
     cursor: pointer;

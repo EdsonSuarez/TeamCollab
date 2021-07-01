@@ -184,6 +184,12 @@ input[type="checkbox"]:checked {
 }
 .modal-header {
     background-color: #fc998e;
+    text-align: center;
+    padding-top: 20px;
+}
+.card-header {
+    margin-top: 30px;
+    
 }
 .add-task-button {
     background-color: #fa897b;

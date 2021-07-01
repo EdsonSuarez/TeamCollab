@@ -47,7 +47,7 @@
         <mat-form-field class="search-file-input" *ngIf="flagTask==true || flagImage==false" appearance="fill">
             <mat-label>Loaded Image</mat-label>
             <input matInput disabled>
-            <a class="image-name" matInput>{{taskData.imageName}}</a>
+            <a class="image-name" matInput data-bs-toggle="modal" data-bs-target="#modalImg" (click)='getImage()'>{{taskData.imageName}}</a>
             <mat-icon class="search-file-icon" matSuffix (click)='addImage()' ngxMatFileInputIcon>image_search</mat-icon >
           </mat-form-field>
 
@@ -115,20 +115,48 @@
                         </div>
                     </div>
                 </div>
-                <div  *ngFor="let member of teamMembers">
-                    <div class="displayFlex" *ngIf="member.userId!=null">
-                        <span>{{member.userId.fullName}}</span>
-                        <span class="spacer"></span>
-                        <button class="btn btn-success btn-xs m-1" (click)="userAdd(member)" *ngIf="!flagEditTask==true">
-                            <mat-icon>add</mat-icon>
-                        </button>
-                        <button class="btn btn-danger btn-xs m-1" (click)="userDelete(member.userId)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+                <div *ngIf="!teamMembers.length">
+                    <span>No team members assigned</span>
+                    <span class="spacer"></span>
+                </div>
+                <div *ngIf="teamMembers.length">
+                    <div  *ngFor="let member of teamMembers">
+                        <div class="displayFlex" *ngIf="member.userId!=null">
+                            <span>{{member.userId.fullName}}</span>
+                            <span class="spacer"></span>
+                            <button class="btn btn-success btn-xs m-1" (click)="userAdd(member)" *ngIf="!flagEditTask==true">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                            <button class="btn btn-danger btn-xs m-1" (click)="userDelete(member.userId)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
                     </div>
                 </div>
+                
             </div>
             
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary" (click)="userAdd(member)">Add User</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalImg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">Image</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img
+              *ngIf="taskData.imageUrl"
+              src="{{ taskData.imageUrl }}"
+              alt="Img task"
+            />
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <!-- <button type="button" class="btn btn-primary" (click)="userAdd(member)">Add User</button> -->
