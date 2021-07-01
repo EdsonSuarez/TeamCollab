@@ -418,7 +418,6 @@ export class ListBoardComponent implements OnInit {
     
   }
 
-
   adduserTeam(objDetail: any){
     this.team.addDetail(objDetail).subscribe(
       (res)=>{
@@ -428,7 +427,11 @@ export class ListBoardComponent implements OnInit {
         console.log(err)
       }
     )
-  }  
+  }
+  
+  deleteTeam(){
+    
+  }
 
 
   closeAlert() {
