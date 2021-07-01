@@ -64,7 +64,7 @@ router.post(
       return res.status(401).send("Process failed: Incomplete data");
     const validId = mongoose.Types.ObjectId.isValid(req.body.boardId);
     if (!validId)
-      return res.status(401).send("Process failed: Invalid boardId"); 
+      return res.status(401).send("Process failed: Invalid boardId");
     let imageUrl = "";
     if (req.files !== undefined && req.files.image.type) {
       const url = req.protocol + "://" + req.get("host") + "/";

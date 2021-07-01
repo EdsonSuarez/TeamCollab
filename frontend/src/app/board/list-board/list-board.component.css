@@ -1,5 +1,5 @@
 
-input[type="checkbox"]{
+input[type="checkbox"] {
     position: absolute;
     height: 40px;    
     width: 40px;    
@@ -11,7 +11,7 @@ input[type="checkbox"]{
     opacity: 0;    
 }
 
-.icon{
+.icon {
     position: absolute;
     height: 40px;    
     width: 40px;
@@ -22,11 +22,9 @@ input[type="checkbox"]{
     background: #000;
     color: white;
     padding-left: 9px;
-    /* pointer-events: none; */
-    /* z-index: 10; */
 }
 
-.menu{
+.menu {
     position: fixed;
     top:0;
     right: 0;
@@ -37,58 +35,53 @@ input[type="checkbox"]{
     transition: 0.5s;
     z-index: 1000;    
     background: #FFDD94;
-    /* background: #FA897B; */
-    /* background: #86E3CE; */
 }
 
-input[type="checkbox"]:checked ~ .menu{
+input[type="checkbox"]:checked ~ .menu {
     right: -26%;
 }
 
-input[type="checkbox"]:checked{
-    /* opacity: 0.5; */
+input[type="checkbox"]:checked {
     right: 0%;
     width: 32px;     
 }
 
-.contents{
+.contents {
     height: 100vh;
     width: 100%;
     display: flex;
-    /* background-color:royalblue;
-    z-index: -1; */
 }
 
-.menuAll{
+.menuAll {
     height: 100%;
     text-align: center;
 }
 
-.menuUpper{
+.menuUpper {
     height: 40%;    
 }
 
-.menuLower{
+.menuLower {
     height: 60%;    
 }
 
-.containerToDo{
+.containerToDo {
     width: 20%;    
 }
 
-.containerDoing{
+.containerDoing {
     width: 20%;
 }
 
-.containerTesting{
+.containerTesting {
     width: 20%;
 }
 
-.containerDone{
+.containerDone {
     width: 20%;
 }
 
-.containerOtro{
+.containerOtro {
     width: 20%;
 }
 
@@ -98,6 +91,7 @@ input[type="checkbox"]:checked{
     flex-direction: column;    
     align-items: center;    
 }
+
 .image_center {
     margin-left: auto;
     margin-right: auto;
@@ -105,7 +99,7 @@ input[type="checkbox"]:checked{
 }
 
 
-.titleSections{
+.titleSections {
     text-align: center;
     padding: 1.5vh;
     color: #00ffdd;
@@ -114,23 +108,25 @@ input[type="checkbox"]:checked{
 }
 
 .card {
-    min-width: 200px;
+    min-width: 240px;
     width: 70%;
-    /* height: 100%; */
     padding: 2.5vh;
-    /* margin: 2.5vh; */
     margin: 2.5vh auto;
     
 }
+
 .lowPriority {
     background-color: #d0e6a5;
 }
+
 .mediumPriority {
     background-color: #ffdd95;
 }
+
 .highPriority {
     background-color: #fc887b;
 }
+
 .text_center {
     display: flex;
     justify-content: center;
@@ -141,12 +137,13 @@ input[type="checkbox"]:checked{
     font-size: 1.6vh;
 }
 
-.mat-card-title{
+.mat-card-title {
     font-size: 2.5vh;
 }
 .add-task-icon {
     background-color: #fa897b;
 }
+
 .add-task-button {
     background-color: #fa897b;
     position: fixed;
@@ -156,11 +153,11 @@ input[type="checkbox"]:checked{
     z-index: 1000;
 }
 
-.spacer{
+.spacer {
     flex: 1 1 auto;
 }
 
-.containerButton{
+.containerButton {
     display: flex;
     background-color: #86E3CE;
     opacity: 0.8;
@@ -174,29 +171,29 @@ input[type="checkbox"]:checked{
     font-size: 1.8vh;
 }
 
-.containerButton:hover{
+.containerButton:hover {
     opacity: 1;
 }
 
-.buttonsMenu{
+.buttonsMenu {
     width: 100%;    
 }
 
-.change{
+.change {
     width: 90%;    
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.icono{
+.icono {
     width: 10%;    
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.containerTitleMenu{
+.containerTitleMenu {
     display: flex;
     justify-content: center;    
     align-items: center;
@@ -206,13 +203,13 @@ input[type="checkbox"]:checked{
     margin-bottom: 2vh;
 }
 
-.titleMenu{
+.titleMenu {
     margin-right: 2vh;
     padding-top: 2.5%;    
     font-size: 2vh;
 }
 
-.displayFlex{
+.displayFlex {
     padding-bottom: 5px;
     padding-top: 5px;
     display: flex;
@@ -222,21 +219,25 @@ input[type="checkbox"]:checked{
 
 .spacer {
     flex: 1 0 auto;
-  }
+}
 
-  mat-icon {
+mat-icon {
     font-size: 20px;
     vertical-align: inherit;
     height: unset;
     width: unset;
 }
 
-.arriba{
+.arriba {
     z-index: 9999999;
     display: float;
 }
 
-.ancho{
+.ancho {
     width: 200px;
+}
+
+.textSize {
+    font-size: 10px;
 }
 

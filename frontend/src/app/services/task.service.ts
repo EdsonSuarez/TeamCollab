@@ -25,7 +25,7 @@ export class TaskService {
   }
 
   updateTask(task: any){
-    return this.http.put<any>(this.env + 'task/updateTask', task);
+    return this.http.put<any>(this.env + 'task/update', task);
   }
 
   getTeam(teamId: any) {

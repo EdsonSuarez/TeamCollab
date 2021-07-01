@@ -69,6 +69,16 @@
                         <mat-panel-description>
                             <img class="image_center" src="{{ task.imageUrl}}">
                         </mat-panel-description>
+                        
+                        <div class="row">
+                            <div class="col-lg-4"><button class="btn btn-danger btn-sx textSize" (click)="updateTask(task, 'to-do')">To-do</button></div>
+                            <div class="col-lg-4"><button class="btn btn-warning btn-sx textSize" (click)="updateTask(task, 'doing')">Doing</button></div>
+                            <div class="col-lg-4"><button class="btn btn-success btn-sx textSize" (click)="updateTask(task, 'done')">Done</button></div>
+                        </div>
+                        <div class="row m-3">
+                            <div class="col-lg-6"><button class="btn btn-light btn-sx textSize" (click)="updateTask(task, 'testing')">Testing</button></div>
+                            <div class="col-lg-6"><button class="btn btn-dark btn-sx textSize" (click)="updateTask(task, 'otro')">Otro</button></div>
+                        </div>
                     </mat-card>
                     <mat-card class="card mediumPriority" *ngIf="task.priority == '2'">
                         <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
