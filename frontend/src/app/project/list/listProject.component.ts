@@ -34,6 +34,10 @@ export class ListProjectComponent implements OnInit {
     if(this.authService.isAdmin()) this.listAdmin();
     if(this.authService.isScrumMaster()) this.listScrum();
     if(this.authService.isUserLeader()) this.listUserLeader();
+    if(localStorage.getItem('sprint') && localStorage.getItem('team')){
+      localStorage.removeItem('team');
+      localStorage.removeItem('sprint');
+    }
   }
 
   listAdmin() {

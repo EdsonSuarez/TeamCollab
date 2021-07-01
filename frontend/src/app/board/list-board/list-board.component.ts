@@ -136,6 +136,7 @@ export class ListBoardComponent implements OnInit {
               if(cont == 0){
                 this.changeTeam(objBoard)
               }
+              
             }else{            
               if(cont == 0){
                 console.log("first team", firstTeam)
@@ -175,9 +176,17 @@ export class ListBoardComponent implements OnInit {
               this.teamProject.push(objBoard)
             }
   
-            if(this.idProject == 'inicio'){
-              if(cont == 0){
-                this.changeTeam(objBoard)
+            if(this.idProject == 'inicio'){              
+              if(localStorage.getItem('sprint') && localStorage.getItem('team')){
+                if(cont == 0){
+                  console.log("existe local estorage de T & S")
+                  const sprint = { _id: localStorage.getItem('sprint')};                
+                  this.changeSprint(sprint)
+                }
+              }else{
+                if(cont == 0){
+                  this.changeTeam(objBoard)
+                }
               }
             }else{            
               if(cont == 0){
@@ -349,7 +358,7 @@ export class ListBoardComponent implements OnInit {
   }
 
 
-  saveProject(){
+  saveTeam(){
     if(!this.registerTeam.name && !this.registerTeam.projectId){  
       this.message = 'Imcomplete Data'
       this.closeAlert();
@@ -363,10 +372,18 @@ export class ListBoardComponent implements OnInit {
             project: res.teamResult.projectId.name,
             idTeam: res.teamResult._id
           }
-          this.teamProject.push(objBoard)
+          this.teamProject.push(objBoard)          
           this.registerTeam = {};
           this.message = 'Team add successful'
           this.closeAlert();
+
+          // agreagar al scrum al team
+          const objDetail = {
+            teamId: objBoard.idTeam,
+            userId: this.auth.idUser()
+          }  
+          this.adduserTeam(objDetail);
+          
         },
         (err)=>{
           console.log(err.error);
@@ -401,7 +418,17 @@ export class ListBoardComponent implements OnInit {
     
   }
 
-  
+
+  adduserTeam(objDetail: any){
+    this.team.addDetail(objDetail).subscribe(
+      (res)=>{
+        console.log(res)
+      },
+      (err)=>{
+        console.log(err)
+      }
+    )
+  }  
 
 
   closeAlert() {
