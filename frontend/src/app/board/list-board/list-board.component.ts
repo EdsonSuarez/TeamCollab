@@ -32,6 +32,9 @@ export class ListBoardComponent implements OnInit {
   public teamTemp: any;
   public sprint: any;
   public detaTask: any;
+  public objBoard: any;
+  public projectTitle: String;
+  public teamName: String;
 
   constructor(
     private board: BoardService,
@@ -64,6 +67,8 @@ export class ListBoardComponent implements OnInit {
     this.UserSelect = [];
     this.userTemp = []; 
     this.sprint = [];
+    this.projectTitle = '';
+    this.teamName = '';
   }
 
   ngOnInit(): void {
@@ -125,6 +130,7 @@ export class ListBoardComponent implements OnInit {
               team: board.name,
               project: board.projectId.name,
               idTeam: board._id,
+              idProject: board.teamId.projectId._id
             };
 
             let noExiste = true;
@@ -165,6 +171,7 @@ export class ListBoardComponent implements OnInit {
               team: board.teamId.name,
               project: board.teamId.projectId.name,
               idTeam: board.teamId._id,
+              idProject: board.teamId.projectId._id
             };
 
             let noExiste = true;
@@ -210,6 +217,11 @@ export class ListBoardComponent implements OnInit {
 
   changeTeam(team: any) {
     localStorage.setItem('team', team.idTeam);
+    localStorage.setItem('project', team.idProject);
+    console.log(team);
+    this.projectTitle = team.project;
+    this.teamName = team.team;
+    
     this.board.boardsUser(team.idTeam).subscribe(
       (res) => {
         console.log('Sprint', res.boards);
@@ -230,7 +242,7 @@ export class ListBoardComponent implements OnInit {
   }
 
   changeSprint(sprint: any) {
-    console.log(sprint);
+    // console.log(sprint);
     this.taskToDo = [];
     this.taskDoing = [];
     this.taskTesting = [];
@@ -239,7 +251,7 @@ export class ListBoardComponent implements OnInit {
     localStorage.setItem('sprint', sprint._id);
     this.board.TasksBoard(sprint._id).subscribe(
       (res) => {
-        console.log('tasks', res.tasks);
+        // console.log('tasks', res.tasks);
         const data = res.tasks;
         data.forEach((task: any) => {
           switch (task.status) {
@@ -267,8 +279,8 @@ export class ListBoardComponent implements OnInit {
   }
 
   usersTeamF(team: any) {
-    console.log(team);
-    
+    console.log(team.project);
+    this.teamName = team.team;
     team._id = team.idTeam;
     this.team.getUsers(team).subscribe(
       (res) => {
@@ -364,7 +376,8 @@ export class ListBoardComponent implements OnInit {
           const objBoard = {
             team: res.teamResult.name,
             project: res.teamResult.projectId.name,
-            idTeam: res.teamResult._id
+            idTeam: res.teamResult._id,
+            idProject: res.teamResult.projectId._id
           };
           this.teamProject.push(objBoard)          
           this.registerTeam = {};

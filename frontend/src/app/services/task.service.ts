@@ -20,6 +20,10 @@ export class TaskService {
     return this.http.post<any>(this.env + 'task/addImg', task);
   }
 
+  editTask(task: any){
+    return this.http.put<any>(this.env + 'task/update', task);
+  }
+
   deleteTask(taskId: any){
     return this.http.delete<any>(this.env + 'task/delete/' + taskId);
   }
