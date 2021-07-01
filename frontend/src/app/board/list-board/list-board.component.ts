@@ -130,7 +130,7 @@ export class ListBoardComponent implements OnInit {
               team: board.name,
               project: board.projectId.name,
               idTeam: board._id,
-              idProject: board.teamId.projectId._id
+              idProject: board.projectId._id
             };
 
             let noExiste = true;
