@@ -1,10 +1,18 @@
 .title {
     font-size: 35px;
-    font-family: 'Inconsolata', monospace;
+    /* font-family: 'Inconsolata', monospace; */
     font-weight: bold;
-    color: #a548a2;
+    color: #FA897B;
     padding: 10px;
     border-bottom: none;
+}
+
+.titleSections{
+    text-align: center;
+    padding: 1.5vh;
+    color: #FA897B;
+    font-size: 3vh;
+    margin: 0;
 }
 
 mat-icon {
