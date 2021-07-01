@@ -72,7 +72,7 @@ router.delete("/delete/:_id", Auth, UserAuth, TeachnicalAuth, async (req, res) =
 
   const detailTask = await DetailTask.findByIdAndDelete(req.params._id);
   if (!detailTask) return res.status(401).send("Process failed: DetailTask not found");
-  return res.status(200).send("DetailTask deleted");
+  return res.status(200).send({result: "DetailTask deleted"});
 });
 
 module.exports = router;

@@ -2,11 +2,14 @@
   <div class="card-header text-center title">
     <div class="col-lg-12">
       <div class="form-group float-start" >Projects</div>
-      <div class="form-group float-end" *ngIf="!authService.isUserLeader()">
-        <button type="button" class="btn btn-warning btn-sm" (click)="nuevo()">
-          <mat-icon>add</mat-icon> New
-        </button>
+      <div class="form-group float-end">
+        <div class="form-group float-end" *ngIf="!authService.isUserLeader()">
+          <button type="button" class="btn btn-warning btn-sm" (click)="nuevo()">
+            <mat-icon>add</mat-icon> New
+          </button>
+        </div>
       </div>
+      
     </div>
   </div>
   <div class="card-body">
@@ -17,7 +20,7 @@
       <div class="row">
         <div [class]="listClass">
           <div class="row">
-            <input type="search" class="form-control" placeholder="Filtrar por el nombre del proyecto" [(ngModel)]="filter_search">
+            <input type="search" class="form-control filter-project float-end" placeholder="Filter by project name" [(ngModel)]="filter_search">
           </div>
           <div class="row justify-content-center" *ngIf="!cargando">
             <div
@@ -36,7 +39,7 @@
                 </p>
                 <div class="row">
                   <h5 class="card-title text-start">
-                    Estado:
+                    Status:
                     <span
                       class="badge text-dark"
                       [class]="
@@ -52,7 +55,7 @@
                 </div>
                 <div class="row">
                   <h5 class="card-title text-start">
-                    Fecha: {{ project.date | date: "dd-MM-yyyy" }}
+                    Date: {{ project.date | date: "dd-MM-yyyy" }}
                   </h5>
                 </div>
                 <div class="row">

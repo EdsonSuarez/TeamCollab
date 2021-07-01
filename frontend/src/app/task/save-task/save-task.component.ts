@@ -30,6 +30,7 @@ export class SaveTaskComponent implements OnInit {
   public teamId: any;
   public boardId: any;
   public projectId: any;
+  public taskId: any;
 
   // File variables
   fileControl: FormControl;
@@ -64,13 +65,14 @@ export class SaveTaskComponent implements OnInit {
     this.teamId = localStorage.getItem('team');
     this.boardId = localStorage.getItem('sprint');
     this.projectId = localStorage.getItem('project');
+    this.taskId = localStorage.getItem('task');
   }
 
   ngOnInit(): void {
-    localStorage.removeItem('task')
+    // localStorage.removeItem('task')
 
     if(this.idTask != 'inicio'){
-      console.log(this.idTask);
+      // console.log(this.idTask);
       this.flagEditTask = true;
       
       this.flagTask = true;
@@ -118,16 +120,37 @@ export class SaveTaskComponent implements OnInit {
   // }
 
   usersTeam() {
-    const teamId = localStorage.getItem('team');
-    this.task.getTeam(teamId).subscribe(
-      (res) => {
-        console.log(res.team)
-        this.teamMembers = res.team;
-      },
-      (err) => {
-        console.log(err.error);
-      }
-    )
+    console.log(this.flagEditTask);
+    
+    if (this.flagEditTask == true) {
+      this.task.getUsersTask(this.taskId).subscribe(
+        (res: any) => {
+          console.log(res.users);
+          this.teamMembers = res.users;
+          
+          // console.log('Deleted Task');
+          
+          // this.router.navigate(['/board/inicio']);
+        },
+        (err) => {
+          console.log(err);
+          this.errorMessage = err.error;
+          this.closeAlert(3000);
+        }
+      )
+    }
+    else {
+      const teamId = localStorage.getItem('team');
+      this.task.getTeam(teamId).subscribe(
+        (res) => {
+          console.log(res.team)
+          this.teamMembers = res.team;
+        },
+        (err) => {
+          console.log(err.error);
+        }
+      )
+    }
   }
 
   saveTaskImg(){
@@ -194,6 +217,26 @@ export class SaveTaskComponent implements OnInit {
     }
   }
 
+  getAssignedUsers(){
+    if (this.flagEditTask == true) {
+      this.task.getUsersTask(this.taskId).subscribe(
+        (res: any) => {
+          console.log(res);
+          // this.teamMembers = res.team;
+          
+          // console.log('Deleted Task');
+          
+          // this.router.navigate(['/board/inicio']);
+        },
+        (err) => {
+          console.log(err);
+          this.errorMessage = err.error;
+          this.closeAlert(3000);
+        }
+      )
+    }
+  }
+
   addImage() {
     this.flagImage = true;
   }
@@ -237,7 +280,7 @@ export class SaveTaskComponent implements OnInit {
   }
 
   userDelete(userId: any){
-    this.task.addDetail(userId).subscribe(
+    this.task.deleteDetail(userId).subscribe(
       (res: any) => {
         this.successMessageUser = 'Task unassigned';
         this.closeAlert(3000);

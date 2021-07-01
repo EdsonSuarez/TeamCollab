@@ -34,9 +34,6 @@ p {
   color: #fff;
   border-radius: 0.75rem;
 }
-.carousel {
-  margin: 4rem 0;
-}
 .carousel-caption {
   top: 6rem;
   z-index: 10;

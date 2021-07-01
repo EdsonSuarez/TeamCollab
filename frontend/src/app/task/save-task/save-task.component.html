@@ -63,20 +63,20 @@
     </mat-card-content>
 
     <mat-card-actions>
-        <button class="btn btn-info btn-xs m-1" (click)='saveTaskImg()'>
+        <button class="btn btn-info btn-xs m-1" (click)='saveTaskImg()' matTooltip="Save task" matTooltipPosition="above">
             <mat-icon>save</mat-icon>
         </button>
-        <button *ngIf="flagTask==true" class="btn btn-success btn-xs m-1">
+        <button *ngIf="flagTask==true" class="btn btn-success btn-xs m-1" matTooltip="Assign user" matTooltipPosition="above">
             <span class="material-icons icono" data-bs-toggle="modal" data-bs-target="#modalTeam"
                 (click)="usersTeam()">face</span>
         </button>
         <!-- <button *ngIf="flagTask==true" class="btn btn-warning btn-xs m-1">
             <mat-icon>edit</mat-icon>
         </button> -->
-        <button *ngIf="flagTask==true" class="btn btn-danger btn-xs m-1" (click)='deleteTask()'>
+        <button *ngIf="flagTask==true" class="btn btn-danger btn-xs m-1" (click)='deleteTask()' matTooltip="Delete task" matTooltipPosition="above">
             <mat-icon>delete</mat-icon>
         </button>
-        <button *ngIf="flagTask==true" class="btn btn-warning btn-xs m-1" (click)='newTask()'>
+        <button *ngIf="flagTask==true" class="btn btn-warning btn-xs m-1" (click)='newTask()' matTooltip="New task" matTooltipPosition="above">
             <mat-icon>add</mat-icon>
         </button>
     </mat-card-actions>
@@ -119,7 +119,7 @@
                     <div class="displayFlex" *ngIf="member.userId!=null">
                         <span>{{member.userId.fullName}}</span>
                         <span class="spacer"></span>
-                        <button class="btn btn-success btn-xs m-1" (click)="userAdd(member)">
+                        <button class="btn btn-success btn-xs m-1" (click)="userAdd(member)" *ngIf="!flagEditTask==true">
                             <mat-icon>add</mat-icon>
                         </button>
                         <button class="btn btn-danger btn-xs m-1" (click)="userDelete(member.userId)">
