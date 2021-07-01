@@ -15,6 +15,14 @@ button {
     margin-left: 10px;
     margin-right: 10px;
 }
+.image-name {
+    color: #0000008a;
+    cursor: pointer;
+}
+.search-file-icon {
+    color: #0000008a;
+    cursor: pointer;
+}
 .file-icon {
     color: #0000008a;
 }
