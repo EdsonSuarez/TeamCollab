@@ -246,6 +246,19 @@ input[type="checkbox"]:checked {
     align-items: center;
 }
 
+.assigned{
+    padding: auto;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.usersDiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;}
+
 .spacer {
     flex: 1 0 auto;
 }

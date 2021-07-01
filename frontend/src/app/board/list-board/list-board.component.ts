@@ -215,6 +215,7 @@ export class ListBoardComponent implements OnInit {
     this.toggle = !this.toggle;
   }
 
+
   changeTeam(team: any) {
     localStorage.setItem('team', team.idTeam);
     localStorage.setItem('project', team.idProject);
@@ -222,6 +223,7 @@ export class ListBoardComponent implements OnInit {
     this.projectTitle = team.project;
     this.teamName = team.team;
     
+    this.usersTeamF(team);
     this.board.boardsUser(team.idTeam).subscribe(
       (res) => {
         console.log('Sprint', res.boards);
@@ -525,6 +527,14 @@ export class ListBoardComponent implements OnInit {
 
   showDataTask(task: any) {
     this.detaTask = task;
+    this.taskService.getUsersTask(task._id).subscribe(
+      (res) => {
+        this.detaTask.users = res.users;        
+      },
+      (err) => {
+        console.log(err.error);
+      }
+    )
   }
-  
+
 }
