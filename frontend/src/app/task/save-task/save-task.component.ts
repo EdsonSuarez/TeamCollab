@@ -58,7 +58,6 @@ export class SaveTaskComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.removeItem('task')
-
     if(this.idTask != 'inicio'){
       console.log(this.idTask);
       this.flagTask = true;
@@ -72,19 +71,23 @@ export class SaveTaskComponent implements OnInit {
         }
       )
     }
-
     const teamId = localStorage.getItem('team');
     const boardId = localStorage.getItem('sprint');
     this.taskData.boardId = boardId;
-    this.task.getTasks().subscribe(
-      (res) => {
-        this.teamTasks = res.userTask
-        // console.log(this.teamTasks)
-      },
-      (err) => {
-        console.log(err.error);
-      }
-    )
+    try {
+      this.task.getTasks().subscribe(
+        (res) => {
+          this.teamTasks = res.userTask
+          console.log("tareas se supone",this.teamTasks)
+        },
+        (err) => {
+          console.log(err.error);
+        }
+      )
+    } catch (error) {
+      console.log(error);
+      
+    }
 
     this.fileControl.valueChanges.subscribe((files: any) => {
       this.file = files;
