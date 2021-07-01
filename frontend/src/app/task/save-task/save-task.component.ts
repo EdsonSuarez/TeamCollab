@@ -204,7 +204,6 @@ export class SaveTaskComponent implements OnInit {
       (res: any) => {
         this.successMessageUser = `Task assigned to ${member.userId.fullName}`;
         this.closeAlert(3000);
-        this.teamMembers.member.flagAssigned = true;
         console.log(this.teamMembers);
         
       },

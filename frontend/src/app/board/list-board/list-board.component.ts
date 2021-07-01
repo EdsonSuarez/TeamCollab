@@ -117,7 +117,7 @@ export class ListBoardComponent implements OnInit {
     if (this.auth.isAdmin()) {
       this.team.getTeamAdmin().subscribe(
         (res) => {
-          console.log(res.team);
+          console.log("estoy mirando",res.team);
           const data = res.team;
           let cont = 0;
           data.forEach((board: any) => {
