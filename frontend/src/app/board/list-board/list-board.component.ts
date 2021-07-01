@@ -31,6 +31,7 @@ export class ListBoardComponent implements OnInit {
   public userTemp: any;
   public teamTemp: any;
   public sprint: any;
+  public detaTask: any;
 
   constructor(
     private board: BoardService,
@@ -468,6 +469,46 @@ export class ListBoardComponent implements OnInit {
     localStorage.setItem('task', taskId)
     console.log(taskId);
     
+  }
+
+  updateTask(task: any, status: String) {
+    const tempStatus = task.status;
+    task.status = status;
+    this.taskService.updateTask(task).subscribe(
+      (res) => {
+        task.status = status;
+        this.updateBoard(task, res.task);
+      },
+      (err) => {
+        task.status = tempStatus;
+        this.message = err.error;
+        this.closeAlert();
+      }
+    );
+  }
+
+  updateBoard(task: any, res: any) {
+    if(res.status === 'to-do') {
+      const index = this.taskToDo.indexOf(task);
+      if (index > -1) this.taskToDo.splice(index, 1);
+    } else if(res.status === 'doing') {
+      const index = this.taskDoing.indexOf(task);
+      if (index > -1) this.taskDoing.splice(index, 1);
+    } else if(res.status === 'testing') {
+      const index = this.taskTesting.indexOf(task);
+      if (index > -1) this.taskTesting.splice(index, 1);
+    } else {
+      const index = this.taskDone.indexOf(task);
+      if (index > -1) this.taskDone.splice(index, 1);
+    }
+    if(task.status === 'to-do') this.taskToDo.unshift(res);
+    if(task.status === 'doing') this.taskDoing.unshift(res);
+    if(task.status === 'testing') this.taskTesting.unshift(res);
+    if(task.status === 'done') this.taskDone.unshift(res);
+  }
+
+  showDataTask(task: any) {
+    this.detaTask = task;
   }
   
 }

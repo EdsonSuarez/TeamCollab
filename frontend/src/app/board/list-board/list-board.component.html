@@ -1,100 +1,75 @@
-<div>
-  <input type="checkbox" checkbox="checkbox" (click)="cambio()" />
-  <div class="menu">
-    <span class="material-icons icon">{{
-      toggle ? "arrow_forward_ios" : "arrow_back_ios"
-    }}</span>
-    <div class="menuAll">
-      <div class="menuUpper">
-        <div class="containerTitleMenu">
-          <h3 class="titleMenu">Teams/Proyect</h3>
-          <span
-            class="material-icons"
-            *ngIf="auth.isScrumMaster() || auth.isAdmin()"
-            data-bs-toggle="modal"
-            data-bs-target="#modalAddTeam"
-            (click)="viewProjects()"
-            >add_circle_outline</span
+<input type="checkbox" checkbox="checkbox" (click)="cambio()" />
+<div class="menu">
+  <span class="material-icons icon">{{
+    toggle ? "arrow_forward_ios" : "arrow_back_ios"
+  }}</span>
+  <div class="menuAll">
+    <div class="menuUpper">
+      <div class="containerTitleMenu">
+        <h3 class="titleMenu">Teams/Proyect</h3>
+        <span
+          class="material-icons"
+          *ngIf="auth.isScrumMaster() || auth.isAdmin()"
+          data-bs-toggle="modal"
+          data-bs-target="#modalAddTeam"
+          (click)="viewProjects()"
+          >add_circle_outline</span
+        >
+      </div>
+      <div class="buttonsMenu overflow-auto" *ngIf="teamProject.length">
+        <div *ngFor="let team of teamProject">
+          <div
+            class="containerButton"
+            *ngIf="!auth.isScrumMaster() && !auth.isAdmin()"
           >
-        </div>
-        <div class="buttonsMenu" *ngIf="teamProject.length">
-          <div *ngFor="let team of teamProject">
-            <div
-              class="containerButton"
-              *ngIf="!auth.isScrumMaster() && !auth.isAdmin()"
-            >
-              <div class="change" (click)="changeTeam(team)">
-                {{ team.team + " / " + team.project }}
-              </div>
+            <div class="change" (click)="changeTeam(team)">
+              {{ team.team + " / " + team.project }}
             </div>
-            <div
-              class="containerButton"
-              *ngIf="auth.isScrumMaster() || auth.isAdmin()"
-            >
-              <div class="change" (click)="changeTeam(team)">
-                {{ team.team + " / " + team.project }}
-              </div>
-              <span class="spacer"></span>
-              <span
-                class="material-icons icono"
-                data-bs-toggle="modal"
-                data-bs-target="#modaldeleteTeam"
-                >delete</span
-              >
-              <span
-                class="material-icons icono"
-                data-bs-toggle="modal"
-                data-bs-target="#modalTeam"
-                (click)="usersTeamF(team)"
-                >edit_note</span
-              >
+          </div>
+          <div
+            class="containerButton"
+            *ngIf="auth.isScrumMaster() || auth.isAdmin()"
+          >
+            <div class="change" (click)="changeTeam(team)">
+              {{ team.team + " / " + team.project }}
             </div>
+            <span class="spacer"></span>
+            <span
+              class="material-icons icono"
+              data-bs-toggle="modal"
+              data-bs-target="#modaldeleteTeam"
+              >delete</span
+            >
+            <span
+              class="material-icons icono"
+              data-bs-toggle="modal"
+              data-bs-target="#modalTeam"
+              (click)="usersTeamF(team)"
+              >edit_note</span
+            >
           </div>
         </div>
       </div>
-      <div class="menuLower">
-        <div class="containerTitleMenu">
-          <h3 class="titleMenu">Sprints</h3>
-          <span
-            class="material-icons"
-            *ngIf="auth.isScrumMaster() || auth.isAdmin()"
-            data-bs-toggle="modal"
-            data-bs-target="#modalAddSprint"
-            >add_circle_outline</span
+    </div>
+    <div class="menuLower">
+      <div class="containerTitleMenu">
+        <h3 class="titleMenu">Sprints</h3>
+        <span
+          class="material-icons"
+          *ngIf="auth.isScrumMaster() || auth.isAdmin()"
+          data-bs-toggle="modal"
+          data-bs-target="#modalAddSprint"
+          >add_circle_outline</span
+        >
+      </div>
+      <div class="buttonsMenu overflow-auto" *ngIf="sprints.length">
+        <div *ngFor="let sprint of sprints">
+          <div
+            *ngIf="!auth.isScrumMaster() && !auth.isAdmin()"
+            class="containerButton"
           >
-        </div>
-        <div class="buttonsMenu" *ngIf="sprints.length">
-          <div *ngFor="let sprint of sprints">
-            <div
-              *ngIf="!auth.isScrumMaster() && !auth.isAdmin()"
-              class="containerButton"
-            >
-              <div class="change" (click)="changeSprint(sprint)">
-                {{ sprint.name }}
-              </div>
-            </div>
-
-            <div
-              *ngIf="auth.isScrumMaster() || auth.isAdmin()"
-              class="containerButton"
-            >
-              <div class="change" (click)="changeSprint(sprint)">
-                {{ sprint.name }}
-              </div>
-              <span class="spacer"></span>
-              <span
-                class="material-icons icono"
-                data-bs-toggle="modal"
-                data-bs-target="#modaldeleteSprint"
-                >delete</span
-              >
-              <span
-                class="material-icons icono"
-                data-bs-toggle="modal"
-                data-bs-target="#modalSprint"
-                (click)="SprintF(sprint)"
-                >edit_note</span
-              >
+            <div class="change" (click)="changeSprint(sprint)">
+              {{ sprint.name }}
             </div>
           </div>
 
@@ -109,11 +84,34 @@
             <span
               class="material-icons icono"
               data-bs-toggle="modal"
+              data-bs-target="#modaldeleteSprint"
+              >delete</span
+            >
+            <span
+              class="material-icons icono"
+              data-bs-toggle="modal"
               data-bs-target="#modalSprint"
               (click)="SprintF(sprint)"
               >edit_note</span
             >
           </div>
+        </div>
+
+        <div
+          *ngIf="auth.isScrumMaster() || auth.isAdmin()"
+          class="containerButton"
+        >
+          <div class="change" (click)="changeSprint(sprint)">
+            {{ sprint.name }}
+          </div>
+          <span class="spacer"></span>
+          <span
+            class="material-icons icono"
+            data-bs-toggle="modal"
+            data-bs-target="#modalSprint"
+            (click)="SprintF(sprint)"
+            >edit_note</span
+          >
         </div>
       </div>
     </div>
@@ -123,234 +121,217 @@
 <div class="contents">
   <div class="containerToDo">
     <h3 class="titleSections">To-Do</h3>
-
     <div class="container" *ngIf="taskToDo.length">
-      <div *ngFor="let task of taskToDo">
-        <mat-card
-          class="card lowPriority"
-          *ngIf="task.priority == '1'"
-          (click)="getTask(task._id)"
-          routerLink="/saveTask/{{ task._id }}"
-        >
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
+      <mat-card
+        class="card"
+        [class.lowPriority]="task.priority == '1'"
+        [class.mediumPriority]="task.priority == '2'"
+        [class.highPriority]="task.priority == '3'"
+        *ngFor="let task of taskToDo"
+      >
+        <mat-card-title>
+          <a
+            class="text_center"
+            data-bs-toggle="modal"
+            data-bs-target="#detaTask"
+            (click)="showDataTask(task)"
+            >{{ task.name }}</a
           >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-          <mat-panel-description>
-            <img class="image_center" src="{{ task.imageUrl }}" />
-          </mat-panel-description>
-
-          <!-- <div class="row">
-                            <div class="col-lg-4"><button class="btn btn-danger btn-sx textSize" (click)="updateTask(task, 'to-do')">To-do</button></div>
-                            <div class="col-lg-4"><button class="btn btn-warning btn-sx textSize" (click)="updateTask(task, 'doing')">Doing</button></div>
-                            <div class="col-lg-4"><button class="btn btn-success btn-sx textSize" (click)="updateTask(task, 'done')">Done</button></div>
-                        </div>
-                        <div class="row m-3">
-                            <div class="col-lg-6"><button class="btn btn-light btn-sx textSize" (click)="updateTask(task, 'testing')">Testing</button></div>
-                            <div class="col-lg-6"><button class="btn btn-dark btn-sx textSize" (click)="updateTask(task, 'otro')">Otro</button></div>
-                        </div> -->
-        </mat-card>
-        <mat-card
-          class="card mediumPriority"
-          *ngIf="task.priority == '2'"
-          (click)="getTask(task._id)"
-        >
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
-          >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-          <mat-panel-description>
-            <img class="image_center" src="{{ task.imageUrl }}" />
-          </mat-panel-description>
-        </mat-card>
-        <mat-card
-          class="card highPriority"
-          *ngIf="task.priority == '3'"
-          (click)="getTask(task._id)"
-        >
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
-          >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-          <mat-panel-description>
-            <img class="image_center" src="{{ task.imageUrl }}" />
-          </mat-panel-description>
-        </mat-card>
-      </div>
+        </mat-card-title>
+        <mat-card-content>
+          <p>{{ task.description }}</p>
+        </mat-card-content>
+        <div class="row">
+          <div class="btn-group" role="group">
+            <button
+              class="btn btn-danger btn-sx textSize"
+              (click)="updateTask(task, 'to-do')"
+            >
+              To-do
+            </button>
+            <button
+              class="btn btn-warning btn-sx textSize"
+              (click)="updateTask(task, 'doing')"
+            >
+              Doing
+            </button>
+            <button
+              class="btn btn-success btn-sx textSize"
+              (click)="updateTask(task, 'done')"
+            >
+              Done
+            </button>
+            <button
+              class="btn btn-light btn-sx textSize"
+              (click)="updateTask(task, 'testing')"
+            >
+              Testing
+            </button>
+          </div>
+        </div>
+      </mat-card>
     </div>
   </div>
 
   <div class="containerDoing">
     <h3 class="titleSections">Doing</h3>
     <div class="container" *ngIf="taskDoing.length">
-      <div *ngFor="let task of taskDoing">
-        <mat-card class="card lowPriority" *ngIf="task.priority == '1'">
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
+      <mat-card
+        class="card"
+        [class.lowPriority]="task.priority == '1'"
+        [class.mediumPriority]="task.priority == '2'"
+        [class.highPriority]="task.priority == '3'"
+        *ngFor="let task of taskDoing"
+      >
+        <mat-card-title>
+          <a
+            class="text_center"
+            data-bs-toggle="modal"
+            data-bs-target="#detaTask"
+            (click)="showDataTask(task)"
+            >{{ task.name }}</a
           >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-        </mat-card>
-        <mat-card class="card mediumPriority" *ngIf="task.priority == '2'">
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
-          >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-        </mat-card>
-        <mat-card class="card highPriority" *ngIf="task.priority == '3'">
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
-          >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div>
+        </mat-card-title>
+        <mat-card-content>
+          <p>{{ task.description }}</p>
+        </mat-card-content>
+        <div class="row">
+          <div class="btn-group" role="group">
+            <button
+              class="btn btn-danger btn-sx textSize"
+              (click)="updateTask(task, 'to-do')"
+            >
+              To-do
+            </button>
+            <button
+              class="btn btn-warning btn-sx textSize"
+              (click)="updateTask(task, 'doing')"
+            >
+              Doing
+            </button>
+            <button
+              class="btn btn-success btn-sx textSize"
+              (click)="updateTask(task, 'done')"
+            >
+              Done
+            </button>
+            <button
+              class="btn btn-light btn-sx textSize"
+              (click)="updateTask(task, 'testing')"
+            >
+              Testing
+            </button>
+          </div>
+        </div>
+      </mat-card>
     </div>
   </div>
 
   <div class="containerTesting">
     <h3 class="titleSections">Testing</h3>
     <div class="container" *ngIf="taskTesting.length">
-      <div *ngFor="let task of taskTesting">
-        <mat-card class="card lowPriority" *ngIf="task.priority == '1'">
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
+      <mat-card
+        class="card"
+        [class.lowPriority]="task.priority == '1'"
+        [class.mediumPriority]="task.priority == '2'"
+        [class.highPriority]="task.priority == '3'"
+        *ngFor="let task of taskTesting"
+      >
+        <mat-card-title>
+          <a
+            class="text_center"
+            data-bs-toggle="modal"
+            data-bs-target="#detaTask"
+            (click)="showDataTask(task)"
+            >{{ task.name }}</a
           >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-        </mat-card>
-        <mat-card class="card mediumPriority" *ngIf="task.priority == '2'">
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
-          >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-        </mat-card>
-        <mat-card class="card highPriority" *ngIf="task.priority == '3'">
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
-          >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div>
+        </mat-card-title>
+        <mat-card-content>
+          <p>{{ task.description }}</p>
+        </mat-card-content>
+        <div class="row">
+          <div class="btn-group" role="group">
+            <button
+              class="btn btn-danger btn-sx textSize"
+              (click)="updateTask(task, 'to-do')"
+            >
+              To-do
+            </button>
+            <button
+              class="btn btn-warning btn-sx textSize"
+              (click)="updateTask(task, 'doing')"
+            >
+              Doing
+            </button>
+            <button
+              class="btn btn-success btn-sx textSize"
+              (click)="updateTask(task, 'done')"
+            >
+              Done
+            </button>
+            <button
+              class="btn btn-light btn-sx textSize"
+              (click)="updateTask(task, 'testing')"
+            >
+              Testing
+            </button>
+          </div>
+        </div>
+      </mat-card>
     </div>
   </div>
 
   <div class="containerDone">
     <h3 class="titleSections">Done</h3>
     <div class="container" *ngIf="taskDone.length">
-      <div *ngFor="let task of taskDone">
-        <mat-card class="card lowPriority" *ngIf="task.priority == '1'">
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
+      <mat-card
+        class="card"
+        [class.lowPriority]="task.priority == '1'"
+        [class.mediumPriority]="task.priority == '2'"
+        [class.highPriority]="task.priority == '3'"
+        *ngFor="let task of taskDone"
+      >
+        <mat-card-title>
+          <a
+            class="text_center"
+            data-bs-toggle="modal"
+            data-bs-target="#detaTask"
+            (click)="showDataTask(task)"
+            >{{ task.name }}</a
           >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-        </mat-card>
-        <mat-card class="card mediumPriority" *ngIf="task.priority == '2'">
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
-          >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-        </mat-card>
-        <mat-card class="card highPriority" *ngIf="task.priority == '3'">
-          <mat-card-title
-            ><span class="text_center">{{ task.name }}</span></mat-card-title
-          >
-          <mat-card-content>
-            <span>{{ task.description }}</span>
-            <p>
-              Estado: <span>{{ task.status }}</span>
-            </p>
-            <p>
-              Priority: <span>{{ task.priority }}</span>
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div>
+        </mat-card-title>
+        <mat-card-content>
+          <p>{{ task.description }}</p>
+        </mat-card-content>
+        <div class="row">
+          <div class="btn-group" role="group">
+            <button
+              class="btn btn-danger btn-sx textSize"
+              (click)="updateTask(task, 'to-do')"
+            >
+              To-do
+            </button>
+            <button
+              class="btn btn-warning btn-sx textSize"
+              (click)="updateTask(task, 'doing')"
+            >
+              Doing
+            </button>
+            <button
+              class="btn btn-success btn-sx textSize"
+              (click)="updateTask(task, 'done')"
+            >
+              Done
+            </button>
+            <button
+              class="btn btn-light btn-sx textSize"
+              (click)="updateTask(task, 'testing')"
+            >
+              Testing
+            </button>
+          </div>
+        </div>
+      </mat-card>
     </div>
   </div>
 
@@ -723,6 +704,71 @@
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
       Close
     </button>
+  </div>
+</div>
+
+<div id="detaTask" class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content" *ngIf="detaTask">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title">
+          <mat-icon class="sizeIconDetaTask">info</mat-icon> Detalle de la
+          tarea:
+          <span class="badge bg-dark textSizeDetaTask">{{
+            detaTask.name
+          }}</span>
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <p>
+              {{ detaTask.description }}
+            </p>
+            <h3>Fecha: {{ detaTask.date | date: "dd-MM-yyyy" }}</h3>
+            <h3>
+              Prioridad:
+              <span
+                class="badge text-dark"
+                [class.lowPriority]="detaTask.priority == '1'"
+                [class.mediumPriority]="detaTask.priority == '2'"
+                [class.highPriority]="detaTask.priority == '3'"
+                >{{
+                  detaTask.priority == 3
+                    ? "Alta"
+                    : detaTask.priority == 2
+                    ? "Media"
+                    : "Baja"
+                }}</span
+              >
+            </h3>
+          </div>
+          <div class="col-lg-6 alinearImgDetaTask">
+            <img
+              *ngIf="detaTask.imageUrl"
+              src="{{ detaTask.imageUrl }}"
+              alt="Img task"
+              width="100"
+              height="100"
+            />
+            <mat-icon *ngIf="!detaTask.imageUrl" class="sizeIconDetaTaskImg"
+              >local_offer</mat-icon
+            >
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
