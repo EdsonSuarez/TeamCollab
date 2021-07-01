@@ -61,10 +61,10 @@
             <span class="material-icons icono" data-bs-toggle="modal" data-bs-target="#modalTeam"
                 (click)="usersTeam()">face</span>
         </button>
-        <button *ngIf="flagTask==true" class="btn btn-warning btn-xs m-1">
+        <!-- <button *ngIf="flagTask==true" class="btn btn-warning btn-xs m-1">
             <mat-icon>edit</mat-icon>
-        </button>
-        <button *ngIf="flagTask==true" class="btn btn-danger btn-xs m-1">
+        </button> -->
+        <button *ngIf="flagTask==true" class="btn btn-danger btn-xs m-1" (click)='deleteTask()'>
             <mat-icon>delete</mat-icon>
         </button>
     </mat-card-actions>

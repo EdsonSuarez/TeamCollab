@@ -60,7 +60,7 @@
 
             <div class="container" *ngIf="taskToDo.length">
                 <div *ngFor="let task of taskToDo">
-                    <mat-card class="card lowPriority" *ngIf="task.priority == '1'" routerLink="/saveTask/{{task._id}}" >
+                    <mat-card class="card lowPriority" *ngIf="task.priority == '1'" (click)='getTask(task._id)' routerLink="/saveTask/{{task._id}}">
                         <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
                         <mat-card-content>
                             <span>{{ task.description }}</span>
@@ -71,7 +71,7 @@
                             <img class="image_center" src="{{ task.imageUrl}}">
                         </mat-panel-description>
                     </mat-card>
-                    <mat-card class="card mediumPriority" *ngIf="task.priority == '2'">
+                    <mat-card class="card mediumPriority" *ngIf="task.priority == '2'" (click)='getTask(task._id)'>
                         <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
                         <mat-card-content>
                             <span>{{ task.description }}</span>
@@ -82,7 +82,7 @@
                             <img class="image_center" src="{{ task.imageUrl}}">
                         </mat-panel-description>
                     </mat-card>
-                    <mat-card class="card highPriority" *ngIf="task.priority == '3'">
+                    <mat-card class="card highPriority" *ngIf="task.priority == '3'" (click)='getTask(task._id)'>
                         <mat-card-title><span class="text_center">{{ task.name }}</span></mat-card-title>
                         <mat-card-content>
                             <span>{{ task.description }}</span>

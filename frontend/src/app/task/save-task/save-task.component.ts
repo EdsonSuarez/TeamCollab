@@ -59,19 +59,33 @@ export class SaveTaskComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem('task')
 
+    if(this.idTask != 'inicio'){
+      console.log(this.idTask);
+      this.flagTask = true;
+      this.task.getOneTask(this.idTask).subscribe(
+        (res) => {
+          this.taskData = res.userTask;
+          console.log(res.userTask)
+        },
+        (err) => {
+          console.log(err.error);
+        }
+      )
+    }
+
     const teamId = localStorage.getItem('team');
     const boardId = localStorage.getItem('sprint');
     this.taskData.boardId = boardId;
-    console.log(teamId)
     this.task.getTasks().subscribe(
       (res) => {
         this.teamTasks = res.userTask
-        console.log(this.teamTasks)
+        // console.log(this.teamTasks)
       },
       (err) => {
         console.log(err.error);
       }
     )
+
     this.fileControl.valueChanges.subscribe((files: any) => {
       this.file = files;
     })
@@ -152,6 +166,19 @@ export class SaveTaskComponent implements OnInit {
         )
       }
     }
+  }
+
+  deleteTask(){
+    this.task.deleteTask(this.idTask).subscribe(
+      (res: any) => {
+        this.router.navigate(['/board/inicio']);
+      },
+      (err) => {
+        console.log(err);
+        this.errorMessage = err.error;
+        this.closeAlert(3000);
+      }
+    )
   }
 
   userAdd(member: any){
