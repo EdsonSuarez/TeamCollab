@@ -764,6 +764,13 @@
               >local_offer</mat-icon
             >
           </div>
+            <h3 class="assigned">Assigned user</h3>
+            <div class="usersDiv" >
+                <div *ngFor="let user of detaTask.users">
+                    <h3 >{{user.userId.fullName}}</h3>
+                </div>
+
+            </div>
         </div>
       </div>
       <div class="modal-footer">

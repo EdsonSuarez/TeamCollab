@@ -44,6 +44,11 @@ export class TaskService {
     return this.http.post<any>(this.env + "detailTask/add", user);
   }
 
+  getUsersTask(taskId: any) {
+    return this.http.get<any>(this.env + 'detailTask/getUsers/' + taskId);
+  }
+
+
   deleteDetail(userId: any) {
     return this.http.delete<any>(this.env + 'detailTask/delete/' + userId);
   }

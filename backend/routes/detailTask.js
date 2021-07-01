@@ -37,6 +37,14 @@ router.get("/get", Auth, UserAuth, TeachnicalAuth, async (req, res) => {
   return res.status(200).send({ detailTask });
 });
 
+router.get("/getUsers/:_id?", Auth, UserAuth, async (req, res) => {
+  const users = await DetailTask.find({ taskId: req.params._id})
+  .populate("userId")
+  .exec();
+  if (!users) return res.status(401).send("Process failed: No DetailTasks to delete");
+  return res.status(200).send({ users });
+});
+
 router.put("/update", Auth, UserAuth, TeachnicalAuth, async (req, res) => {
     if (
         !req.body._id ||
