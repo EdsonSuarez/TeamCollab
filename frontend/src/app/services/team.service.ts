@@ -31,9 +31,7 @@ export class TeamService {
     return this.http.put<any>(this.env + 'team/update', team);
   }
 
-  delete(team: any) {
-    return this.http.delete<any>(this.env + 'team/delete/' + team._id)
-  }
+
 
   getTeamAdmin() {
     return this.http.get<any>(this.env + "team/getAdmin");
@@ -41,5 +39,29 @@ export class TeamService {
   
   deleteDetail(team: any) {
     return this.http.delete<any>(this.env + 'detailTeam/delete/' + team._id);
+  }
+
+  delete(id: String) {
+    return this.http.delete<any>(this.env + 'team/delete/' + id)
+  }
+
+  deleteTaskBoard(id: String) {
+    return this.http.delete<any>(this.env + 'board/deleteTaskBoard/' + id)
+  }
+
+  deleteBoard(id: String) {
+    return this.http.delete<any>(this.env + 'board/deleteBoard/' + id)
+  }
+
+  getDetailTask(id: String) {
+    return this.http.get<any>(this.env + 'detailTask/getMany/' + id)
+  }
+
+  deleteDetailTask(id: String) {
+    return this.http.delete<any>(this.env + 'detailTask/delete/' + id)
+  }
+
+  deleteTask(id: String){
+    return this.http.delete<any>(this.env + 'task/deleteTask/' + id)
   }
 }

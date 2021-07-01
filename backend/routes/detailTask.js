@@ -75,4 +75,14 @@ router.delete("/delete/:_id", Auth, UserAuth, TeachnicalAuth, async (req, res) =
   return res.status(200).send({result: "DetailTask deleted"});
 });
 
+router.get("/getMany/:_id", Auth, UserAuth, TeachnicalAuth, async (req, res) => {
+  const validId = mongoose.Types.ObjectId.isValid(req.params._id);
+  if (!validId) return res.status(401).send("Process failed: Invalid id");
+
+  const detailTask = await DetailTask.find().populate({path:'taskId', populate:{path:'boardId', populate:{path:'teamId', match:{_id: req.params._id}}}}).exec();
+
+  if (!detailTask) return res.status(401).send("Process failed: DetailTask not found");
+  return res.status(200).send({detailTask});
+});
+
 module.exports = router;

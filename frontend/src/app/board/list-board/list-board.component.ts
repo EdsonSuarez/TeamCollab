@@ -437,14 +437,57 @@ export class ListBoardComponent implements OnInit {
     )
   }
   
-  deleteTeam() {
-    
+  deleteTeam(team: any) {
+    const resultado = window.confirm(
+      `Do you want to delete the ${team.team}?`
+    );
+    if (resultado === true) {
+
+      // let exitsDetailTask = true;
+
+      // borrar detailTeam
+      this.team.delete(team.idTeam).subscribe(
+        (res)=>{
+          console.log("aqui lo que borro 1",res)
+        },
+        (err)=>{
+          console.log(err.error)
+        }
+      )
+
+      this.team.deleteBoard(team.idTeam).subscribe(
+        (res)=>{
+          console.log("aqui lo que borro 1",res)
+        },
+        (err)=>{
+          console.log(err.error)
+        }
+      )
+      const index = this.teamProject.indexOf(team); 
+      if (index > -1){
+        this.teamProject.splice(index, 1)
+      } 
+      this.sprints = [];
+    }
+
   }
 
-  deleteSprint(){
-    
-  }
-
+  deleteSprint(sprint: any){
+    console.log(sprint)
+    const resultado = window.confirm(
+    `Do you want to delete the ${sprint.name}?`
+    );
+    if (resultado === true) {
+      this.team.deleteBoard(sprint._id).subscribe(
+        (res)=>{
+          console.log("aqui lo que borro 1",res)
+        },
+        (err)=>{
+          console.log(err.error)
+        }
+      )
+      }
+    }
 
   closeAlert() {
     setTimeout(() => {

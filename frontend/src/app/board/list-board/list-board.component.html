@@ -34,12 +34,7 @@
               {{ team.team + " / " + team.project }}
             </div>
             <span class="spacer"></span>
-            <span
-              class="material-icons icono"
-              data-bs-toggle="modal"
-              data-bs-target="#modaldeleteTeam"
-              >delete</span
-            >
+            <span class="material-icons icono" (click)="deleteSprint(sprint)">delete</span>
             <span
               class="material-icons icono"
               data-bs-toggle="modal"
@@ -81,12 +76,8 @@
               {{ sprint.name }}
             </div>
             <span class="spacer"></span>
-            <span
-              class="material-icons icono"
-              data-bs-toggle="modal"
-              data-bs-target="#modaldeleteSprint"
-              >delete</span
-            >
+            <span class="material-icons icono" (click)="deleteTeam(team)">delete</span>
+
             <span
               class="material-icons icono"
               data-bs-toggle="modal"
@@ -485,84 +476,6 @@
         </button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="modal fade"
-  id="modaldeleteTeam"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Team</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-
-      <div class="modal-body">
-        <p>Do you want to delete the Team?</p>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-danger"
-          data-bs-dismiss="modal"
-          (click)="deleteTeam()"
-        >
-          Delete
-        </button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="modal fade"
-  id="modaldeleteSprint"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Sprint</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-
-      <div class="modal-body">
-        <p>Do you want to delete the Sprint?</p>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-danger"
-          data-bs-dismiss="modal"
-          (click)="deleteSprint()"
-        >
-          Delete
-        </button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
