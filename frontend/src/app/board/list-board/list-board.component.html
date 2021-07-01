@@ -433,7 +433,7 @@
           aria-label="Default"
           aria-describedby="inputGroup-sizing-default"
         />
-        <br>
+        <br />
         <label for="">Description</label>
         <input
           [(ngModel)]="sprint.description"
@@ -442,7 +442,7 @@
           aria-label="Default"
           aria-describedby="inputGroup-sizing-default"
         />
-        <br>
+        <br />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -503,7 +503,7 @@
           aria-describedby="inputGroup-sizing-default"
           placeholder="Name Team"
         />
-        <br>
+        <br />
         <select
           class="form-select"
           aria-label="Default select example"
@@ -729,10 +729,8 @@
         ></button>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <div class="col-lg-12">
-            <p>{{ detaTask.description }}</p>
-          </div>
+        <div class="row text-justify">
+          <p>{{ detaTask.description }}</p>
         </div>
         <div class="row">
           <div class="col-lg-6">
@@ -769,7 +767,13 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning btn-sm" (click)="getTask(detaTask._id)" data-bs-dismiss="modal" *ngIf="!auth.isUser()">
+        <button
+          type="button"
+          class="btn btn-warning btn-sm"
+          (click)="getTask(detaTask._id)"
+          data-bs-dismiss="modal"
+          *ngIf="!auth.isUser()"
+        >
           <mat-icon>edit</mat-icon>
         </button>
         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
