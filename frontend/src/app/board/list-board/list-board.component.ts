@@ -79,6 +79,8 @@ export class ListBoardComponent implements OnInit {
           (res) => {
             console.log('teams by project', res.team);
             this.teamInitial = res.team;
+            console.log(res.team);
+            
             let cont = 0;
             this.teamInitial.forEach((element: any) => {
               if (cont == 0) {
@@ -122,7 +124,7 @@ export class ListBoardComponent implements OnInit {
     if (this.auth.isAdmin()) {
       this.team.getTeamAdmin().subscribe(
         (res) => {
-          console.log(res.team);
+          console.log("estoy mirando",res.team);
           const data = res.team;
           let cont = 0;
           data.forEach((board: any) => {
@@ -163,7 +165,7 @@ export class ListBoardComponent implements OnInit {
     } else {
       this.board.teamsUser().subscribe(
         (res) => {
-          console.log('teamsUser', res.teamsUser);
+          // console.log('teamsUser', res.teamsUser);
           const data = res.teamsUser;
           let cont = 0;
           data.forEach((board: any) => {
@@ -186,7 +188,7 @@ export class ListBoardComponent implements OnInit {
             if(this.idProject == 'inicio') {            
               if(localStorage.getItem('sprint') && localStorage.getItem('team')) {
                 if(cont == 0) {
-                  console.log("existe local estorage de T & S")
+                  // console.log("existe local estorage de T & S")
                   const sprint = { _id: localStorage.getItem('sprint')};                
                   this.changeSprint(sprint)
                 }

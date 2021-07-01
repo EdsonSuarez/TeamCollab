@@ -173,7 +173,7 @@ router.delete("/delete/:_id", async (req, res) => {
 
   const task = await Task.findByIdAndDelete(req.params._id);
   if (!task) return res.status(401).send("Process failed: Error deleting task");
-  res.status(200).send("Process successfull: Task deleted");
+  res.status(200).send({result: "Process successfull: Task deleted"});
 });
 
 module.exports = router;

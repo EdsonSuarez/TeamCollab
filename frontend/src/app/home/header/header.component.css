@@ -10,13 +10,18 @@ img {
 
 a {
   text-decoration: none;
-  color: white;
+  color: black;
   padding-top: 1rem;
 }
 
-.bgHeader {
+.bgHeader{
   background-color: #fc998e;
   height: 60px;
+  width: 100%;
+}
+
+.btHeader{
+  color: white;
 }
 
 .accountbtn{
@@ -27,6 +32,7 @@ a {
 
 .photo_container {
   width: 100%;
+  color: white;
 }
 
 .photo_default {

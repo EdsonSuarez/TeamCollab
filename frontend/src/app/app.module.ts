@@ -37,6 +37,7 @@ import { ListBoardComponent } from './board/list-board/list-board.component';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { HomeComponent } from './home/home/home.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
@@ -105,6 +106,7 @@ import { ProjectPipe } from './pipe/project.pipe';
     MatSelectModule,
     NgxMatFileInputModule,
     ToastrModule.forRoot(),
+    MatTooltipModule
   ],
   providers: [
     AuthService,
