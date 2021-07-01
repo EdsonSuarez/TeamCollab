@@ -18,6 +18,7 @@ export class ListProjectComponent implements OnInit {
   public formHide: Boolean;
   public errorMessage: string;
   public confiEdit: Boolean;
+  public filter_search: string;
 
   constructor( public authService: AuthService, private projectService: ProjectService, private toastrService: ToastrService ) {
     this.projects = {};
@@ -28,13 +29,14 @@ export class ListProjectComponent implements OnInit {
     this.formHide = false;
     this.errorMessage = '';
     this.confiEdit = false;
+    this.filter_search = '';
   }
 
   ngOnInit(): void {
     if(this.authService.isAdmin()) this.listAdmin();
     if(this.authService.isScrumMaster()) this.listScrum();
     if(this.authService.isUserLeader()) this.listUserLeader();
-    if(localStorage.getItem('sprint') && localStorage.getItem('team')){
+    if(localStorage.getItem('sprint') && localStorage.getItem('team')) {
       localStorage.removeItem('team');
       localStorage.removeItem('sprint');
     }

@@ -16,13 +16,16 @@
       </div>
       <div class="row">
         <div [class]="listClass">
+          <div class="row">
+            <input type="search" class="form-control" placeholder="Filtrar por el nombre del proyecto" [(ngModel)]="filter_search">
+          </div>
           <div class="row justify-content-center" *ngIf="!cargando">
             <div
               class="card m-2"
               [class.card-secondary]="!project.active"
               [class.card-success]="project.active"
               style="width: 18rem"
-              *ngFor="let project of projects"
+              *ngFor="let project of projects | projects: filter_search"
             >
               <div class="card-header">
                 {{ project.name }}

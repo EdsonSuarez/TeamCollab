@@ -55,6 +55,8 @@ import { UpdateProjectAdminComponent } from './admin/update-project-admin/update
 import { ListBoardAdminComponent } from './admin/list-board-admin/list-board-admin.component';
 import { UpdateBoardAdminComponent } from './admin/update-board-admin/update-board-admin.component';
 
+import { ProjectPipe } from './pipe/project.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +81,7 @@ import { UpdateBoardAdminComponent } from './admin/update-board-admin/update-boa
     ListBoardAdminComponent,
     UpdateBoardAdminComponent,
     ProfileComponent,
+    ProjectPipe
   ],
   imports: [
     BrowserModule,
