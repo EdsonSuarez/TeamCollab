@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PerfilService } from 'src/app/services/perfil.service';
 import { AdminService } from '../../services/admin.service';
 import { UpdateProfileComponent } from '../update-profile/update-profile.component';
 
@@ -19,7 +20,7 @@ export class ProfileComponent implements OnInit {
   public profileData: any;
   public errorMessage: String;
 
-  constructor(private admin: AdminService, public dialog: MatDialog) {
+  constructor( private admin: AdminService, public dialog: MatDialog, public perfilService: PerfilService ) {
     this.profileData = {};
     this.errorMessage = '';
   }
@@ -32,10 +33,10 @@ export class ProfileComponent implements OnInit {
     this.admin.getUser().subscribe(
       (res) => {
         this.profileData = res.user;
-        console.log(this.profileData);
+        // console.log(this.profileData);
       },
       (err) => {
-        this.errorMessage = err.error; 
+        this.errorMessage = err.error;
         this.closeAlert();
       }
     );

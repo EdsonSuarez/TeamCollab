@@ -56,15 +56,15 @@
       *ngIf="auth.loggedIn()"
     >
       <div class="photo_container">
-        <div *ngIf="!photo" class="photo_default">
+        <div *ngIf="perfilService.datosUser.imageUrl === ''" class="photo_default">
           <div><mat-icon> account_circle </mat-icon></div>
           <div>
-            <p>{{ profile.fullname }}</p>
+            <p>{{ perfilService.datosUser.fullName }}</p>
           </div>
         </div>
-        <div *ngIf="photo" class="user_photo">
-          <img src="{{ profile.photo }}" alt="User photo" />
-          <p>{{ profile.fullname }}</p>
+        <div *ngIf="perfilService.datosUser.imageUrl !== ''" class="user_photo">
+          <img src="{{ perfilService.datosUser.imageUrl }}" alt="User photo" />
+          <p>{{ perfilService.datosUser.fullName }}</p>
         </div>
       </div>
     </button>

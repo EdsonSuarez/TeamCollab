@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { PerfilService } from 'src/app/services/perfil.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   public loginData: any;
   public errorMessage: String;
 
-  constructor( private router: Router, private authService: AuthService) {
+  constructor( private router: Router, private authService: AuthService, private perfilService: PerfilService ) {
     this.loginData = {};
     this.errorMessage = '';
   }
@@ -31,6 +32,8 @@ export class LoginComponent implements OnInit {
         (res: any) => {
           console.log(res);
           localStorage.setItem('token', res.jwtToken);
+          const dataToken = this.authService.getDataToken();
+          this.perfilService.datosUser = dataToken;
           if(this.authService.isAdmin()) {
             this.router.navigate(['/project']);
           } else if(this.authService.isScrumMaster()) {

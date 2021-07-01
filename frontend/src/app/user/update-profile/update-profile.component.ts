@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AdminService } from '../../services/admin.service';
 import { profileData } from '../profile/profile.component';
 import { Router } from '@angular/router';
+import { PerfilService } from 'src/app/services/perfil.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-update-profile',
@@ -20,7 +22,9 @@ export class UpdateProfileComponent implements OnInit {
     private admin: AdminService,
     public dialogRef: MatDialogRef<UpdateProfileComponent>,
     @Inject(MAT_DIALOG_DATA) public data: profileData,
-    private router: Router
+    private router: Router,
+    public perfilService: PerfilService,
+    private authService: AuthService
   ) {
     this.errorMessage = '';
     this.enabledP = false;
@@ -57,13 +61,14 @@ export class UpdateProfileComponent implements OnInit {
       const dataProfile = new FormData();
       dataProfile.append('fullName', String(this.data.fullName));
       dataProfile.append('email', String(this.data.email));
-      dataProfile.append('password', String(this.data.password));
-      if (this.selectedFile) {
-        dataProfile.append('image', this.selectedFile, this.selectedFile.name);
-      }
+      if(this.data.password !== '') dataProfile.append('password', String(this.data.password));
+      if (this.selectedFile) dataProfile.append('image', this.selectedFile, this.selectedFile.name);
       this.admin.updateProfile(dataProfile).subscribe(
         (res) => {
-          this.data = res.result;
+          localStorage.setItem('token', res.jwtToken);
+          const dataToken = this.authService.getDataToken();
+          this.perfilService.datosUser = dataToken;
+          this.data = dataToken;
           this.onNoClick();
         },
         (err) => {

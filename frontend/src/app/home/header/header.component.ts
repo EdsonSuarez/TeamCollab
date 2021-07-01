@@ -1,25 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { PerfilService } from 'src/app/services/perfil.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  public profile: any;
-  public photo: Boolean;
 
-  constructor(public auth: AuthService) {
-    this.profile = {};
-    this.photo = false;
-  }
+  constructor( public auth: AuthService, public perfilService: PerfilService ) { }
 
-  ngOnInit(): void {
-    this.headProf();
-  }
+  ngOnInit(): void { }
 
-  headProf() {
-    this.profile = this.auth.profile();
-    if (this.profile.photo) this.photo = true;
-  }
 }

@@ -3,17 +3,17 @@
     <mat-card-title> Profile </mat-card-title>
     <mat-card-content>
       <div class="photoProfile">
-        <img src="{{ profileData.imageUrl }}" alt="User" />
+        <img *ngIf="perfilService.datosUser.imageUrl" src="{{ perfilService.datosUser.imageUrl }}" alt="User" />
       </div>
       <div class="container">
         <div class="card-body">
           <div class="card-body-item">
             <h3><strong>Name:</strong></h3>
-            <h3>{{ profileData.fullName }}</h3>
+            <h3>{{ perfilService.datosUser.fullName }}</h3>
           </div>
           <div class="card-body-item">
             <h3><strong>Email: </strong></h3>
-            <h3>{{ profileData.email }}</h3>
+            <h3>{{ perfilService.datosUser.email }}</h3>
           </div>
         </div>
       </div>

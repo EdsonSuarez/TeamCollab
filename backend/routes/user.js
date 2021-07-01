@@ -28,14 +28,12 @@ router.post("/add", async (req, res) => {
   const role = await Role.findOne({ name: "user" });
   if (!role)
     return res.status(401).send("Process failed: No role was assigned");
-  const imageUrl =
-    req.protocol + "://" + req.get("host") + "/img/users/1234567890.jpg";
   user = new User({
     fullName: req.body.fullName,
     email: req.body.email,
     password: hash,
     roleId: role._id,
-    imageUrl: imageUrl,
+    imageUrl: "",
   });
 
   try {
@@ -100,15 +98,12 @@ router.post("/addUserAdmin", Auth, UserAuth, Admin, async (req, res) => {
   if (!role)
     return res.status(401).send("Process failed: No role was assigned");
 
-  const imageUrl =
-    req.protocol + "://" + req.get("host") + "/img/users/1234567890.jpg";
-
   user = new User({
     fullName: req.body.fullName,
     email: req.body.email,
     password: hash,
     roleId: role._id,
-    imageUrl: imageUrl,
+    imageUrl: "",
   });
 
   try {
@@ -142,8 +137,7 @@ router.put("/update", Auth, UserAuth, Admin, async (req, res) => {
       return res.status(401).send("Process failed: The email isn't available");
   }
 
-  let hash = await User.findById(req.body._id);
-  hash = hash.password;
+  hash = findUser.password;
   if (req.body.password) hash = await bcrypt.hash(req.body.password, 10);
 
   const role = await Role.findOne({ name: req.body.roleId });
@@ -164,43 +158,33 @@ router.put("/update", Auth, UserAuth, Admin, async (req, res) => {
 });
 
 router.put("/updateImg", mult, Upload, Auth, UserAuth, async (req, res) => {
-  if (!req.user._id)
-    return res.status(401).send("Process failed: Incomplete data");
   const findUser = await User.findById(req.user._id);
-  if (!findUser) return res.status(401).send("Process failed: Invalid User");
-  const email = await User.findOne({ email: req.body.email });
-  if (email && email.email != req.body.email)
-    return res.status(401).send("Process failed: Email already exists");
-  let hash = "";
-  if (findUser.password == req.body.password || !req.body.password) {
-    hash = findUser.password;
-  } else {
-    hash = await bcrypt.hash(req.body.password, 10);
-  }
-  const url = req.protocol + "://" + req.get("host") + "/";
-  let imageUrl = url + "img/users/1234567890.png";
-  try {
-    if (req.files !== undefined && req.files.image.type) {
-      let serverImg =
-        "./img/users/" + moment().unix() + path.extname(req.files.image.path);
-      fs.createReadStream(req.files.image.path).pipe(
-        fs.createWriteStream(serverImg)
-      );
-      imageUrl =
-        url +
-        "img/users/" +
-        moment().unix() +
-        path.extname(req.files.image.path);
-    }
-  } catch (error) {
-    if (findUser.imageUrl) {
-      imageUrl = findUser.imageUrl;
-    } else {
-      imageUrl = url + "img/users/1234567890.png";
-    }
+
+  if (findUser.email !== req.body.email) {
+    const findEmail = await User.findOne({ email: req.body.email });
+    if (findEmail)
+      return res.status(401).send("Process failed: The email isn't available");
   }
 
-  const user = await User.findByIdAndUpdate(req.user._id, {
+  hash = findUser.password;
+  if (req.body.password) hash = await bcrypt.hash(req.body.password, 10);
+
+  let imageUrl = findUser.imageUrl;
+  if (Object.keys(req.files).length !== 0 && req.files.image.type) {
+    const url = req.protocol + "://" + req.get("host") + "/";
+    let serverImg =
+      "./uploads/user/" + moment().unix() + path.extname(req.files.image.path);
+    fs.createReadStream(req.files.image.path).pipe(
+      fs.createWriteStream(serverImg)
+    );
+    imageUrl =
+      url +
+      "uploads/user/" +
+      moment().unix() +
+      path.extname(req.files.image.path);
+  }
+
+  let user = await User.findByIdAndUpdate(req.user._id, {
     fullName: req.body.fullName,
     email: req.body.email,
     password: hash,
@@ -209,8 +193,9 @@ router.put("/updateImg", mult, Upload, Auth, UserAuth, async (req, res) => {
     active: true,
   });
   if (!user) return res.status(401).send("Process failed: Error updating user");
-  const result = await User.findById(req.user._id);
-  return res.status(200).send({ result });
+  user = await User.findById(user._id).populate("roleId", "name").exec();
+  const jwtToken = user.generateJWT();
+  return res.status(200).send({ jwtToken });
 });
 
 router.put("/delete", Auth, UserAuth, Admin, async (req, res) => {

@@ -20,7 +20,7 @@
     <mat-dialog-content>
       <div class="container">
         <div class="photoProfile">
-          <img src="{{ data.imageUrl }}" alt="User" />
+          <img *ngIf="data.imageUrl" src="{{ data.imageUrl }}" alt="User" />
         </div>
         <input
           *ngIf="changImg"
