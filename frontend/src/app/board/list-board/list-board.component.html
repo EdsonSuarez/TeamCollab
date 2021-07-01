@@ -424,24 +424,26 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body displayFlex">
-        <span>Name:</span>
-        <span class="spacer"></span>
-        <textarea name="name" rows="1" cols="30">{{ sprint.name }} </textarea>
-        <span class="spacer"></span>
-      </div>
-      <div class="modal-body displayFlex">
-        <span>Description:</span>
-        <span class="spacer"></span>
-        <textarea
-          name="description"
-          rows="3"
-          cols="30"
+      <div class="modal-body">
+        <label for="exampleInputEmail1">Name</label>
+        <input
+          [(ngModel)]="sprint.name"
+          type="text"
+          class="form-control"
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+        />
+        <br>
+        <label for="">Description</label>
+        <input
           [(ngModel)]="sprint.description"
-        ></textarea>
-        <span class="spacer"></span>
+          type="text"
+          class="form-control"
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+        />
+        <br>
       </div>
-
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
@@ -501,6 +503,7 @@
           aria-describedby="inputGroup-sizing-default"
           placeholder="Name Team"
         />
+        <br>
         <select
           class="form-select"
           aria-label="Default select example"
@@ -764,6 +767,9 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-warning btn-sm" (click)="getTask(detaTask._id)" data-bs-dismiss="modal" *ngIf="!auth.isUser()">
+          <mat-icon>edit</mat-icon>
+        </button>
         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
           Close
         </button>
@@ -776,7 +782,7 @@
   mat-fab
   class="add-task-button"
   mat-button
-  [routerLink]="['/saveTask/']"
+  [routerLink]="['/saveTask/inicio']"
   *ngIf="!auth.isUser()"
 >
   <mat-icon

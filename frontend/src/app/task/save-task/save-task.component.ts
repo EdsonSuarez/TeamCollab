@@ -25,6 +25,7 @@ export class SaveTaskComponent implements OnInit {
   public UserSelect: any;
   public userTemp: any;
   public flagTask: boolean;
+  public flagImage: boolean;
 
   // File variables
   fileControl: FormControl;
@@ -43,6 +44,7 @@ export class SaveTaskComponent implements OnInit {
     this.UserSelect = [];
     this.userTemp = []; 
     this.flagTask = false;
+    this.flagImage = true;
 
     // File variables
     this.fileControl = new FormControl(this.file)
@@ -61,6 +63,7 @@ export class SaveTaskComponent implements OnInit {
     if(this.idTask != 'inicio'){
       console.log(this.idTask);
       this.flagTask = true;
+      this.flagImage = false
       this.task.getOneTask(this.idTask).subscribe(
         (res) => {
           this.taskData = res.userTask;
@@ -171,9 +174,16 @@ export class SaveTaskComponent implements OnInit {
     }
   }
 
+  addImage() {
+    this.flagImage = true;
+  }
   deleteTask(){
-    this.task.deleteTask(this.idTask).subscribe(
+    // let taskId = localStorage.getItem('team');
+    const taskId = this.idTask;
+    this.task.deleteTask(taskId).subscribe(
       (res: any) => {
+        console.log('Deleted Task');
+        
         this.router.navigate(['/board/inicio']);
       },
       (err) => {
