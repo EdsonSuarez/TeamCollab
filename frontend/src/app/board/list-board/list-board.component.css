@@ -289,3 +289,7 @@ mat-icon {
     align-items: center;
 }
 
+.text-justify {
+    text-align: justify;
+}
+
