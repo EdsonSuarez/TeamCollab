@@ -77,7 +77,7 @@ export class AuthService {
     } else {
       let jwtData = jwtToken.split('.')[1];
       let decodedJwtJsonData = window.atob(jwtData);
-      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);  
       return decodedJwtData.roleId.name !== 'user' && decodedJwtData.roleId.name !== 'technicalLeader' ? false : true;
     }
   }
@@ -91,6 +91,18 @@ export class AuthService {
       let decodedJwtJsonData = window.atob(jwtData);
       let decodedJwtData = JSON.parse(decodedJwtJsonData);
       return decodedJwtData.roleId.name !== 'user' ? false : true;
+    }
+  }
+
+  idUser(){
+    let jwtToken = localStorage.getItem('token');
+    if (jwtToken == null) {
+      return;
+    } else {
+      let jwtData = jwtToken.split('.')[1];
+      let decodedJwtJsonData = window.atob(jwtData);
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      return decodedJwtData._id;
     }
   }
 }

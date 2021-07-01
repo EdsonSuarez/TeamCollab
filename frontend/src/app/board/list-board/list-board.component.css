@@ -19,7 +19,7 @@ input[type="checkbox"] {
     right: 98%;
     top: 40%;
     border-radius: 3px;       
-    background: #000;
+    background: #FA897B;
     color: white;
     padding-left: 9px;
 }
@@ -102,7 +102,7 @@ input[type="checkbox"]:checked {
 .titleSections {
     text-align: center;
     padding: 1.5vh;
-    color: #00ffdd;
+    color: #FA897B;
     font-size: 3vh;
     margin: 0;
 }
@@ -131,7 +131,9 @@ input[type="checkbox"]:checked {
     display: flex;
     justify-content: center;
 }
-
+.mat-card {
+    cursor: pointer;
+}
 .mat-card-content {
     padding-top: 11px;
     font-size: 1.6vh;
@@ -161,7 +163,7 @@ input[type="checkbox"]:checked {
     display: flex;
     background-color: #86E3CE;
     opacity: 0.8;
-    width: 60%;
+    width: 70%;
     min-height: 3.5vh;    
     margin-right: auto;
     margin-left: auto;

@@ -20,8 +20,16 @@ export class TaskService {
     return this.http.post<any>(this.env + 'task/addImg', task);
   }
 
+  deleteTask(taskId: any){
+    return this.http.delete<any>(this.env + 'task/delete/' + taskId);
+  }
+
   getTasks(){
     return this.http.get<any>(this.env + 'task/get');
+  }
+
+  getOneTask(taskId: any){
+    return this.http.get<any>(this.env + 'task/get/' + taskId);
   }
 
   updateTask(task: any){
@@ -30,5 +38,13 @@ export class TaskService {
 
   getTeam(teamId: any) {
     return this.http.get<any>(this.env + 'detailTeam/getTeam/' + teamId);
+  }
+
+  addDetail(user: any) {
+    return this.http.post<any>(this.env + "detailTask/add", user);
+  }
+
+  deleteDetail(userId: any) {
+    return this.http.delete<any>(this.env + 'detailTask/delete/' + userId);
   }
 }

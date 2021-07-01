@@ -112,6 +112,15 @@ router.get("/get", Auth, UserAuth, async (req, res) => {
   res.status(200).send({ userTask });
 });
 
+router.get("/get/:_id",  async (req, res) => {
+  const validId = mongoose.Types.ObjectId.isValid(req.params._id);
+  if (!validId) return res.status(401).send("Process failed: Invalid id");
+  const userTask = await Task.findById(req.params._id)
+    // .populate("taskId")
+    // .exec();
+  res.status(200).send({ userTask });
+});
+
 router.get("/getScrum/:userId?", Auth, UserAuth, ScrumM, async (req, res) => {
   const userTasks = await DetailTask.find({ userId: req.params.userId })
     .populate("taskId")
@@ -153,7 +162,7 @@ router.put("/update", Auth, UserAuth, ScrumM, async (req, res) => {
   res.status(200).send({ task });
 });
 
-router.delete("/delete/:_id", Auth, UserAuth, ScrumM, async (req, res) => {
+router.delete("/delete/:_id", Auth, UserAuth, async (req, res) => {
   const validId = mongoose.Types.ObjectId.isValid(req.params._id);
   if (!validId) return res.status(401).send("Process failed: Invalid id");
 

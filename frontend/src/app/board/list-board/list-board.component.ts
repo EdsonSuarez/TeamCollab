@@ -30,6 +30,7 @@ export class ListBoardComponent implements OnInit {
   public UserSelect: any;
   public userTemp: any;
   public teamTemp: any;
+  public sprint: any;
 
   constructor(
     private board: BoardService,
@@ -60,7 +61,8 @@ export class ListBoardComponent implements OnInit {
       this.idProject = params.id;
     });
     this.UserSelect = [];
-    this.userTemp = [];
+    this.userTemp = []; 
+    this.sprint = [];
   }
 
   ngOnInit(): void {
@@ -176,9 +178,17 @@ export class ListBoardComponent implements OnInit {
               this.teamProject.push(objBoard);
             }
 
-            if (this.idProject == 'inicio') {
-              if (cont == 0) {
-                this.changeTeam(objBoard);
+            if(this.idProject == 'inicio') {            
+              if(localStorage.getItem('sprint') && localStorage.getItem('team')) {
+                if(cont == 0) {
+                  console.log("existe local estorage de T & S")
+                  const sprint = { _id: localStorage.getItem('sprint')};                
+                  this.changeSprint(sprint)
+                }
+              } else {
+                if(cont == 0){
+                  this.changeTeam(objBoard)
+                }
               }
             } else {
               if (cont == 0) {
@@ -341,9 +351,10 @@ export class ListBoardComponent implements OnInit {
     }
   }
 
-  saveProject() {
-    if (!this.registerTeam.name && !this.registerTeam.projectId) {
-      this.message = 'Imcomplete Data';
+
+  saveTeam() {
+    if(!this.registerTeam.name && !this.registerTeam.projectId){  
+      this.message = 'Imcomplete Data'
       this.closeAlert();
     } else {
       console.log('datos team', this.registerTeam);
@@ -353,12 +364,19 @@ export class ListBoardComponent implements OnInit {
           const objBoard = {
             team: res.teamResult.name,
             project: res.teamResult.projectId.name,
-            idTeam: res.teamResult._id,
+            idTeam: res.teamResult._id
           };
-          this.teamProject.push(objBoard);
+          this.teamProject.push(objBoard)          
           this.registerTeam = {};
           this.message = 'Team add successful';
           this.closeAlert();
+
+          // agreagar al scrum al team
+          const objDetail = {
+            teamId: objBoard.idTeam,
+            userId: this.auth.idUser()
+          }  
+          this.adduserTeam(objDetail);
         },
         (err) => {
           console.log(err.error);
@@ -391,20 +409,21 @@ export class ListBoardComponent implements OnInit {
     }
   }
 
-  updateTask(task: any, status: String) {
-    const tempStatus = task.status;
-    task.status = status;
-    this.taskService.updateTask(task).subscribe(
-      (res) => {
-        task.status = status;
+  adduserTeam(objDetail: any) {
+    this.team.addDetail(objDetail).subscribe(
+      (res)=>{
+        console.log(res)
       },
-      (err) => {
-        task.status = tempStatus;
-        this.message = err.error;
-        this.closeAlert();
+      (err)=>{
+        console.log(err)
       }
-    );
+    )
   }
+  
+  deleteTeam() {
+    
+  }
+
 
   closeAlert() {
     setTimeout(() => {
@@ -415,4 +434,40 @@ export class ListBoardComponent implements OnInit {
   closeX() {
     this.message = '';
   }
+
+
+
+  SprintF(sprint:any) {
+    console.log("!111!!!!1", sprint)
+    this.sprint = sprint;
+    console.log("tttttttttt",this.teamInitial);
+  }
+
+  sprintEdit() {
+    let board = {}
+    board = {
+              _id: this.sprint._id, 
+              name: this.sprint.name, 
+              description: this.sprint.description, 
+              teamId: this.sprint.teamId,
+              status: this.sprint.status, 
+              active: this.sprint.active,
+            };
+    this.board.update(board).subscribe(
+      (res) => {
+        console.log(res.board);
+      },
+      (err) => {
+        console.log(err.error);
+      }
+            ); 
+  }
+
+  getTask(taskId: any) {
+    this.router.navigate(['/saveTask', taskId]);
+    localStorage.setItem('task', taskId)
+    console.log(taskId);
+    
+  }
+  
 }

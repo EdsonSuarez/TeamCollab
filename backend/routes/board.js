@@ -96,25 +96,34 @@ router.get("/getTasks/:_id", Auth, UserAuth, async (req, res) => {
 
 
 router.put("/update", Auth, ScrumMaster, async (req, res) => {
+  console.log("entro");
   if (
     !req.body._id ||
     !req.body.name ||
     !req.body.description ||
-    !req.body.teamId
+    !req.body.teamId ||
+    !req.body.status
   )
     return res.status(401).send("Process failed: Incomplete data");
-
+  console.log("paso el if");
   const validId = mongoose.Types.ObjectId.isValid(req.body.teamId);
   if (!validId) return res.status(401).send("Process failed: Invalid id");
+  console.log("valid Id");
 
   const exist = await Team.findById(req.body.teamId);
   if (!exist) return res.status(401).send("Process failed: team doesn't exist");
+  console.log("existe");
 
   const board = await Board.findByIdAndUpdate(req.body._id, {
     name: req.body.name,
     description: req.body.description,
     teamId: req.body.teamId,
+    status: req.body.status,
+    active: req.body.active,
   });
+
+  console.log(board);
+
   if (!board) return res.status(401).send("Process failed: board not found");
   return res.status(200).send({ board });
 });
