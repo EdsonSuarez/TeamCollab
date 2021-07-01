@@ -23,17 +23,17 @@ router.post("/add", Auth, UserAuth, ScrumM, async (req, res) => {
     return res.status(401).send("Process failed: Incomplete data");
   const validId = mongoose.Types.ObjectId.isValid(req.body.boardId);
   if (!validId) return;
-  if (req.body.dependency) {
-    let isValid = mongoose.Types.ObjectId.isValid(req.body.dependency);
-    if (!isValid)
-      return res.status(401).send("Process failed: Invalid denpendencyId");
-  }
+  // if (req.body.dependency) {
+  //   let isValid = mongoose.Types.ObjectId.isValid(req.body.dependency);
+  //   if (!isValid)
+  //     return res.status(401).send("Process failed: Invalid denpendencyId");
+  // }
   const task = new Task({
     name: req.body.name,
     description: req.body.description,
     boardId: req.body.boardId,
     duration: req.body.duration,
-    dependency: req.body.dependency,
+    // dependency: req.body.dependency,
     status: "to-do",
     priority: req.body.priority,
   });

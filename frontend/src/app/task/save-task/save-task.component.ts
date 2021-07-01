@@ -179,9 +179,9 @@ export class SaveTaskComponent implements OnInit {
           data.append('description', this.taskData.description);
           data.append('boardId', this.taskData.boardId);
           data.append('priority', this.taskData.priority);
-          data.append('dependency', this.taskData.dependency);
+          // data.append('dependency', this.taskData.dependency);
           console.log(data)
-          console.log(this.taskData.dependency);
+          // console.log(this.taskData.dependency);
           
           this.task.saveTaskImg(data).subscribe(
             (res) => {
