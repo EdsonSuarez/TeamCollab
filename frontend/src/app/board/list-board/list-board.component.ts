@@ -435,6 +435,10 @@ export class ListBoardComponent implements OnInit {
     
   }
 
+  deleteSprint(){
+    
+  }
+
 
   closeAlert() {
     setTimeout(() => {
