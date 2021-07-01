@@ -46,10 +46,10 @@ input[type="checkbox"]:checked {
     width: 32px;     
 }
 
-.contents {
-    height: 100vh;
+.contents{
+    height: 93vh;
     width: 100%;
-    display: flex;
+    display: flex;    
 }
 
 .menuAll {
@@ -57,33 +57,72 @@ input[type="checkbox"]:checked {
     text-align: center;
 }
 
-.menuUpper {
-    height: 40%;    
+.menuUpper{
+    height: 40%; 
+    overflow: auto;  
 }
 
 .menuLower {
     height: 60%;    
+    overflow: auto;  
 }
 
-.containerToDo {
-    width: 20%;    
+.menuUpper::-webkit-scrollbar{
+    width: 1.8vh;
+    background-color: #fc998e;
+    border-left: 1px black solid;    
+}
+
+.menuLower::-webkit-scrollbar{
+    width: 1.8vh;
+    background-color: #86E3CE;
+    border-left: 1px black solid;    
+}
+
+.containerToDo{
+    width: 20%;     
+    overflow: auto;
+    border-right: 1px solid #bbbbbb;    
 }
 
 .containerDoing {
     width: 20%;
+    overflow: auto;
+    border-right: 1px solid #bbbbbb;    
 }
 
 .containerTesting {
     width: 20%;
+    overflow: auto;
+    border-right: 1px solid #bbbbbb;    
 }
 
 .containerDone {
     width: 20%;
+    overflow: auto;
+    border-right: 1px solid #bbbbbb;    
 }
 
 .containerOtro {
     width: 20%;
 }
+
+.containerToDo::-webkit-scrollbar{
+    width: 1px;    
+}
+
+.containerDoing::-webkit-scrollbar{
+    width: 1px;    
+}
+
+.containerTesting::-webkit-scrollbar{
+    width: 1px;    
+}
+
+.containerDone::-webkit-scrollbar{
+    width: 1px;    
+}
+
 
 .container {
     padding-top: 1px;
@@ -98,13 +137,14 @@ input[type="checkbox"]:checked {
     width: 100%;
 }
 
-
-.titleSections {
+.titleSections{
     text-align: center;
     padding: 1.5vh;
     color: #FA897B;
     font-size: 3vh;
     margin: 0;
+    /* border-bottom: 1px solid #bbbbbb;   
+    position: fixed; */
 }
 
 .card {
@@ -162,6 +202,7 @@ input[type="checkbox"]:checked {
 .containerButton {
     display: flex;
     background-color: #86E3CE;
+    /* background-color:#fc998e; */
     opacity: 0.8;
     width: 70%;
     min-height: 3.5vh;    
@@ -202,7 +243,7 @@ input[type="checkbox"]:checked {
     width: 100%;    
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    margin-bottom: 2vh;
+    margin-bottom: 2vh;    
 }
 
 .titleMenu {
