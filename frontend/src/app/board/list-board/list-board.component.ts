@@ -474,6 +474,9 @@ export class ListBoardComponent implements OnInit {
             ); 
   }
   getTask(taskId: any){
-    this.router.navigate(['/listTasks', taskId]);
+    this.router.navigate(['/saveTask', taskId]);
+    localStorage.setItem('task', taskId)
+    console.log(taskId);
+    
   }
 }

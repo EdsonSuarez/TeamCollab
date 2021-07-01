@@ -20,8 +20,16 @@ export class TaskService {
     return this.http.post<any>(this.env + 'task/addImg', task);
   }
 
+  deleteTask(taskId: any){
+    return this.http.delete<any>(this.env + 'task/delete/' + taskId);
+  }
+
   getTasks(){
     return this.http.get<any>(this.env + 'task/get');
+  }
+
+  getOneTask(taskId: any){
+    return this.http.get<any>(this.env + 'task/get/' + taskId);
   }
 
   updateTask(task: any){
