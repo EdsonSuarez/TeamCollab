@@ -51,9 +51,9 @@ router.post(
   "/addImg",
   multi,
   Upload,
-  Auth,
-  UserAuth,
-  ScrumM,
+    Auth,
+    UserAuth,
+    ScrumM,
   async (req, res) => {
     if (
       !req.body.name ||
@@ -93,6 +93,7 @@ router.post(
       status: "to-do",
       priority: req.body.priority,
       imageUrl: imageUrl,
+      imageName: req.files.image.name
     });
     try {
       const result = await task.save();
@@ -162,7 +163,7 @@ router.put("/update", Auth, UserAuth, ScrumM, async (req, res) => {
   res.status(200).send({ task });
 });
 
-router.delete("/delete/:_id", Auth, UserAuth, async (req, res) => {
+router.delete("/delete/:_id", async (req, res) => {
   const validId = mongoose.Types.ObjectId.isValid(req.params._id);
   if (!validId) return res.status(401).send("Process failed: Invalid id");
 

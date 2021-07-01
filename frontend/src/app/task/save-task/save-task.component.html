@@ -42,7 +42,16 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <!-- <p *ngIf="flagTask==true">{{ taskData.imageName }}</p> -->
+
+        <mat-form-field class="search-file-input" *ngIf="flagTask==true || flagImage==false" appearance="fill">
+            <mat-label>Loaded Image</mat-label>
+            <input matInput disabled>
+            <a class="image-name" matInput>{{taskData.imageName}}</a>
+            <mat-icon class="search-file-icon" matSuffix (click)='addImage()' ngxMatFileInputIcon>image_search</mat-icon >
+          </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="flagTask==false || flagImage==true">
             <mat-label>Load image</mat-label>
             <ngx-mat-file-input [formControl]="fileControl" accept='.png, .jpg, .jpeg, .gif, image/*'>
                 <mat-icon class="file-icon" ngxMatFileInputIcon>image</mat-icon>

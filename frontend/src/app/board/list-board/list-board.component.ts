@@ -135,6 +135,7 @@ export class ListBoardComponent implements OnInit {
             });
 
             if (noExiste) this.teamProject.push(objBoard);
+            console.log(this.idProject);
             
             if (this.idProject == 'inicio') {
               if (cont == 0) {
@@ -266,6 +267,8 @@ export class ListBoardComponent implements OnInit {
   }
 
   usersTeamF(team: any) {
+    console.log(team);
+    
     team._id = team.idTeam;
     this.team.getUsers(team).subscribe(
       (res) => {

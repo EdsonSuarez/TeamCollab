@@ -174,9 +174,9 @@ input[type="checkbox"]:checked {
 .add-task-button {
     background-color: #fa897b;
     position: fixed;
-    right: 25px;
-    bottom: 25px;
-    transform: scale(1.2);
+    right: 60px;
+    bottom: 60px;
+    transform: scale(1.5);
     z-index: 1000;
 }
 
