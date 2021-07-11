@@ -157,9 +157,18 @@ router.delete("/deleteBoard/:_id?", Auth, UserAuth, ScrumMaster, async (req, res
   const validId = mongoose.Types.ObjectId.isValid(req.params._id);
   if (!validId) return res.status(401).send("Process failed: Invalid id");
 
-  const board = await Board.deleteMany(req.params._id);
+  const board = await Board.findByIdAndDelete(req.params._id)
   if (!board) return res.status(401).send("Process failed: Team not found");
   return res.status(200).send({message: "board deleted"});
+});
+
+router.get("/getManyBoard/:_id", Auth, UserAuth, ScrumMaster, async (req, res) => {
+  const validId = mongoose.Types.ObjectId.isValid(req.params._id);
+  if (!validId) return res.status(401).send("Process failed: Invalid id");
+
+  const boards = await Board.find({teamId: req.params._id})
+  if (!boards) return res.status(401).send("Process failed: boards not found");
+  return res.status(200).send({boards});
 });
 
 module.exports = router;

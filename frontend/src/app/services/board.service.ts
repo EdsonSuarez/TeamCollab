@@ -36,8 +36,13 @@ export class BoardService {
   addBoard(board: any){
     return this.http.post<any>(this.env + 'board/add', board);
   }
+
   update(board: any) {
     return this.http.put<any>(this.env + 'board/update', board);
+  }
+
+  getManyBoard(id: String){
+    return this.http.get<any>(this.env + 'board/getManyBoard/' + id)
   }
 
 }

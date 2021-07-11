@@ -34,7 +34,7 @@
               {{ team.team + " / " + team.project }}
             </div>
             <span class="spacer"></span>
-            <span class="material-icons icono" (click)="deleteSprint(sprint)">delete</span>
+            <span class="material-icons icono" (click)="deleteTeam(team)">delete</span>
             <span
               class="material-icons icono"
               data-bs-toggle="modal"
@@ -75,8 +75,8 @@
             <div class="change" (click)="changeSprint(sprint)">
               {{ sprint.name }}
             </div>
-            <span class="spacer"></span>
-            <span class="material-icons icono" (click)="deleteTeam(team)">delete</span>
+            <span class="spacer"></span>            
+            <span class="material-icons icono" (click)="deleteSprint(sprint, true)">delete</span>
 
             <span
               class="material-icons icono"

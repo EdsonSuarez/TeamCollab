@@ -59,9 +59,5 @@ export class TeamService {
 
   deleteDetailTask(id: String) {
     return this.http.delete<any>(this.env + 'detailTask/delete/' + id)
-  }
-
-  deleteTask(id: String){
-    return this.http.delete<any>(this.env + 'task/deleteTask/' + id)
-  }
+  }  
 }

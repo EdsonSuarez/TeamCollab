@@ -442,27 +442,30 @@ export class ListBoardComponent implements OnInit {
       `Do you want to delete the ${team.team}?`
     );
     if (resultado === true) {
-
-      // let exitsDetailTask = true;
-
-      // borrar detailTeam
+      
       this.team.delete(team.idTeam).subscribe(
         (res)=>{
           console.log("aqui lo que borro 1",res)
         },
         (err)=>{
-          console.log(err.error)
+          console.log(err.result)
         }
       )
 
-      this.team.deleteBoard(team.idTeam).subscribe(
+      // recorremos board y obtenemos los id para luego borrarlos
+      this.board.getManyBoard(team.idTeam).subscribe(
         (res)=>{
-          console.log("aqui lo que borro 1",res)
+          console.log("boardssssssss:",res.boards)
+          let listBoard = res.boards;
+          listBoard.forEach((element:any) => {
+            this.deleteSprint(element, false);
+          });
         },
         (err)=>{
           console.log(err.error)
         }
       )
+      
       const index = this.teamProject.indexOf(team); 
       if (index > -1){
         this.teamProject.splice(index, 1)
@@ -472,20 +475,56 @@ export class ListBoardComponent implements OnInit {
 
   }
 
-  deleteSprint(sprint: any){
-    console.log(sprint)
-    const resultado = window.confirm(
-    `Do you want to delete the ${sprint.name}?`
-    );
-    if (resultado === true) {
+  deleteSprint(sprint: any, mensaje: boolean){
+    
+    let resultado = true;
+    if(mensaje){
+        resultado = window.confirm(
+        `Do you want to delete the ${sprint.name}?`
+        );      
+    }
+
+    if (resultado === true) {      
       this.team.deleteBoard(sprint._id).subscribe(
         (res)=>{
-          console.log("aqui lo que borro 1",res)
+          console.log("primero se eliminar el board",res)
         },
         (err)=>{
           console.log(err.error)
         }
       )
+
+      // recorremos task y obtenemos los id, para luego borrarlos
+      
+      this.taskService.getManyTask(sprint._id).subscribe(
+        (res)=>{
+          console.log("trae los id de las task del board", res.tasks)
+          let listTask = res.tasks;
+          listTask.forEach((element:any)=>{
+            this.taskService.deleteTask(element._id).subscribe(
+              (res)=>{
+                console.log(res.result)
+              },
+              (err)=>{
+                console.log(err.error)
+              }
+            )
+          })
+        },
+        (err)=>{
+          console.log(err.error);
+        }
+      )
+
+      const index = this.sprints.indexOf(sprint); 
+      if (index > -1){
+        this.sprints.splice(index, 1)
+      } 
+      this.taskToDo = [];
+      this.taskDoing = [];
+      this.taskTesting = [];
+      this.taskDone = [];
+
       }
     }
 

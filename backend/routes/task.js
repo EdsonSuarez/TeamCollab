@@ -176,4 +176,17 @@ router.delete("/delete/:_id", async (req, res) => {
   res.status(200).send({result: "Process successfull: Task deleted"});
 });
 
+router.get("/getManyTask/:_id", Auth, UserAuth, ScrumM, async (req, res) => {
+  const validId = mongoose.Types.ObjectId.isValid(req.params._id);
+  if (!validId) return res.status(401).send("Process failed: Invalid id");
+
+  const tasks = await Task.find({boardId: req.params._id})
+
+  if (!tasks) return res.status(401).send("Process failed: tasks not found");
+  return res.status(200).send({tasks});
+});
+
+
+
+
 module.exports = router;

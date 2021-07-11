@@ -56,4 +56,8 @@ export class TaskService {
   deleteDetail(userId: any) {
     return this.http.delete<any>(this.env + 'detailTask/delete/' + userId);
   }
+
+  getManyTask(id: String){
+    return this.http.get<any>(this.env + 'task/getManyTask/' + id)
+  }
 }

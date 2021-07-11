@@ -84,7 +84,7 @@ router.delete("/delete/:_id?", Auth, UserAuth, ScrumM, async (req, res) => {
 
   const team = await Team.findByIdAndDelete(req.params._id);
   if (!team) return res.status(401).send("Process failed: Team not found");
-  return res.status(200).send("Team deleted");
+  return res.status(200).send({result: "Team deleted"});
 });
 
 module.exports = router;
