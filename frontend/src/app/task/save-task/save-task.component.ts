@@ -3,6 +3,7 @@ import { TaskService } from "../../services/task.service";
 import { TeamService } from "../../services/team.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormControl } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-save-task',
@@ -24,7 +25,7 @@ export class SaveTaskComponent implements OnInit {
   public teamTasks: any;
   public UserSelect: any;
   public userTemp: any;
-  public flagTask: boolean;
+  // public flagTask: boolean;
   public flagImage: boolean;
   public flagEditTask: boolean;
   public teamId: any;
@@ -38,7 +39,7 @@ export class SaveTaskComponent implements OnInit {
 
   public idTask: String;
 
-  constructor(private task: TaskService, private team:TeamService, private router: Router, private activatedRoute: ActivatedRoute) { 
+  constructor(private task: TaskService, private team:TeamService, private router: Router, private activatedRoute: ActivatedRoute, public auth: AuthService,) { 
     this.taskData = {};
     this.successMessage = '';
     this.errorMessage = '';
@@ -48,7 +49,7 @@ export class SaveTaskComponent implements OnInit {
     this.teamTasks = [];
     this.UserSelect = [];
     this.userTemp = []; 
-    this.flagTask = false;
+    // this.flagTask = false;
     this.flagImage = true;
     this.flagEditTask = false;
 
@@ -71,22 +72,24 @@ export class SaveTaskComponent implements OnInit {
   ngOnInit(): void {
     // localStorage.removeItem('task')
 
-    if(this.idTask != 'inicio'){
-      // console.log(this.idTask);
-      this.flagEditTask = true;
+    this.taskData = {};
+    this.taskData.priority = 'Priority'
+    // if(this.idTask != 'inicio'){
+    //   // console.log(this.idTask);
+    //   this.flagEditTask = true;
       
-      this.flagTask = true;
-      this.flagImage = false;
-      this.task.getOneTask(this.idTask).subscribe(
-        (res) => {
-          this.taskData = res.userTask;
-          console.log(res.userTask)
-        },
-        (err) => {
-          console.log(err.error);
-        }
-      )
-    }
+    //   this.flagTask = true;
+    //   this.flagImage = false;
+    //   this.task.getOneTask(this.idTask).subscribe(
+    //     (res) => {
+    //       this.taskData = res.userTask;
+    //       console.log(res.userTask)
+    //     },
+    //     (err) => {
+    //       console.log(err.error);
+    //     }
+    //   )
+    // }
     this.taskData.boardId = this.boardId;
     this.task.getTasks().subscribe(
       (res) => {
@@ -186,9 +189,10 @@ export class SaveTaskComponent implements OnInit {
           this.task.saveTaskImg(data).subscribe(
             (res) => {
               localStorage.setItem('task', res.result._id );
-              this.flagTask = true;
-              this.successMessage = 'Task created successfully';
-              this.closeAlert(3000);
+              // this.flagTask = true;
+              window.location.reload();
+              // this.successMessage = 'Task created successfully';
+              // this.closeAlert(3000);
             },
             (err) => {
               console.log(err.error);
@@ -201,9 +205,10 @@ export class SaveTaskComponent implements OnInit {
           this.task.saveTask(this.taskData).subscribe(
             (res: any) => {
               localStorage.setItem('task', res.result._id);
-              this.flagTask = true;
-              this.successMessage = 'Task created successfully';
-              this.closeAlert(3000);
+              // this.flagTask = true;
+              // this.successMessage = 'Task created successfully';
+              // this.closeAlert(3000);
+              window.location.reload();
             },
             (err) => {
               console.log(err);
@@ -244,14 +249,14 @@ export class SaveTaskComponent implements OnInit {
   addImage() {
     this.flagImage = true;
   }
-  deleteTask(){
+  deleteTask(taskId: any){
     // let taskId = localStorage.getItem('team');
-    const taskId = this.idTask;
+    // const taskId = this.idTask;
     this.task.deleteTask(taskId).subscribe(
       (res: any) => {
         console.log('Deleted Task');
         
-        this.router.navigate(['/board/inicio']);
+        // this.router.navigate(['/board/inicio']);
       },
       (err) => {
         console.log(err);
@@ -299,7 +304,7 @@ export class SaveTaskComponent implements OnInit {
   }
 
   newTask(){
-    this.flagTask = false;
+    // this.flagTask = false;
     this.flagImage = true
     this.taskData = {};
     const boardId = localStorage.getItem('sprint');
