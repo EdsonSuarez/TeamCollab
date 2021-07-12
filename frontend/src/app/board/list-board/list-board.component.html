@@ -372,7 +372,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Sprint</h5>
+        <h2 class="modal-title" id="exampleModalLabel">Sprint</h2>
         <button
           type="button"
           class="btn-close"
@@ -422,7 +422,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Team</h5>
+        <h2 class="modal-title" id="exampleModalLabel">Add Team</h2>
         <button
           type="button"
           class="btn-close"
@@ -494,7 +494,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Sprint</h5>
+        <h2 class="modal-title" id="exampleModalLabel">Add Sprint</h2>
         <button
           type="button"
           class="btn-close"
@@ -592,17 +592,18 @@
   <div class="modal-dialog">
     <div class="modal-content" *ngIf="detaTask">
       <div class="modal-header">
-        <h5 class="modal-title">
+        <h2 class="modal-title">
           <mat-icon class="sizeIconDetaTask">info</mat-icon>Task detail:
           <span class="badge bg-dark textSizeDetaTask">{{
             detaTask.name
           }}</span>
-        </h5>
+        </h2>
         <button
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
+          id="btn-close-modal"
         ></button>
       </div>
       <div class="modal-body">
@@ -653,14 +654,18 @@
       <div class="modal-footer">
         <button
           type="button"
-          class="btn btn-warning btn-sm"
+          class="btn btn-warning btn-xs m-1"
           (click)="getTask(detaTask._id)"
           data-bs-dismiss="modal"
           *ngIf="!auth.isUser()"
         >
           <mat-icon>edit</mat-icon>
         </button>
-        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+        <button class="btn btn-danger btn-xs m-1" (click)="deleteTask(detaTask._id)"
+                        matTooltip="Delete task" matTooltipPosition="above">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
       </div>
@@ -668,14 +673,17 @@
   </div>
 </div>
 
-<a
-  mat-fab
+<!-- <a
   class="add-task-button"
   mat-button
   [routerLink]="['/saveTask/inicio']"
   *ngIf="!auth.isUser()"
->
-  <mat-icon
-    ><span class="material-icons add-task-icon"> note_add </span></mat-icon
+> -->
+<app-save-task></app-save-task>
+  <!-- <mat-icon
+    ><span class="material-icons add-task-icon" > note_add </span></mat-icon
   >
-</a>
+</a> -->
+  
+
+<!-- <app-save-task></app-save-task> -->

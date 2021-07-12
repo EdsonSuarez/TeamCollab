@@ -6,7 +6,7 @@ import { TeamService } from '../../services/team.service';
 import { AdminService } from '../../services/admin.service';
 import { ProjectService } from '../../services/project.service';
 import { TaskService } from 'src/app/services/task.service';
-
+// import { SaveTaskComponent } from "../../task/save-task/save-task.component";
 @Component({
   selector: 'app-list-board',
   templateUrl: './list-board.component.html',
@@ -44,7 +44,8 @@ export class ListBoardComponent implements OnInit {
     public team: TeamService,
     private taskService: TaskService,
     private activatedRoute: ActivatedRoute,
-    private project: ProjectService
+    private project: ProjectService,
+    // public taskk: SaveTaskComponent
   ) {
     this.toggle = true;
     this.taskToDo = [];
@@ -213,10 +214,29 @@ export class ListBoardComponent implements OnInit {
     }
   }
 
+  deleteTask(taskId: any){
+    // let taskId = localStorage.getItem('team');
+    // const taskId = this.idTask;
+    this.taskService.deleteTask(taskId).subscribe(
+      (res: any) => {
+        console.log('Deleted Task');
+        // window.location.reload();
+        this.ngOnInit();
+        document.getElementById('btn-close-modal')?.click();
+        
+        // this.router.navigate(['/board/inicio']);
+      },
+      (err) => {
+        console.log(err);
+        // this.errorMessage = err.error;
+        // this.closeAlert(3000);
+      }
+    )
+  }
+
   cambio() {
     this.toggle = !this.toggle;
   }
-
 
   changeTeam(team: any) {
     localStorage.setItem('team', team.idTeam);
@@ -567,9 +587,12 @@ export class ListBoardComponent implements OnInit {
   }
 
   getTask(taskId: any) {
-    this.router.navigate(['/saveTask', taskId]);
+    // this.router.navigate(['saveTask', taskId]);
+    document.getElementById('btn-close-modal')?.click();
+    
     localStorage.setItem('task', taskId)
     console.log(taskId);
+    document.getElementById('task-window')?.click();
     
   }
 
