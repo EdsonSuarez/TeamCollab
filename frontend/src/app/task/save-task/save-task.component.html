@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <h2 class="modal-title" id="exampleModalLabel">Create Task</h2>
                 <!-- <mat-card-title>Create task</mat-card-title> -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="deleteLocalInfo()"></button>
             </div>
             <div class="col-12 col-lg-12" *ngIf="successMessage">
                 <div class="alert alert-success alert-dismissible" role="alert">
@@ -65,7 +65,7 @@
                         <span class="material-icons icono" data-bs-toggle="modal" data-bs-target="#modalTeam"
                             (click)="usersTeam()">face</span>
                     </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="deleteLocalInfo()">
                         Close
                       </button>
             </div>
@@ -73,7 +73,7 @@
     </div>
 </div>
 
-<a mat-fab class="return-board-button" mat-button *ngIf="!auth.isUser()" id="task-window" data-bs-toggle="modal" data-bs-target="#modalTask" >
+<a mat-fab class="return-board-button" mat-button *ngIf="!auth.isUser()" id="task-window" data-bs-toggle="modal" data-bs-target="#modalTask" (click)="getTaskInfo()" >
     <mat-icon>
         <span class="material-icons return-board-icon" >note_add</span>
     </mat-icon>

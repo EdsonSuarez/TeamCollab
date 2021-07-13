@@ -33,7 +33,7 @@ export class ListBoardComponent implements OnInit {
   public sprint: any;
   public detaTask: any;
   public objBoard: any;
-  public projectTitle: String;
+  public projectTitle: string;
   public teamName: String;
 
   constructor(
@@ -125,7 +125,8 @@ export class ListBoardComponent implements OnInit {
     if (this.auth.isAdmin()) {
       this.team.getTeamAdmin().subscribe(
         (res) => {
-          console.log("estoy mirando",res.team);
+          console.log("estoy mirando",res.team)
+          
           const data = res.team;
           let cont = 0;
           data.forEach((board: any) => {
@@ -589,11 +590,13 @@ export class ListBoardComponent implements OnInit {
   getTask(taskId: any) {
     // this.router.navigate(['saveTask', taskId]);
     document.getElementById('btn-close-modal')?.click();
-    
-    localStorage.setItem('task', taskId)
     console.log(taskId);
     document.getElementById('task-window')?.click();
     
+  }
+
+  deleteLocalInfo() {
+    // localStorage.removeItem('task')
   }
 
   updateTask(task: any, status: String) {
@@ -634,6 +637,7 @@ export class ListBoardComponent implements OnInit {
 
   showDataTask(task: any) {
     this.detaTask = task;
+    localStorage.setItem('task', task._id)
     this.taskService.getUsersTask(task._id).subscribe(
       (res) => {
         this.detaTask.users = res.users;        

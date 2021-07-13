@@ -70,26 +70,28 @@ export class SaveTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     // localStorage.removeItem('task')
 
-    this.taskData = {};
-    this.taskData.priority = 'Priority'
-    // if(this.idTask != 'inicio'){
-    //   // console.log(this.idTask);
-    //   this.flagEditTask = true;
+    // this.taskData = {};
+    this.taskData.priority = 'Priority';
+    
+    if(localStorage.getItem('task')){
+      // console.log(this.idTask);
+      this.flagEditTask = true;
       
-    //   this.flagTask = true;
-    //   this.flagImage = false;
-    //   this.task.getOneTask(this.idTask).subscribe(
-    //     (res) => {
-    //       this.taskData = res.userTask;
-    //       console.log(res.userTask)
-    //     },
-    //     (err) => {
-    //       console.log(err.error);
-    //     }
-    //   )
-    // }
+      // this.flagTask = true;
+      this.flagImage = false;
+      this.task.getOneTask(this.taskId).subscribe(
+        (res) => {
+          this.taskData = res.userTask;
+          console.log(res.userTask)
+        },
+        (err) => {
+          console.log(err.error);
+        }
+      )
+    }
     this.taskData.boardId = this.boardId;
     this.task.getTasks().subscribe(
       (res) => {
@@ -114,6 +116,9 @@ export class SaveTaskComponent implements OnInit {
     }
   }
 
+  deleteLocalInfo() {
+    localStorage.removeItem('task')
+  }
   // Not in use
   // uploadImg(event: any){
   //   console.log(event);
@@ -160,8 +165,9 @@ export class SaveTaskComponent implements OnInit {
       this.task.updateTask(this.taskData).subscribe(
         (res) => {
           console.log(res.team)
-          this.successMessage = 'Task updated successfully';
-              this.closeAlert(3000);
+          // this.successMessage = 'Task updated successfully';
+              // this.closeAlert(3000);
+              window.location.reload();
         },
         (err) => {
           console.log(err.error);
@@ -189,6 +195,7 @@ export class SaveTaskComponent implements OnInit {
           this.task.saveTaskImg(data).subscribe(
             (res) => {
               localStorage.setItem('task', res.result._id );
+              this.taskData = {};
               // this.flagTask = true;
               window.location.reload();
               // this.successMessage = 'Task created successfully';
@@ -208,6 +215,7 @@ export class SaveTaskComponent implements OnInit {
               // this.flagTask = true;
               // this.successMessage = 'Task created successfully';
               // this.closeAlert(3000);
+              this.taskData = {};
               window.location.reload();
             },
             (err) => {
@@ -218,6 +226,28 @@ export class SaveTaskComponent implements OnInit {
           )
         }
       }
+    }
+  }
+
+  getTaskInfo(){
+    if(localStorage.getItem('task')){
+      // console.log(this.idTask);
+      this.flagEditTask = true;
+      
+      // this.flagTask = true;
+      this.flagImage = false;
+      this.task.getOneTask(localStorage.getItem('task')).subscribe(
+        (res) => {
+          this.taskData = res.userTask;
+          console.log(res.userTask)
+        },
+        (err) => {
+          console.log(err.error);
+        }
+      )
+    }
+    else {
+      this.taskData = {}
     }
   }
 
@@ -301,14 +331,6 @@ export class SaveTaskComponent implements OnInit {
         this.closeAlert(3000);
       }
     )
-  }
-
-  newTask(){
-    // this.flagTask = false;
-    this.flagImage = true
-    this.taskData = {};
-    const boardId = localStorage.getItem('sprint');
-    this.taskData.boardId = boardId;
   }
 
   closeAlert(time: number) {
