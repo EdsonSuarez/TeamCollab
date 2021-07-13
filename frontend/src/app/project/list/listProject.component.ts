@@ -101,6 +101,12 @@ export class ListProjectComponent implements OnInit {
             this.formHide = false;
             this.projects.push(res.result);
             this.toastrService.success("Project add with success");
+            if(this.authService.isScrumMaster()){
+              this.listScrum()
+            }else{
+              this.listAdmin();
+            }
+            
           },
           (err) => {
             this.errorMessage = err.error;

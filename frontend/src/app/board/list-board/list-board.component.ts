@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BoardService } from '../../services/board.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -240,8 +240,10 @@ export class ListBoardComponent implements OnInit {
 
   changeTeam(team: any) {
     localStorage.setItem('team', team.idTeam);
-    localStorage.setItem('project', team.idProject);
-    console.log(team);
+    localStorage.setItem('project', team.idProject);    
+    // console.log("este es el id ", document.getElementById(team._id)?.innerHTML)    
+    // (<HTMLInputElement> document.getElementById(team._id)).style.color = 'white';
+    // @ViewChild('team._id') myDiv: ElementRef;
     this.projectTitle = team.project;
     this.teamName = team.team;
     
