@@ -39,7 +39,7 @@ router.get("/get", Auth, UserAuth, TeachnicalAuth, async (req, res) => {
 
 router.get("/getUsers/:_id?", Auth, UserAuth, async (req, res) => {
   const users = await DetailTask.find({ taskId: req.params._id})
-  .populate("userId")
+  .populate({path:"userId",populate:{path:'roleId'}})
   .exec();
   if (!users) return res.status(401).send("Process failed: No DetailTasks to delete");
   return res.status(200).send({ users });

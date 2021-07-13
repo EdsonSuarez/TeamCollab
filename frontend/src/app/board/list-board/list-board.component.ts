@@ -640,7 +640,9 @@ export class ListBoardComponent implements OnInit {
     localStorage.setItem('task', task._id)
     this.taskService.getUsersTask(task._id).subscribe(
       (res) => {
-        this.detaTask.users = res.users;        
+        this.detaTask.users = res.users;   
+        console.log(this.detaTask.users);
+             
       },
       (err) => {
         console.log(err.error);

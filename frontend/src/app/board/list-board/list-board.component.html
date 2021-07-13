@@ -316,7 +316,33 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body displayFlex" *ngFor="let item of usersTeam">
+      <div class="modal-body" >
+        <table class="table">
+        <thead class="table">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of usersTeam;let indice=index">
+            <th scope="row">{{indice+1}}</th>
+            <td>{{ item.userId.fullName }}</td>
+            <td>{{ item.userId.roleId.name }}</td>
+            <td><button
+              class="btn btn-danger btn-xs m-1"
+              title="Delete User"
+              (click)="userDelete(item)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button></td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+      <!-- <div class="modal-body displayFlex" *ngFor="let item of usersTeam">
         <span>{{ item.userId.fullName }}</span>
         <span class="spacer"></span>
         <span>{{ item.userId.roleId.name }}</span>
@@ -328,34 +354,34 @@
         >
           <mat-icon>delete</mat-icon>
         </button>
-      </div>
-      <div class="displayFlex modal-body">
+      </div> -->
+      <div class="displayFlex modal-body " style=" justify-content: space-evenly;">
         <select
           *ngIf="usersAll.length"
           class="form-select ancho"
           aria-label="Default select example"
           [(ngModel)]="UserSelect"
         >
-          <option selected>Select user</option>
           <option [value]="user._id" *ngFor="let user of usersAll">
             {{ user.fullName }}
           </option>
         </select>
-        <span class="spacer"></span>
+
         <button
+          *ngIf="!usersAll.length"
           type="button"
           class="btn btn-success btn-sm"
           (click)="userList()"
         >
-          <mat-icon>add</mat-icon>New
+          <mat-icon>add</mat-icon>New Users
+        </button>
+        <button type="button" *ngIf="usersAll.length" class="btn btn-success btn-sm" (click)="userAdd()">
+          Add User
         </button>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
-        </button>
-        <button type="button" class="btn btn-primary" (click)="userAdd()">
-          Add User
         </button>
       </div>
     </div>
@@ -644,11 +670,23 @@
             >
           </div>
             <h3 class="assigned">Assigned users</h3>
-            <div class="usersDiv" >
+            <!-- <div class="usersDiv" >
                 <div *ngFor="let user of detaTask.users">
                     <h3 >{{user.userId.fullName}}</h3>
                 </div>
+            </div> -->
+            <div class="modal-body" >
+              <table class="table">
 
+              <tbody>
+                <tr *ngFor="let user of detaTask.users;let indice=index">
+                  <th scope="row">{{indice+1}}</th>
+                  <td>{{ user.userId.fullName}}</td>
+                  <td>{{ user.userId.roleId.name}}</td>
+
+                </tr>
+              </tbody>
+              </table>
             </div>
         </div>
       </div>
