@@ -591,14 +591,14 @@ export class ListBoardComponent implements OnInit {
 
   getTask(taskId: any) {
     // this.router.navigate(['saveTask', taskId]);
-    document.getElementById('btn-close-modal')?.click();
+    // document.getElementById('btn-close-modal')?.click();
     console.log(taskId);
     document.getElementById('task-window')?.click();
     
   }
 
   deleteLocalInfo() {
-    // localStorage.removeItem('task')
+    localStorage.removeItem('task')
   }
 
   updateTask(task: any, status: String) {

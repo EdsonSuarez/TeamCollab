@@ -61,10 +61,10 @@
                     <button class="btn btn-info btn-xs m-1" (click)="saveTaskImg()">
                         <mat-icon>save</mat-icon>
                     </button>
-                    <button class="btn btn-success btn-xs m-1">
+                    <!-- <button class="btn btn-success btn-xs m-1">
                         <span class="material-icons icono" data-bs-toggle="modal" data-bs-target="#modalTeam"
                             (click)="usersTeam()">face</span>
-                    </button>
+                    </button> -->
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="deleteLocalInfo()">
                         Close
                       </button>
@@ -75,7 +75,7 @@
 
 <a mat-fab class="return-board-button" mat-button *ngIf="!auth.isUser()" id="task-window" data-bs-toggle="modal" data-bs-target="#modalTask" (click)="getTaskInfo()" >
     <mat-icon>
-        <span class="material-icons return-board-icon" >note_add</span>
+        <span class="material-icons return-board-icon" (click)='deleteLocalInfo()'>note_add</span>
     </mat-icon>
 </a>
 

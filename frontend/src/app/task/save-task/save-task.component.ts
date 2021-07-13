@@ -93,6 +93,8 @@ export class SaveTaskComponent implements OnInit {
       )
     }
     this.taskData.boardId = this.boardId;
+    console.log(this.boardId);
+    
     this.task.getTasks().subscribe(
       (res) => {
         this.teamTasks = res.userTask
@@ -118,6 +120,8 @@ export class SaveTaskComponent implements OnInit {
 
   deleteLocalInfo() {
     localStorage.removeItem('task')
+    this.flagEditTask = false;
+    this.flagImage = true
   }
   // Not in use
   // uploadImg(event: any){
@@ -165,9 +169,13 @@ export class SaveTaskComponent implements OnInit {
       this.task.updateTask(this.taskData).subscribe(
         (res) => {
           console.log(res.team)
+          this.flagEditTask = true;
           // this.successMessage = 'Task updated successfully';
               // this.closeAlert(3000);
-              window.location.reload();
+              this.taskData = {}
+              // window.location.reload();
+              this.router.navigate([`/board/${localStorage.getItem('project')}`]);
+              // window.location.reload();
         },
         (err) => {
           console.log(err.error);
@@ -176,7 +184,12 @@ export class SaveTaskComponent implements OnInit {
         }
       )
     } else {
+      this.taskData.boardId = localStorage.getItem('sprint')
       if (!this.taskData.name || !this.taskData.description || !this.taskData.boardId) {
+        console.log(this.taskData);
+        console.log(this.taskData.boardId);
+        
+        
         console.log('Failed process: Incomplete data');
         this.errorMessage = 'Failed process: Incomplete data'
         this.closeAlert(3000);  
@@ -197,7 +210,8 @@ export class SaveTaskComponent implements OnInit {
               localStorage.setItem('task', res.result._id );
               this.taskData = {};
               // this.flagTask = true;
-              window.location.reload();
+              // window.location.reload();
+              this.router.navigate([`/board/${localStorage.getItem('project')}`]);
               // this.successMessage = 'Task created successfully';
               // this.closeAlert(3000);
             },
@@ -216,7 +230,8 @@ export class SaveTaskComponent implements OnInit {
               // this.successMessage = 'Task created successfully';
               // this.closeAlert(3000);
               this.taskData = {};
-              window.location.reload();
+              // window.location.reload();
+              this.router.navigate([`/board/${localStorage.getItem('project')}`]);
             },
             (err) => {
               console.log(err);
