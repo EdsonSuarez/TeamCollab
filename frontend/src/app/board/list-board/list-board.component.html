@@ -342,19 +342,7 @@
         </tbody>
         </table>
       </div>
-      <!-- <div class="modal-body displayFlex" *ngFor="let item of usersTeam">
-        <span>{{ item.userId.fullName }}</span>
-        <span class="spacer"></span>
-        <span>{{ item.userId.roleId.name }}</span>
-        <span class="spacer"></span>
-        <button
-          class="btn btn-danger btn-xs m-1"
-          title="Delete User"
-          (click)="userDelete(item)"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div> -->
+
       <div class="displayFlex modal-body " style=" justify-content: space-evenly;">
         <select
           *ngIf="usersAll.length"
@@ -662,14 +650,14 @@
               *ngIf="detaTask.imageUrl"
               src="{{ detaTask.imageUrl }}"
               alt="Img task"
-              width="100"
-              height="100"
+              width="200"
+              height="200"
             />
             <mat-icon *ngIf="!detaTask.imageUrl" class="sizeIconDetaTaskImg"
               >local_offer</mat-icon
             >
           </div>
-            <h3 class="assigned">Assigned users</h3>
+            <h3 class="assigned" style="margin-top: 20px;">Assigned users</h3>
             <!-- <div class="usersDiv" >
                 <div *ngFor="let user of detaTask.users">
                     <h3 >{{user.userId.fullName}}</h3>
@@ -683,12 +671,43 @@
                   <th scope="row">{{indice+1}}</th>
                   <td>{{ user.userId.fullName}}</td>
                   <td>{{ user.userId.roleId.name}}</td>
-
+                  <td><button
+                    class="btn btn-danger btn-xs m-1"
+                    title="Delete User"
+                    (click)="userDeleteTask(user._id)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button></td>
                 </tr>
               </tbody>
               </table>
             </div>
         </div>
+      </div>
+
+      <div class="displayFlex modal-body " style=" justify-content: space-evenly;">
+        <select
+          *ngIf="usersTeam.length"
+          class="form-select ancho"
+          aria-label="Default select example"
+          [(ngModel)]="UserSelect"
+        >
+          <option [value]="user.userId._id" *ngFor="let user of usersTeam">
+            {{ user.userId.fullName }}
+          </option>
+        </select>
+        <button
+          *ngIf="!usersTeam.length"
+          type="button"
+          class="btn btn-success btn-sm"
+          (click)="adduserTeam(team)" 
+
+        >
+          <mat-icon>add</mat-icon>New Users
+        </button>
+        <button type="button" *ngIf="usersTeam.length" class="btn btn-success btn-sm" (click)="userAddTask()">
+          Add User
+        </button>
       </div>
       <div class="modal-footer">
         <button

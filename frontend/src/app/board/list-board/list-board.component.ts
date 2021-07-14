@@ -35,6 +35,8 @@ export class ListBoardComponent implements OnInit {
   public objBoard: any;
   public projectTitle: string;
   public teamName: String;
+  public successMessageUser: String;
+  public errorMessageUser: String;
 
   constructor(
     private board: BoardService,
@@ -45,6 +47,7 @@ export class ListBoardComponent implements OnInit {
     private taskService: TaskService,
     private activatedRoute: ActivatedRoute,
     private project: ProjectService,
+    private task: TaskService,
     // public taskk: SaveTaskComponent
   ) {
     this.toggle = true;
@@ -70,6 +73,8 @@ export class ListBoardComponent implements OnInit {
     this.sprint = [];
     this.projectTitle = '';
     this.teamName = '';
+    this.successMessageUser = '';
+    this.errorMessageUser = '';
   }
 
   ngOnInit(): void {
@@ -304,7 +309,7 @@ export class ListBoardComponent implements OnInit {
   }
 
   usersTeamF(team: any) {
-    console.log(team.project);
+    console.log("eeeeeeeeeee", team.project);
     this.teamName = team.team;
     team._id = team.idTeam;
     this.team.getUsers(team).subscribe(
@@ -448,6 +453,7 @@ export class ListBoardComponent implements OnInit {
   }
 
   adduserTeam(objDetail: any) {
+    
     this.team.addDetail(objDetail).subscribe(
       (res)=>{
         console.log(res)
@@ -650,4 +656,44 @@ export class ListBoardComponent implements OnInit {
     )
   }
 
+  userAddTask(){
+    let taskId = localStorage.getItem('task');
+    //let taskDetail = {userId: member.userId._id, taskId: taskId}
+    let taskDetail = {userId: this.UserSelect, taskId: taskId}
+    //userId: this.UserSelect
+    console.log("menberrrr",taskDetail);
+    
+    this.task.addDetail(taskDetail).subscribe(
+      (res: any) => {
+        //this.successMessageUser = `Task assigned to ${member.userId.fullName}`;
+        this.closeAlert();
+        // this.teamMembers.member.flagAssigned = true;
+        
+      },
+      (err) => {
+        console.log(err);
+        this.errorMessageUser = err.error;
+        this.closeAlert();
+      }
+    )
+  }
+
+  userDeleteTask(userId: any){
+    this.task.deleteDetail(userId).subscribe(
+      (res: any) => {
+        this.successMessageUser = 'Task unassigned';
+        this.closeAlert();
+        const index = this.detaTask.users.indexOf(userId);
+        if (index > -1) {
+          this.detaTask.users.splice(index, 1);
+        }
+        
+      },
+      (err) => {
+        console.log(err);
+        this.errorMessageUser = err.error;
+        this.closeAlert();
+      }
+    )
+  }
 }
