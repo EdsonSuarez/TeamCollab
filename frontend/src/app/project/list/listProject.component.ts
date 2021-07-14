@@ -160,6 +160,10 @@ export class ListProjectComponent implements OnInit {
     }
   }
 
+  asignarLocalStorage(id:string){
+    localStorage.setItem('project', id);
+  }
+
   changeStatus(status: string) {
     this.dataProject.status = status;
   }
