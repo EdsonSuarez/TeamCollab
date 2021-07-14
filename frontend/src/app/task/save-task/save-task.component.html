@@ -75,7 +75,7 @@
 
 <a mat-fab class="return-board-button" mat-button *ngIf="!auth.isUser()" id="task-window" data-bs-toggle="modal" data-bs-target="#modalTask" (click)="getTaskInfo()" >
     <mat-icon>
-        <span class="material-icons return-board-icon" >note_add</span>
+        <span class="material-icons return-board-icon" (click)='deleteLocalInfo()'>note_add</span>
     </mat-icon>
 </a>
 

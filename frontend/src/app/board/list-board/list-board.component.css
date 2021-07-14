@@ -38,7 +38,10 @@ input[type="checkbox"] {
   height: 100vh;
   transition: 0.5s;
   z-index: 1000;
-  background: #ffdd94;
+  background: #F7F7F7;
+  border: 1px #929292 solid;
+  /* background: #2F3136; */
+  /* background: #ffdd94; */
 }
 
 input[type="checkbox"]:checked ~ .menu {
@@ -205,6 +208,9 @@ input[type="checkbox"]:checked {
   padding: 10px;
   border-bottom: none;
   height: 60px;
+  margin-top: 0;
+  display: flex;
+  align-items: center;  
 }
 .spacer {
   flex: 1 1 auto;
@@ -212,7 +218,12 @@ input[type="checkbox"]:checked {
 
 .containerButton {
   display: flex;
-  background-color: #86e3ce;
+  background-color:#505153;
+  /* background-color:#3d3e41; */
+  /* background-color: #86e3ce; */
+  /* background-color:#fa897b; */
+  /* background-color: #5f5f5f;   */
+  color: white;
   width: 90%;
   min-height: 3.5vh;
   margin-right: auto;
@@ -222,8 +233,14 @@ input[type="checkbox"]:checked {
   font-size: 2vh;
 }
 
+.titleMenu {
+  margin: 0 2vh 0 0;
+  padding: 0%;
+  font-size: 2vh;  
+}
+
 .containerButton:hover {
-  opacity: 1;
+  opacity: 0.8;
 }
 
 .buttonsMenu {
@@ -260,12 +277,6 @@ input[type="checkbox"]:checked {
   border-top: 0.1px solid #00000046;
   border-bottom: 0.1px solid #00000046;
   height: 20%;
-}
-
-.titleMenu {
-  margin: 0 2vh 0 0;
-  padding: 0%;
-  font-size: 2vh;
 }
 
 .containerTitleMenu span {
@@ -340,4 +351,10 @@ mat-icon {
 
 .text-justify {
   text-align: justify;
+}
+
+.algo{
+  opacity: 0.8;
+  background-color: red;
+  color: #000;
 }

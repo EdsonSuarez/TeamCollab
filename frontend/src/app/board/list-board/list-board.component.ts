@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BoardService } from '../../services/board.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -190,24 +190,26 @@ export class ListBoardComponent implements OnInit {
               }
             });
 
-            if (noExiste) this.teamProject.push(objBoard);
-            
+            if (noExiste) this.teamProject.push(objBoard); 
+
             if(this.idProject == 'inicio') {            
+              
+                if(cont == 0){
+                  this.changeTeam(objBoard)
+                }
+              
+            } else {
               if(localStorage.getItem('sprint') && localStorage.getItem('team')) {
                 if(cont == 0) {
                   // console.log("existe local estorage de T & S")
                   const sprint = { _id: localStorage.getItem('sprint')};                
                   this.changeSprint(sprint)
                 }
-              } else {
-                if(cont == 0){
-                  this.changeTeam(objBoard)
+              }else{
+                if (cont == 0) {
+                  console.log('first team', firstTeam);
+                  this.changeTeam(firstTeam);
                 }
-              }
-            } else {
-              if (cont == 0) {
-                console.log('first team', firstTeam);
-                this.changeTeam(firstTeam);
               }
             }
             cont++;
@@ -246,8 +248,14 @@ export class ListBoardComponent implements OnInit {
 
   changeTeam(team: any) {
     localStorage.setItem('team', team.idTeam);
-    localStorage.setItem('project', team.idProject);
-    console.log(team);
+    if(team.idProject){
+      localStorage.setItem('project', team.idProject); 
+    } 
+    this.router.navigate([`/board/${localStorage.getItem('project')}`]);
+
+    // console.log("este es el id ", document.getElementById(team._id)?.innerHTML)    
+    // (<HTMLInputElement> document.getElementById(team._id)).style.color = 'white';
+    // @ViewChild('team._id') myDiv: ElementRef;
     this.projectTitle = team.project;
     this.teamName = team.team;
     
@@ -595,14 +603,14 @@ export class ListBoardComponent implements OnInit {
 
   getTask(taskId: any) {
     // this.router.navigate(['saveTask', taskId]);
-    document.getElementById('btn-close-modal')?.click();
+    // document.getElementById('btn-close-modal')?.click();
     console.log(taskId);
     document.getElementById('task-window')?.click();
     
   }
 
   deleteLocalInfo() {
-    // localStorage.removeItem('task')
+    localStorage.removeItem('task')
   }
 
   updateTask(task: any, status: String) {

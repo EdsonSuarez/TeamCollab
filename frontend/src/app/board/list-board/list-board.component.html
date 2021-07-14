@@ -30,7 +30,7 @@
             class="containerButton"
             *ngIf="auth.isScrumMaster() || auth.isAdmin()"
           >
-            <div class="change" (click)="changeTeam(team)">
+            <div class="change" (click)="changeTeam(team)" id="(team._id)" #(team._id)>
               {{ team.team + " / " + team.project }}
             </div>
             <span class="spacer"></span>
@@ -61,7 +61,7 @@
         <div *ngFor="let sprint of sprints">
           <div
             *ngIf="!auth.isScrumMaster() && !auth.isAdmin()"
-            class="containerButton"
+            class="containerButton"            
           >
             <div class="change" (click)="changeSprint(sprint)">
               {{ sprint.name }}
@@ -618,7 +618,7 @@
           data-bs-dismiss="modal"
           aria-label="Close"
           id="btn-close-modal"
-          (click)="deleteLocalInfo()"
+          (click)="deleteLocalInfo()" 
         ></button>
       </div>
       <div class="modal-body">

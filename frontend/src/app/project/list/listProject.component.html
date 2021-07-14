@@ -88,6 +88,7 @@
                 <button
                   class="btn btn-info btn-xs m-1"
                   title="Detalle del proyecto"
+                  (click)="asignarLocalStorage(project._id)"                  
                   routerLink="/board/{{project._id}}"
                 >
                   <mat-icon>dashboard</mat-icon>
